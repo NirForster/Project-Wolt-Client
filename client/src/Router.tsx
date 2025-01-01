@@ -12,10 +12,10 @@ function AppRoutes() {
   return (
     <Router>
       <Routes>
-        {/* Discovery Pages Nav */}
-        <Route path="/discovery" element={<DiscoveryPage />} />
         <Route path="/" element={<HomePage />} />
 
+        {/* Discovery Pages Nav */}
+        <Route path="/discovery" element={<DiscoveryPage />} />
         <Route
           path="/discovery/restaurants"
           element={<DiscoveryRestaurants />}
