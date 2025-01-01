@@ -6,6 +6,7 @@ import DiscoveryStorePage from "./pages/discovery-pages/DiscoveryStorePage";
 import AccountInfoPage from "./pages/AccountInfoPage";
 import CategoryBrowse from "./pages/browsing-pages/CategoryBrowse";
 import RestaurantPage from "./pages/RestaurantPage";
+import HomePage from "./pages/HomePage";
 
 function AppRoutes() {
   return (
@@ -13,6 +14,8 @@ function AppRoutes() {
       <Routes>
         {/* Discovery Pages Nav */}
         <Route path="/discovery" element={<DiscoveryPage />} />
+        <Route path="/" element={<HomePage />} />
+
         <Route
           path="/discovery/restaurants"
           element={<DiscoveryRestaurants />}
