@@ -1,0 +1,6 @@
+****Production Conventions****
+
+all folders will be kebab-case .
+all pages will be PascalCase and end with "Page" .
+all components will be PascalCase .
+all routes will be kebab-case .
