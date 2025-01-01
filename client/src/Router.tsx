@@ -1,35 +1,79 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import MainLayout from "../src/components/MainLayout";
+import ScrollToTop from "./services/ScrollToTop";
 
-import DiscoveryPage from "./pages/discovery-pages/DiscoveryPage";
-import DiscoveryRestaurants from "./pages/discovery-pages/DiscoveryRestaurants";
-import DiscoveryStorePage from "./pages/discovery-pages/DiscoveryStorePage";
-import AccountInfoPage from "./pages/AccountInfoPage";
-import CategoryBrowse from "./pages/browsing-pages/CategoryBrowse";
-import RestaurantPage from "./pages/RestaurantPage";
-import HomePage from "./pages/HomePage";
+const DiscoveryPage = lazy(
+  () => import("./pages/discovery-pages/DiscoveryPage")
+);
+const DiscoveryRestaurants = lazy(
+  () => import("./pages/discovery-pages/DiscoveryRestaurants")
+);
+const DiscoveryStorePage = lazy(
+  () => import("./pages/discovery-pages/DiscoveryStorePage")
+);
+const AccountInfoPage = lazy(() => import("./pages/AccountInfoPage"));
+const CategoryBrowse = lazy(
+  () => import("./pages/browsing-pages/CategoryBrowse")
+);
+const RestaurantPage = lazy(() => import("./pages/RestaurantPage"));
 
 function AppRoutes() {
   return (
     <Router>
+      {/* ScrollToTop ensures the scroll position resets on route change */}
+      <ScrollToTop />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-
-        {/* Discovery Pages Nav */}
-        <Route path="/discovery" element={<DiscoveryPage />} />
-        <Route
-          path="/discovery/restaurants"
-          element={<DiscoveryRestaurants />}
-        />
-        <Route path="/discovery/Store" element={<DiscoveryStorePage />} />
-
-        {/* Other NavBar Nav */}
-        <Route path="/account-info" element={<AccountInfoPage />} />
-
-        {/* category browse */}
-        <Route path="/browse/:category" element={<CategoryBrowse />} />
-
-        {/* restaurent detailes */}
-        <Route path="/restaurant/:id" element={<RestaurantPage />} />
+        <Route path="/discovery" element={<MainLayout />}>
+          <Route
+            index
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <DiscoveryPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="restaurants"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <DiscoveryRestaurants />
+              </Suspense>
+            }
+          />
+          <Route
+            path="discovery/store"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <DiscoveryStorePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="account-info"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <AccountInfoPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="browse/:category"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <CategoryBrowse />
+              </Suspense>
+            }
+          />
+          <Route
+            path="restaurant/:id"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <RestaurantPage />
+              </Suspense>
+            }
+          />
+        </Route>
       </Routes>
     </Router>
   );
