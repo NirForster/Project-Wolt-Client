@@ -1,5 +1,5 @@
-import CartModel from "@/components/CartModel";
-import CartTabs from "@/components/CartTabs";
+import CartModel from "@/components/cart/CartModel";
+import CartTabs from "@/components/cart/CartTabs";
 
 const HomePage = () => {
   return (
