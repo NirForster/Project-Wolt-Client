@@ -12,37 +12,22 @@ const SavedOrder: React.FC<SavedOrderProps> = ({
   totalPrice,
 }) => {
   return (
-    <div className="w-full max-w-md p-4 bg-white border border-gray-300 rounded-lg shadow-md">
+    <div className="line-height w-full max-w-md p-4 bg-white border border-gray-300 rounded-lg shadow-md">
       {/* Header Section */}
-      <div className="flex items-center justify-between mb-4">
-        <button
+      <div className="flex items-center justify-end mb-4">
+        {/* <button
           aria-label="Delete order"
           className="text-gray-400 hover:text-red-600"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+        ></button> */}
         <div className="flex items-center">
-          <div className="mr-4 text-right">
-            <h2 className="text-sm font-bold">{restaurantName}</h2>
-            <p className="text-sm text-gray-500">{ShippingMessage}</p>
+          <div className="mr-2 text-right">
+            <h2 className="font-sans font-bold text-black">{restaurantName}</h2>
+            <p className=" text-gray-500">{ShippingMessage}</p>
           </div>
           <img
             src={mcLogo}
             alt="McDonald's Logo"
-            className="w-12 h-12 rounded-full"
+            className="w-8 h-8 rounded-full"
           />
         </div>
       </div>
@@ -50,8 +35,8 @@ const SavedOrder: React.FC<SavedOrderProps> = ({
       {/* Order Details */}
       <div className="flex items-center justify-end mb-4">
         <div className="text-right flex">
-          <p className="text-sm font-bold text-gray-800">{totalPrice}</p>
-          <span className="text-sm font-medium">:סכום ביניים של פריט</span>
+          <p className=" font-bold text-gray-800">{totalPrice}</p>
+          <span className="font-medium">:סכום ביניים של פריט</span>
         </div>
       </div>
 
