@@ -1,17 +1,5 @@
-import CartModel from "@/components/CartModel";
-import CartTabs from "@/components/CartTabs";
-
 const DiscoveryPage = () => {
-  return (
-    <div>
-      {" "}
-      <div>
-        HomePage
-        {/* <CartTabs /> */}
-        <CartModel />
-      </div>
-    </div>
-  );
+  return <div>Discovery Page</div>;
 };
 
 export default DiscoveryPage;
