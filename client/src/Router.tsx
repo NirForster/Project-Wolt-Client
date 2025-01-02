@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 import MainLayout from "../src/components/MainLayout";
 import ScrollToTop from "./services/ScrollToTop";
 
+const HomePage = lazy(() => import("./pages/HomePage"));
 const DiscoveryPage = lazy(
   () => import("./pages/discovery-pages/DiscoveryPage")
 );
@@ -21,9 +22,17 @@ const RestaurantPage = lazy(() => import("./pages/RestaurantPage"));
 function AppRoutes() {
   return (
     <Router>
-      {/* ScrollToTop ensures the scroll position resets on route change */}
       <ScrollToTop />
       <Routes>
+        {/* Define root route */}
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <HomePage />
+            </Suspense>
+          }
+        />
         <Route path="/discovery" element={<MainLayout />}>
           <Route
             index
@@ -42,7 +51,7 @@ function AppRoutes() {
             }
           />
           <Route
-            path="discovery/store"
+            path="store"
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <DiscoveryStorePage />
