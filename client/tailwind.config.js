@@ -13,6 +13,11 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        // main colors
+        BlueBackgroundAndText: "#009de0",
+        BlueLightBackground: "#ebf7fd",
+        BlueBackgroundOnHover: "#d6effa",
+
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -52,6 +57,77 @@ module.exports = {
           3: "hsl(var(--chart-3))",
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
+        },
+        woltColors: {
+          white: "#fff",
+          black: "#000",
+          transparent: "transparent",
+          current: "currentColor",
+
+          // Background Colors
+          bgDefault: "#fff",
+          bgSurface: "#ededee",
+          bgSurfaceHovered: "#dbdbdc",
+          bgSurfacePressed: "#c9cacb",
+          bgSurfaceSelected: "#e4e4e5",
+          bgSurfaceDisabled: "#f6f6f6",
+          bgSurfaceSecondary: "#f6f6f6",
+          bgSurfaceSecondaryHovered: "#ededee",
+          bgSurfaceSecondaryPressed: "#dbdbdc",
+          bgSurfaceSecondarySelected: "#e4e4e5",
+          bgSurfaceSecondaryDisabled: "#f6f6f6",
+          bgSurfaceTertiary: "#fff0",
+          bgSurfaceTertiaryHovered: "#f6f6f6",
+          bgSurfaceTertiaryPressed: "#e4e4e4",
+          bgSurfaceTertiarySelected: "#eee",
+          bgSurfaceTertiaryDisabled: "#fff0",
+          bgFill: "#000",
+          bgFillHovered: "#1f1f1f",
+          bgFillPressed: "#333",
+          bgFillSelected: "#292929",
+          bgFillDisabled: "#5c5c5c",
+
+          // Brand Colors
+          brandBg: "#009de0",
+          brandHovered: "#1fa9e4",
+          brandPressed: "#33b1e6",
+          brandSelected: "#29ade5",
+          brandDisabled: "#5cc0eb",
+
+          // Text Colors
+          textDefault: "#202125",
+          textHovered: "#202125eb",
+          textPressed: "#202125cc",
+          textSelected: "#202125e0",
+          textSubdued: "#202125a3",
+          textDisabled: "#20212566",
+          textOnFill: "#fff",
+          textOnFillHovered: "#fff",
+          textOnFillPressed: "#fff",
+          textOnFillSelected: "#fff",
+          textOnFillDisabled: "#9d9d9d",
+
+          // Border Colors
+          borderDefault: "#e4e4e5",
+          borderHovered: "#c9cacb",
+          borderPressed: "#b8b8b9",
+          borderSelected: "#009de0",
+          borderDisabled: "#ededee",
+          borderSubdued: "#ededee",
+          borderNegative: "#f93a25",
+
+          // Overlay Colors
+          overlay: "#00000052",
+        },
+        boxShadow: {
+          DEFAULT:
+            "0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)",
+          brand:
+            "0 4px 6px -1px rgba(0, 157, 224, 0.1), 0 2px 4px -1px rgba(0, 157, 224, 0.06)",
+          negative:
+            "0 4px 6px -1px rgba(249, 58, 37, 0.1), 0 2px 4px -1px rgba(249, 58, 37, 0.06)",
+          positive:
+            "0 4px 6px -1px rgba(31, 199, 10, 0.1), 0 2px 4px -1px rgba(31, 199, 10, 0.06)",
         },
       },
     },
