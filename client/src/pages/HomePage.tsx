@@ -1,11 +1,10 @@
+import AppBar from "@/components/appBar/AppBar";
 import CartModel from "@/components/cart/CartModel";
-import CartTabs from "@/components/cart/CartTabs";
 
 const HomePage = () => {
   return (
     <div>
-      HomePage
-      {/* <CartTabs /> */}
+      <AppBar />
       <CartModel />
     </div>
   );
