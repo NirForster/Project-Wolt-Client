@@ -5,12 +5,21 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Open Sans", "sans-serif"],
+        sans: ["var(--cb-font-family-sans)", "Open Sans", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontSize: {
+        base: ".875rem",
+      },
+      fontWeight: {
+        medium: "500",
+      },
+      lineHeight: {
+        base: "1.25rem",
       },
       colors: {
         // main colors
