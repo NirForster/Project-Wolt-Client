@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "../ui/button";
-import LoginSignUpModel from "../auth-components/login/LoginModel";
+import LoginSignUpModel from "../auth-components/Login/LoginModel";
 
 const NavBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
