@@ -1,7 +1,5 @@
-import React from "react";
-
 const DiscoveryPage = () => {
-  return <div>DiscoveryPage</div>;
+  return <div>Discovery Page</div>;
 };
 
 export default DiscoveryPage;

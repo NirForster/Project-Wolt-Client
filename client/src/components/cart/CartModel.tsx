@@ -13,9 +13,9 @@ const CartModel = () => {
     <div>
       <Sheet>
         <SheetTrigger>Open</SheetTrigger>
-        <SheetContent side={"left"} className="w-[280px] ">
+        <SheetContent side={"left"} className="w-[400px] sm:w-[540px] ">
           <SheetHeader>
-            <SheetTitle>ההזמנות שלך</SheetTitle>
+            <SheetTitle className="text-right">ההזמנות שלך</SheetTitle>
             <SheetDescription>
               <CartTabs />
             </SheetDescription>
