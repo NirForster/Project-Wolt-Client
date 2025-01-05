@@ -4,8 +4,24 @@
 
 @layer base {
   :root {
+    /* Font Line Heights */
+    --cb-font-leading-medium: 1.4;
+    --cb-font-leading-small: 1.2;
+
+    /* Font Weights */
+    --cb-font-weight-bold: 700;
+    --cb-font-weight-semibold: 600;
+    --cb-font-weight-medium: 500;
+    --cb-font-weight-regular: 400;
+
+    /* Font Families */
+    --cb-font-family-brand: "WoltHeading-Omnes", -apple-system,
+      BlinkMacSystemFont, "Roboto", "Segoe UI", "Arimo", "Open Sans", sans-serif;
+    --cb-font-family-brand-font-feature-settings: "kern", "ss01", "ss05", "ss07";
     --cb-font-family-sans: -apple-system, BlinkMacSystemFont, "Roboto",
       "Segoe UI", "Arimo", "Open Sans", sans-serif;
+    --cb-font-family-mono: ui-monospace, "SFMono-Regular", "SF Mono", "Menlo",
+      "Consolas", "Liberation Mono", monospace;
 
     /* Light Mode Colors */
     --background: 0 0% 100%;
@@ -90,4 +106,11 @@
   src: url("./assets/fonts/OpenSans-VariableFont.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: "Omnes Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: url("./assets/fonts/omnes/Omnes Bold.woff") format("woff");
 }
