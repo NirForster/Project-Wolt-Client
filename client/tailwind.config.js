@@ -4,13 +4,32 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["Open Sans", "sans-serif"],
-      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontSize: {
+        base: ".875rem",
+      },
+      lineHeight: {
+        base: "1.25rem",
+      },
+      fontFamily: {
+        woltHeader: ["Omnes Bold", "var(--cb-font-family-brand)", "sans-serif"],
+        brand: ["Omnes Bold", "var(--cb-font-family-brand)", "sans-serif"],
+        sans: ["var(--cb-font-family-sans)", "sans-serif"],
+        mono: ["var(--cb-font-family-mono)", "monospace"],
+      },
+      fontWeight: {
+        bold: "var(--cb-font-weight-bold)",
+        semibold: "var(--cb-font-weight-semibold)",
+        medium: "var(--cb-font-weight-medium)",
+        regular: "var(--cb-font-weight-regular)",
+      },
+      lineHeight: {
+        medium: "var(--cb-font-leading-medium)",
+        small: "var(--cb-font-leading-small)",
       },
       colors: {
         // main colors
@@ -63,6 +82,9 @@ module.exports = {
           black: "#000",
           transparent: "transparent",
           current: "currentColor",
+          facebookBlueBg: "rgba(57, 117, 234, 1)",
+          facebookBlueBgHover: "rgba(57, 117, 234, 0.88)",
+          facebookBlueTextHover: "rgba(57, 117, 234, 0.88)",
 
           // Background Colors
           bgDefault: "#fff",
