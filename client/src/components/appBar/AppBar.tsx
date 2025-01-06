@@ -3,6 +3,7 @@ import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import woltLogo from "../../assets/dummyData/Wolt-Logo-b&w.png";
 import { SlHome } from "react-icons/sl";
 import { log } from "console";
+import CartModel from "../cart/CartModel";
 
 const AppBar = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -11,14 +12,7 @@ const AppBar = () => {
     <div className="flex  h-[70px] bg-white w-full px-5 py-3 border-b border-gray-200">
       <div className="flex-1">
         <div className="flex gap-4 items-center">
-          <div className="relative">
-            <button className="p-3 bg-gray-100 rounded-full hover:bg-gray-200">
-              <FaShoppingCart size={16} />
-            </button>
-            <span className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-black rounded-full">
-              3
-            </span>
-          </div>
+          <CartModel />
           <button
             className={`px-4 py-2 text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200 ${
               isSearchActive ? "opacity-0" : "opacity-100"
