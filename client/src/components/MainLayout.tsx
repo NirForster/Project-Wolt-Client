@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
-import NavBar from "./navbar-components/NavBar";
+import AppBar from "./appBar/AppBar";
 import Footer from "./Footer";
 import DiscoveryTabs from "./DiscoveryTabs";
 
 function MainLayout() {
   return (
     <div className="min-h-screen bg-gray-100">
-      <NavBar />
+      <AppBar />
       <DiscoveryTabs />
       <main className="p-4">
         <Outlet />
