@@ -4,9 +4,12 @@ import woltLogo from "../../assets/dummyData/Wolt-Logo-b&w.png";
 import { SlHome } from "react-icons/sl";
 import { log } from "console";
 import CartModel from "../cart/CartModel";
+import { Button } from "../ui/button";
+import LoginSignUpModel from "../auth-components/Login/LoginModel";
 
 const AppBar = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className=" flex  h-[70px] bg-white w-full px-5 py-3 border-b border-gray-200">
@@ -55,7 +58,25 @@ const AppBar = () => {
           >
             HB
           </button>
+
           <CartModel />
+          {/* Home Icon */}
+          <div className="p-2  text-blue-600 ml-1 h-8 bg-blue-100 rounded-full items-center">
+            <SlHome size={16} />
+          </div>
+          <div className="flex w-[80px] justify-end ml-2">
+            <img src={woltLogo} alt="wolt-logo" />
+          </div>
+
+          {/* _____LOGIN____ */}
+          {/* Button to trigger login modal */}
+          <Button onClick={() => setIsModalOpen(true)}>Log in</Button>
+          <Button onClick={() => setIsModalOpen(true)}>Sign up</Button>
+
+          {/* Conditional rendering of the modal */}
+          {isModalOpen && (
+            <LoginSignUpModel onClose={() => setIsModalOpen(false)} />
+          )}
         </div>
       </div>
     </div>
