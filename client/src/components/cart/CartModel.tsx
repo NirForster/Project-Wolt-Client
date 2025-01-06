@@ -23,7 +23,7 @@ const CartModel = () => {
             </span>
           </div>
         </SheetTrigger>
-        <SheetContent side={"left"} className="w-[400px] sm:w-[540px] ">
+        <SheetContent side={"right"} className="w-[400px] sm:w-[540px] ">
           <SheetHeader>
             <SheetTitle className="text-right">ההזמנות שלך</SheetTitle>
             <SheetDescription className="overflow-y-auto max-h-screen">
