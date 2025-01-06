@@ -1,4 +1,4 @@
-import mcLogo from "../../../public/dummyData/mcdonaldsIMG.avif";
+import mcLogo from "../../assets/mcdonaldsIMG.avif";
 
 interface SavedOrderProps {
   restaurantName: string;
