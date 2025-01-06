@@ -1,4 +1,3 @@
-import CartModel from "@/components/cart/CartModel";
 import { testShopApiConnection } from "../services/apiTest";
 import AppBar from "@/components/appBar/AppBar";
 
