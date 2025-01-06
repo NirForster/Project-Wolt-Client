@@ -1,23 +1,68 @@
+// src/services/auth.ts
 import api from "./api";
 
-export const login = async (credentials: {
-  email: string;
-  password: string;
-}) => {
-  const response = await api.post("/auth/login", credentials);
-  return response.data;
+// Login Function
+export const login = async (email: string, password: string) => {
+  try {
+    const response = await api.post("/api/v1/auth/login", {
+      email,
+      password,
+    });
+    alert("Login successful!");
+    return response.data;
+  } catch (error: any) {
+    console.error(
+      "Login error:",
+      error.response?.data?.message || error.message
+    );
+    throw new Error(error.response?.data?.message || error.message);
+  }
 };
 
-export const signup = async (details: {
-  name: string;
-  email: string;
-  password: string;
-  plan: string;
-}) => {
-  const response = await api.post("/auth/signup", details);
-  return response.data;
+// Signup Function
+export const signup = async (name: string, email: string, password: string) => {
+  try {
+    const response = await api.post("/api/v1/auth/signup", {
+      name,
+      email,
+      password,
+    });
+    alert("Signup successful!");
+    return response.data;
+  } catch (error: any) {
+    console.error(
+      "Signup error:",
+      error.response?.data?.message || error.message
+    );
+    throw new Error(error.response?.data?.message || error.message);
+  }
 };
 
+// Logout Function
 export const logout = async () => {
-  await api.post("/auth/logout");
+  try {
+    const response = await api.post("/api/v1/auth/logout");
+    alert("You have been logged out.");
+    return response.data;
+  } catch (error: any) {
+    console.error(
+      "Logout error:",
+      error.response?.data?.message || error.message
+    );
+    throw new Error(error.response?.data?.message || error.message);
+  }
+};
+
+// Fetch Current User
+export const fetchCurrentUser = async () => {
+  try {
+    const response = await api.get("/api/v1/auth/me");
+    return response.data;
+  } catch (error: any) {
+    console.error(
+      "Failed to fetch user:",
+      error.response?.data?.message || error.message
+    );
+    throw new Error(error.response?.data?.message || error.message);
+  }
 };

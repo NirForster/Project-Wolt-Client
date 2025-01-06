@@ -8,7 +8,7 @@ function MainLayout() {
     <div className="min-h-screen bg-gray-100">
       <AppBar />
       <DiscoveryTabs />
-      <main className="p-4">
+      <main className="">
         <Outlet />
       </main>
       <Footer />
