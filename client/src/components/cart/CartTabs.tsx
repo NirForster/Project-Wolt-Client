@@ -4,10 +4,7 @@ import SavedOrder from "./SavedOrder";
 const CartTabs = () => {
   return (
     <div>
-      <Tabs
-        defaultValue="savedOrder"
-        className="w-full overflow-y-auto max-h-full"
-      >
+      <Tabs defaultValue="savedOrder" className="w-full ">
         <TabsList className="flex">
           <TabsTrigger className="flex-1" value="reorder">
             הזמנה חוזרת
@@ -30,7 +27,7 @@ const CartTabs = () => {
               ShippingMessage="אוי, אנחנו לא מגיעים למיקום שלך"
               totalPrice="₪108.00"
             />
-            <SavedOrder
+            {/* <SavedOrder
               restaurantName="מקדונלד'ס קניון אורות הכשר"
               ShippingMessage="אוי, אנחנו לא מגיעים למיקום שלך"
               totalPrice="₪108.00"
@@ -49,7 +46,7 @@ const CartTabs = () => {
               restaurantName="מקדונלד'ס קניון אורות הכשר"
               ShippingMessage="אוי, אנחנו לא מגיעים למיקום שלך"
               totalPrice="₪108.00"
-            />
+            /> */}
           </div>
         </TabsContent>
       </Tabs>

@@ -1,4 +1,4 @@
-import mcLogo from "../../assets/mcdonaldsIMG.avif";
+import mcLogo from "../../assets/dummyData/mcdonaldsIMG.avif";
 
 interface SavedOrderProps {
   restaurantName: string;
@@ -12,7 +12,7 @@ const SavedOrder: React.FC<SavedOrderProps> = ({
   totalPrice,
 }) => {
   return (
-    <div className="line-height w-full max-w-md p-4 bg-white border border-gray-300 rounded-lg shadow-md">
+    <div className="line-height w-full max-w-md mb-2 p-4 bg-white border border-gray-300 rounded-lg shadow-md">
       {/* Header Section */}
       <div className="flex items-center justify-end mb-4">
         {/* <button

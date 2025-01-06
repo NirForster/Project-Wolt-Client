@@ -16,7 +16,7 @@ const CartModel = () => {
         <SheetContent side={"left"} className="w-[400px] sm:w-[540px] ">
           <SheetHeader>
             <SheetTitle className="text-right">ההזמנות שלך</SheetTitle>
-            <SheetDescription>
+            <SheetDescription className="overflow-y-auto max-h-screen">
               <CartTabs />
             </SheetDescription>
           </SheetHeader>
