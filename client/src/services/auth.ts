@@ -4,11 +4,13 @@ import api from "./api";
 // Login Function
 export const login = async (email: string, password: string) => {
   try {
-    const response = await api.post("/api/v1/auth/login", {
-      email,
-      password,
-    });
+    const response = await api.post(
+      "/api/v1/auth/login",
+      { email, password },
+      { withCredentials: true } // Ensure cookies are sent
+    );
     alert("Login successful!");
+    localStorage.setItem("token", response.data.token); // Store the token if needed
     return response.data;
   } catch (error: any) {
     console.error(

@@ -8,6 +8,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { login } from "../../../services/auth";
+import {
+  REGEX_EMAIL,
+  EMAIL_MESSAGE,
+} from "../../../lib/constants/auth-constants";
 
 interface LoginFormProps {
   className?: string;
@@ -19,6 +25,36 @@ export function LoginFormWithPassword({
   onClose,
   ...props
 }: LoginFormProps) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState<string | null>(null);
+
+  const validateEmail = (email: string) => {
+    if (!REGEX_EMAIL.test(email)) {
+      setEmailError(EMAIL_MESSAGE);
+      return false;
+    }
+    setEmailError(null);
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    if (!validateEmail(email)) {
+      return; // Prevent form submission if email is invalid
+    }
+
+    try {
+      await login(email, password);
+      alert("Login successful!");
+      onClose(); // Close the form on successful login
+    } catch (error) {
+      alert("Login failed. Please check your credentials.");
+      console.error("Login error:", error);
+    }
+  };
+
   return (
     <div className={cn("", className)} {...props}>
       <Card className="shadow-none border-none flex flex-col">
@@ -49,7 +85,9 @@ export function LoginFormWithPassword({
               Log in below or create a new Wolt account.
             </CardDescription>
           </div>
-          <form>
+
+          {/* Form Submission Handling */}
+          <form onSubmit={handleSubmit}>
             <div className="grid gap-4">
               <div className="flex flex-col gap-2 ">
                 <Button
@@ -144,6 +182,8 @@ export function LoginFormWithPassword({
                     id="email"
                     type="email"
                     placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                     className="h-[54px] mb-2"
                   />
@@ -151,6 +191,8 @@ export function LoginFormWithPassword({
                     id="password"
                     type="password"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                     className="h-[54px] mb-2"
                   />
