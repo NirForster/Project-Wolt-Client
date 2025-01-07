@@ -24,6 +24,18 @@ export function CarouselSpacing({ restaurants }: CarouselSpacingProps) {
     <div className="flex flex-col justify-center items-center w-full">
       <div>
         <h2>Late-night snacks nearby</h2>
+        <div>
+          <a
+            data-variant="brand"
+            href="/discovery/lunch-venues"
+            data-test-id="Discovery.AllLink"
+            aria-label="See all Lunch near you"
+            className="--sr88i7j-0: var(--cb-color-text-brand); --sr88i7j-1: var(--cb-color-text-brand-hovered); --sr88i7j-2: var(--cb-color-text-brand); --sr88i7j-3: var(--cb-color-text-brand);"
+          >
+            See all
+          </a>
+          <a href="">See all</a>
+        </div>
       </div>
       {/* Centered carousel container */}
       <Carousel className="w-full max-w-4xl relative">
