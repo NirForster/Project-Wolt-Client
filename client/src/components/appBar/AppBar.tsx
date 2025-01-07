@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaSearch, FaShoppingCart } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import woltLogo from "../../assets/dummyData/Wolt-Logo-b&w.png";
 import { SlHome } from "react-icons/sl";
 import { log } from "console";
