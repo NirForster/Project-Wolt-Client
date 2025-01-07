@@ -21,7 +21,7 @@ interface UserProviderProps {
   children: React.ReactNode;
 }
 
-const userProvider = ({ children }: UserProviderProps) => {
+const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
 
   function providerLogin(user: User) {
@@ -38,4 +38,4 @@ const userProvider = ({ children }: UserProviderProps) => {
   );
 };
 
-export default userProvider;
+export default UserProvider;
