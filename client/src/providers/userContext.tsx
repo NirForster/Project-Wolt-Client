@@ -1,39 +1,41 @@
-import { createContext, useState } from "react"
+import { createContext, useState } from "react";
+import { User } from "../types";
 
 interface UserContextType {
-    user: User | null;
-    login: (user: User) => void;
-    logout: () => void;
-  }
-  
-  export const UserContext = createContext<UserContextType>({
-    user: null,
-    login: (user: User) => {
-      console.log(user);
-    },
-    logout: () => {
-      console.log("hello");
-    },
-  });
-  
+  user: User | null;
+  providerLogin: (user: User) => void;
+  providerLogout: () => void;
+}
+
+export const UserContext = createContext<UserContextType>({
+  user: null,
+  providerLogin: (user: User) => {
+    console.log(user);
+  },
+  providerLogout: () => {
+    console.log("hello");
+  },
+});
 
 interface UserProviderProps {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 
-const userProvider = ({children}:UserProviderProps) => {
-  const [user, setUser] = useState<User | null>(null)
-  
-  function providerLogin(user:User){
-    setUser(user)
-  }
-  function providerLogout(user:User){
-    setUser(null)
-  }
-  
-    return (
+const UserProvider = ({ children }: UserProviderProps) => {
+  const [user, setUser] = useState<User | null>(null);
 
-    )
-}
+  function providerLogin(user: User) {
+    setUser(user);
+  }
+  function providerLogout() {
+    setUser(null);
+  }
 
-export default userProvider 
+  return (
+    <UserContext.Provider value={{ user, providerLogin, providerLogout }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+export default UserProvider;
