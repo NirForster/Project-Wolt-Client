@@ -60,13 +60,6 @@ const AppBar = () => {
           </button>
 
           <CartModel />
-          {/* Home Icon */}
-          <div className="p-2  text-blue-600 ml-1 h-8 bg-blue-100 rounded-full items-center">
-            <SlHome size={16} />
-          </div>
-          <div className="flex w-[80px] justify-end ml-2">
-            <img src={woltLogo} alt="wolt-logo" />
-          </div>
 
           {/* _____LOGIN____ */}
           {/* Button to trigger login modal */}
