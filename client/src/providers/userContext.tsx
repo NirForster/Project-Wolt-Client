@@ -7,7 +7,7 @@ interface UserContextType {
   providerLogout: () => void;
 }
 
-export const UserContext = createContext<UserContextType>({
+export const userContext = createContext<UserContextType>({
   user: null,
   providerLogin: (user: User) => {
     console.log(user);
@@ -32,9 +32,9 @@ const UserProvider = ({ children }: UserProviderProps) => {
   }
 
   return (
-    <UserContext.Provider value={{ user, providerLogin, providerLogout }}>
+    <userContext.Provider value={{ user, providerLogin, providerLogout }}>
       {children}
-    </UserContext.Provider>
+    </userContext.Provider>
   );
 };
 

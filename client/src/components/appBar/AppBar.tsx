@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import woltLogo from "../../assets/dummyData/Wolt-Logo-b&w.png";
 import { SlHome } from "react-icons/sl";
@@ -6,11 +6,14 @@ import { log } from "console";
 import CartModel from "../cart/CartModel";
 import { Button } from "../ui/button";
 import LoginSignUpModel from "../auth-components/Login/LoginModel";
+import { userContext } from "@/providers/userContext";
 
 const AppBar = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const UserContext = useContext(userContext);
 
+  const test = UserContext.user;
   return (
     <div className=" flex  h-[70px] bg-white w-full px-5 py-3 border-b border-gray-200">
       <div className="flex-1 ">
@@ -33,7 +36,7 @@ const AppBar = () => {
               isSearchActive ? "opacity-0" : "opacity-100"
             }`}
           >
-            Home (nahalat binyamin 42`)
+            Home {test?.email} (nahalat binyamin 42`)
           </button>
         </div>
       </div>

@@ -1,6 +1,5 @@
 export interface User extends Document {
   email: string;
-  password: string;
   fname: string;
   lname: string;
   phone: string;
@@ -8,7 +7,6 @@ export interface User extends Document {
   locations: object[];
   favoritesShops: string[];
   cart: IOrder[];
-  lastOrders: IOrder[]; // Virtual property
   fullname: string;
 }
 

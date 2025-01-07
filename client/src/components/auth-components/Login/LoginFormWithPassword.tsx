@@ -8,12 +8,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { login } from "../../../services/auth";
 import {
   REGEX_EMAIL,
   EMAIL_MESSAGE,
 } from "../../../lib/constants/auth-constants";
+import { userContext } from "@/providers/userContext";
+import { User } from "@/types";
 
 interface LoginFormProps {
   className?: string;
@@ -28,6 +30,8 @@ export function LoginFormWithPassword({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
+  const UserContext = useContext(userContext);
+  const loginUpdateContext = UserContext.providerLogin;
 
   const validateEmail = (email: string) => {
     if (!REGEX_EMAIL.test(email)) {
@@ -46,8 +50,24 @@ export function LoginFormWithPassword({
     }
 
     try {
-      await login(email, password);
+      const userData = await login(email, password);
+      console.log(userData);
+
       alert("Login successful!");
+      const newUser = {
+        email: userData.user.email,
+        fname: userData.user.fname,
+        lname: userData.user.lname,
+        phone: userData.user.phone,
+        photo: userData.user.photo,
+        locations: userData.user.locations,
+        favoritesShops: userData.user.favoritesShops,
+        cart: userData.user.cart,
+        fullname: userData.user.fullname,
+      };
+      //update the user in context
+      loginUpdateContext(newUser);
+
       onClose(); // Close the form on successful login
     } catch (error) {
       alert("Login failed. Please check your credentials.");
