@@ -1,5 +1,14 @@
+import RestaurentsCarosel from "@/components/carosel-components/RestaurentsCarosel";
+
 const DiscoveryPage = () => {
-  return <div>Discovery Page</div>;
+  return (
+    <div className="p-0">
+      <RestaurentsCarosel />
+      <RestaurentsCarosel />
+      <RestaurentsCarosel />
+      <RestaurentsCarosel />
+    </div>
+  );
 };
 
 export default DiscoveryPage;
