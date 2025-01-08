@@ -2,13 +2,14 @@ import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import woltLogo from "../../assets/dummyData/Wolt-Logo-b&w.png";
 import { SlHome } from "react-icons/sl";
-import { log } from "console";
 import CartModel from "../cart/CartModel";
 import { Button } from "../ui/button";
 import LoginSignUpModel from "../auth-components/Login/LoginModel";
+import SignUpModel from "../auth-components/register/RegisterModel";
 
 const AppBar = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -61,14 +62,21 @@ const AppBar = () => {
 
           <CartModel />
 
-          {/* _____LOGIN____ */}
-          {/* Button to trigger login modal */}
-          <Button onClick={() => setIsModalOpen(true)}>Log in</Button>
-          <Button onClick={() => setIsModalOpen(true)}>Sign up</Button>
+          {/* register or login btns */}
+          <button onClick={() => setIsModalOpen(true)}>Log in</button>
+          <Button
+            className="bg-BlueLightBackground text-woltColors-brandBg hover:bg-woltColors-brandHovered"
+            onClick={() => setIsSignUpModalOpen(true)}
+          >
+            Sign up
+          </Button>
 
           {/* Conditional rendering of the modal */}
           {isModalOpen && (
             <LoginSignUpModel onClose={() => setIsModalOpen(false)} />
+          )}
+          {isSignUpModalOpen && (
+            <SignUpModel onClose={() => setIsSignUpModalOpen(false)} />
           )}
         </div>
       </div>
