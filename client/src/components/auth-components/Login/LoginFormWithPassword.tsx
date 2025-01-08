@@ -8,12 +8,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { login } from "../../../services/auth";
 import {
   REGEX_EMAIL,
   EMAIL_MESSAGE,
 } from "../../../lib/constants/auth-constants";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../providers/userContext";
 
 interface LoginFormProps {
   className?: string;
@@ -28,6 +30,9 @@ export function LoginFormWithPassword({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
+
+  const navigate = useNavigate(); // Initialize useNavigate hook
+  const { providerLogin } = useContext(UserContext); // ✅ Access the providerLogin method
 
   const validateEmail = (email: string) => {
     if (!REGEX_EMAIL.test(email)) {
@@ -46,9 +51,11 @@ export function LoginFormWithPassword({
     }
 
     try {
-      await login(email, password);
+      const userData = await login(email, password);
       alert("Login successful!");
+      providerLogin(userData.user);
       onClose(); // Close the form on successful login
+      navigate("/discovery"); // Redirect to Discovery page after successful login
     } catch (error) {
       alert("Login failed. Please check your credentials.");
       console.error("Login error:", error);
