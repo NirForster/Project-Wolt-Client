@@ -1,8 +1,7 @@
 import { useContext, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import woltLogo from "../../assets/dummyData/Wolt-Logo-b&w.png";
-import { SlHome } from "react-icons/sl";
-import { log } from "console";
+import { SlHome, SlLocationPin } from "react-icons/sl";
 import CartModel from "../cart/CartModel";
 import { Button } from "../ui/button";
 import LoginSignUpModel from "../auth-components/Login/LoginModel";
@@ -11,9 +10,11 @@ import { userContext } from "@/providers/userContext";
 const AppBar = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const UserContext = useContext(userContext);
+  const userContextValue = useContext(userContext);
 
-  const test = UserContext.user;
+  const userLoggedIn = userContextValue.user;
+  const address = userLoggedIn?.locations?.[1] || "Halizon 3 Ramat Gan";
+
   return (
     <div className=" flex  h-[70px] bg-white w-full px-5 py-3 border-b border-gray-200">
       <div className="flex-1 ">
@@ -22,13 +23,14 @@ const AppBar = () => {
           <div className="flex w-[80px] justify-end mr-2">
             <img src={woltLogo} alt="wolt-logo" />
           </div>
-          {/* Home Icon */}
+          {/* Location Icon */}
           <div
             className={`p-2 text-blue-600 mr-1 h-8 bg-blue-100 rounded-full items-center ${
               isSearchActive ? "opacity-0" : "opacity-100"
             }`}
           >
-            <SlHome size={16} />
+            {/* <SlHome size={16} /> */}
+            <SlLocationPin size={16} />
           </div>
           {/* Address */}
           <button
@@ -36,7 +38,7 @@ const AppBar = () => {
               isSearchActive ? "opacity-0" : "opacity-100"
             }`}
           >
-            Home {test?.email} (nahalat binyamin 42`)
+            {address}
           </button>
         </div>
       </div>

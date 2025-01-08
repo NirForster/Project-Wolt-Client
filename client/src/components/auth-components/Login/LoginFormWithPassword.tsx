@@ -29,7 +29,7 @@ export function LoginFormWithPassword({
 }: LoginFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState<string | null>(null);
+  const [_emailError, setEmailError] = useState<string | null>(null);
   const UserContext = useContext(userContext);
   const loginUpdateContext = UserContext.providerLogin;
 
@@ -54,7 +54,7 @@ export function LoginFormWithPassword({
       console.log(userData);
 
       alert("Login successful!");
-      const newUser = {
+      const newUser: User = {
         email: userData.user.email,
         fname: userData.user.fname,
         lname: userData.user.lname,

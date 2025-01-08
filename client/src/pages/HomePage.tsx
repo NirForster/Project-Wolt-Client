@@ -8,7 +8,6 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1>HomePage</h1>
       <AppBar />
       <button
         onClick={handleTestConnection}

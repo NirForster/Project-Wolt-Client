@@ -1,4 +1,4 @@
-export interface User extends Document {
+export interface User {
   email: string;
   fname: string;
   lname: string;
@@ -10,7 +10,7 @@ export interface User extends Document {
   fullname: string;
 }
 
-export interface IOrder extends Document {
+export interface IOrder {
   user: string;
   shop: string;
   createdAt: Date;
