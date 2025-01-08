@@ -14,6 +14,8 @@ import {
   REGEX_EMAIL,
   EMAIL_MESSAGE,
 } from "../../../lib/constants/auth-constants";
+import { userContext } from "@/providers/userContext";
+import { User } from "@/types";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../providers/userContext";
 
@@ -29,10 +31,12 @@ export function LoginFormWithPassword({
 }: LoginFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState<string | null>(null);
+  const [_emailError, setEmailError] = useState<string | null>(null);
 
   const navigate = useNavigate(); // Initialize useNavigate hook
   const { providerLogin } = useContext(UserContext); // ✅ Access the providerLogin method
+  const UserContext = useContext(userContext);
+  const loginUpdateContext = UserContext.providerLogin;
 
   const validateEmail = (email: string) => {
     if (!REGEX_EMAIL.test(email)) {
@@ -53,7 +57,20 @@ export function LoginFormWithPassword({
     try {
       const userData = await login(email, password);
       alert("Login successful!");
-      providerLogin(userData.user);
+      const newUser: User = {
+        email: userData.user.email,
+        fname: userData.user.fname,
+        lname: userData.user.lname,
+        phone: userData.user.phone,
+        photo: userData.user.photo,
+        locations: userData.user.locations,
+        favoritesShops: userData.user.favoritesShops,
+        cart: userData.user.cart,
+        fullname: userData.user.fullname,
+      };
+      //update the user in context
+      loginUpdateContext(newUser);
+
       onClose(); // Close the form on successful login
       navigate("/discovery"); // Redirect to Discovery page after successful login
     } catch (error) {
