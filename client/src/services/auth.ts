@@ -22,12 +22,20 @@ export const login = async (email: string, password: string) => {
 };
 
 // Signup Function
-export const signup = async (name: string, email: string, password: string) => {
+export const signup = async (
+  fname: string,
+  lname: string | undefined,
+  email: string,
+  password: string,
+  phone: string
+) => {
   try {
     const response = await api.post("/api/v1/auth/signup", {
-      name,
+      fname,
+      lname, // Optional last name
       email,
       password,
+      phone,
     });
     alert("Signup successful!");
     return response.data;
