@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { CarouselSpacing } from "./CaroselTemplate";
 import api from "@/services/api";
 
@@ -15,7 +15,7 @@ const RestaurentsCarosel = () => {
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
-        const response = await api.get("/api/v1/shop");
+        const response = await api.get("/api/v1/shop/all");
         if (Array.isArray(response.data)) {
           setRestaurants(response.data);
         } else {
