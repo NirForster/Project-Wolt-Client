@@ -17,7 +17,6 @@ import {
 import { userContext } from "@/providers/userContext";
 import { User } from "@/types";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../../providers/userContext";
 
 interface LoginFormProps {
   className?: string;
@@ -34,7 +33,7 @@ export function LoginFormWithPassword({
   const [_emailError, setEmailError] = useState<string | null>(null);
 
   const navigate = useNavigate(); // Initialize useNavigate hook
-  const { providerLogin } = useContext(UserContext); // ✅ Access the providerLogin method
+  const { providerLogin } = useContext(userContext); // ✅ Access the providerLogin method
   const UserContext = useContext(userContext);
   const loginUpdateContext = UserContext.providerLogin;
 
