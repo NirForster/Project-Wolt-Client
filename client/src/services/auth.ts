@@ -22,13 +22,25 @@ export const login = async (email: string, password: string) => {
 };
 
 // Signup Function
-export const signup = async (name: string, email: string, password: string) => {
+export const signup = async (
+  fname: string,
+  lname: string | undefined,
+  email: string,
+  password: string,
+  phone: string
+) => {
   try {
-    const response = await api.post("/api/v1/auth/signup", {
-      name,
-      email,
-      password,
-    });
+    const response = await api.post(
+      "/api/v1/auth/signup",
+      {
+        fname,
+        lname, // Optional last name
+        email,
+        password,
+        phone,
+      },
+      { withCredentials: true }
+    );
     alert("Signup successful!");
     return response.data;
   } catch (error: any) {
@@ -40,12 +52,11 @@ export const signup = async (name: string, email: string, password: string) => {
   }
 };
 
-// Logout Function
+// Logout Function with Cookies
 export const logout = async () => {
   try {
-    const response = await api.post("/api/v1/auth/logout");
+    await api.get("/api/v1/auth/logout", { withCredentials: true }); // Use GET for logout
     alert("You have been logged out.");
-    return response.data;
   } catch (error: any) {
     console.error(
       "Logout error:",
@@ -55,11 +66,11 @@ export const logout = async () => {
   }
 };
 
-// Fetch Current User
+// Fetch Current User (Updated to call /me)
 export const fetchCurrentUser = async () => {
   try {
-    const response = await api.get("/api/v1/auth/me");
-    return response.data;
+    const response = await api.get("/api/v1/auth/me", {});
+    return response.data.user;
   } catch (error: any) {
     console.error(
       "Failed to fetch user:",

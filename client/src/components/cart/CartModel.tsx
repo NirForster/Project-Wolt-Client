@@ -25,7 +25,9 @@ const CartModel = () => {
         </SheetTrigger>
         <SheetContent side={"right"} className="w-[400px] sm:w-[540px] ">
           <SheetHeader>
-            <SheetTitle className="text-right">ההזמנות שלך</SheetTitle>
+            <SheetTitle className="text-[32px] font-woltHeader">
+              Your orders
+            </SheetTitle>
             <SheetDescription className="overflow-y-auto max-h-screen">
               <CartTabs />
             </SheetDescription>

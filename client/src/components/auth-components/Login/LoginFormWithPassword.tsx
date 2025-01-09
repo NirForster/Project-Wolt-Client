@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useContext, useState } from "react";
+import { useState, useContext } from "react";
 import { login } from "../../../services/auth";
 import {
   REGEX_EMAIL,
@@ -16,6 +16,7 @@ import {
 } from "../../../lib/constants/auth-constants";
 import { userContext } from "@/providers/userContext";
 import { User } from "@/types";
+import { useNavigate } from "react-router-dom";
 
 interface LoginFormProps {
   className?: string;
@@ -30,6 +31,9 @@ export function LoginFormWithPassword({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [_emailError, setEmailError] = useState<string | null>(null);
+
+  const navigate = useNavigate(); // Initialize useNavigate hook
+  const { providerLogin } = useContext(userContext); // ✅ Access the providerLogin method
   const UserContext = useContext(userContext);
   const loginUpdateContext = UserContext.providerLogin;
 
@@ -51,9 +55,8 @@ export function LoginFormWithPassword({
 
     try {
       const userData = await login(email, password);
-      console.log(userData);
-
       alert("Login successful!");
+      providerLogin(userData.user);
       const newUser: User = {
         email: userData.user.email,
         fname: userData.user.fname,
@@ -69,6 +72,7 @@ export function LoginFormWithPassword({
       loginUpdateContext(newUser);
 
       onClose(); // Close the form on successful login
+      navigate("/discovery"); // Redirect to Discovery page after successful login
     } catch (error) {
       alert("Login failed. Please check your credentials.");
       console.error("Login error:", error);

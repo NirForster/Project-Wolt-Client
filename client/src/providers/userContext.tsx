@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { User } from "../types";
+import { fetchCurrentUser, logout } from "../services/auth";
 
 interface UserContextType {
   user: User | null;
@@ -9,27 +10,27 @@ interface UserContextType {
 
 export const userContext = createContext<UserContextType>({
   user: null,
-  providerLogin: (user: User) => {
-    console.log(user);
-  },
-  providerLogout: () => {
-    console.log("hello");
-  },
+  providerLogin: () => {},
+  providerLogout: () => {},
 });
 
-interface UserProviderProps {
-  children: React.ReactNode;
-}
-
-const UserProvider = ({ children }: UserProviderProps) => {
+const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  function providerLogin(user: User) {
-    setUser(user);
-  }
-  function providerLogout() {
+  // Fetch user from server on app load
+  useEffect(() => {
+    const loadUser = async () => {
+      const currentUser = await fetchCurrentUser();
+      setUser(currentUser);
+    };
+    loadUser();
+  }, []);
+
+  const providerLogin = (user: User) => setUser(user);
+  const providerLogout = async () => {
+    await logout();
     setUser(null);
-  }
+  };
 
   return (
     <userContext.Provider value={{ user, providerLogin, providerLogout }}>
