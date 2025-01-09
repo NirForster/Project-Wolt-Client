@@ -1,6 +1,3 @@
-// src/components/ExploreCitiesSection.tsx
-import React from "react";
-
 const cities = [
   "Afula & Emek Yizrael area",
   "Ashdod and Lachish Area",
