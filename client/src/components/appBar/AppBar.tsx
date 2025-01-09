@@ -1,19 +1,23 @@
 import { useState, useContext } from "react";
 import { FaSearch } from "react-icons/fa";
 import woltLogo from "../../assets/dummyData/Wolt-Logo-b&w.png";
-import { SlHome } from "react-icons/sl";
+import { SlHome, SlLocationPin } from "react-icons/sl";
 import CartModel from "../cart/CartModel";
 import { Button } from "../ui/button";
 import LoginModel from "../auth-components/Login/LoginModel";
 import SignUpModel from "../auth-components/register/RegisterModel";
-import { UserContext } from "../../providers/userContext";
+import { userContext } from "../../providers/userContext";
+import AddressModel from "../address/AddressModel";
 
 const AppBar = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const { user, providerLogout } = useContext(UserContext); // Access user context
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const userContextValue = useContext(userContext);
+  const { user, providerLogout } = useContext(userContext); // Access user context
+  const userLoggedIn = userContextValue.user;
+  const address = userLoggedIn?.locations?.[1] || "Halizon 3 Ramat Gan";
 
   return (
     <div className="flex h-[70px] bg-white w-full px-5 py-3 border-b border-gray-200">
@@ -23,21 +27,23 @@ const AppBar = () => {
           <div className="flex w-[80px] justify-end mr-2">
             <img src={woltLogo} alt="wolt-logo" />
           </div>
-          {/* Home Icon */}
+          {/* Location Icon */}
           <div
             className={`p-2 text-blue-600 mr-1 h-8 bg-blue-100 rounded-full items-center ${
               isSearchActive ? "opacity-0" : "opacity-100"
             }`}
           >
-            <SlHome size={16} />
+            {/* <SlHome size={16} /> */}
+            <SlLocationPin size={16} />
           </div>
           {/* Address */}
           <button
             className={`text-sm font-medium text-blue-600 hover:underline ${
               isSearchActive ? "opacity-0" : "opacity-100"
             }`}
+            onClick={() => setIsAddressModalOpen(true)}
           >
-            Home (nahalat binyamin 42`)
+            {address}
           </button>
         </div>
       </div>
@@ -97,6 +103,9 @@ const AppBar = () => {
 
           {/* Modals */}
           {isModalOpen && <LoginModel onClose={() => setIsModalOpen(false)} />}
+          {isAddressModalOpen && (
+            <AddressModel onClose={() => setIsAddressModalOpen(false)} />
+          )}
           {isSignUpModalOpen && (
             <SignUpModel onClose={() => setIsSignUpModalOpen(false)} />
           )}
