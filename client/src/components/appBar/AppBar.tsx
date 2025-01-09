@@ -6,14 +6,16 @@ import CartModel from "../cart/CartModel";
 import { Button } from "../ui/button";
 import LoginModel from "../auth-components/Login/LoginModel";
 import SignUpModel from "../auth-components/register/RegisterModel";
-import { UserContext } from "../../providers/userContext";
+import { userContext } from "../../providers/userContext";
+import AddressModel from "../address/AddressModel";
 
 const AppBar = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
   const userContextValue = useContext(userContext);
-
+  const { user, providerLogout } = useContext(userContext); // Access user context
   const userLoggedIn = userContextValue.user;
   const address = userLoggedIn?.locations?.[1] || "Halizon 3 Ramat Gan";
 
@@ -39,6 +41,7 @@ const AppBar = () => {
             className={`text-sm font-medium text-blue-600 hover:underline ${
               isSearchActive ? "opacity-0" : "opacity-100"
             }`}
+            onClick={() => setIsAddressModalOpen(true)}
           >
             {address}
           </button>
@@ -100,6 +103,9 @@ const AppBar = () => {
 
           {/* Modals */}
           {isModalOpen && <LoginModel onClose={() => setIsModalOpen(false)} />}
+          {isAddressModalOpen && (
+            <AddressModel onClose={() => setIsAddressModalOpen(false)} />
+          )}
           {isSignUpModalOpen && (
             <SignUpModel onClose={() => setIsSignUpModalOpen(false)} />
           )}
