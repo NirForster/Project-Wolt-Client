@@ -56,6 +56,7 @@ export function LoginFormWithPassword({
     try {
       const userData = await login(email, password);
       alert("Login successful!");
+      providerLogin(userData.user);
       const newUser: User = {
         email: userData.user.email,
         fname: userData.user.fname,
