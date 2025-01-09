@@ -3,7 +3,7 @@ import woltLogo from "../../assets/dummyData/Wolt-Logo-b&w.png";
 import { Button } from "../ui/button";
 import LoginModel from "../auth-components/Login/LoginModel";
 import SignUpModel from "../auth-components/register/RegisterModel";
-import { UserContext } from "../../providers/userContext";
+import { userContext } from "@/providers/userContext";
 import { useNavigate } from "react-router-dom";
 
 const AppBarHomePage = () => {
@@ -11,7 +11,7 @@ const AppBarHomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate(); // Initialize useNavigate hook
-  const { user, providerLogout } = useContext(UserContext); // Access user context
+  const { user, providerLogout } = useContext(userContext); // Access user context
 
   // ✅ Corrected: Navigate when user is logged in using useEffect
   useEffect(() => {
