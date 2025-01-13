@@ -5,9 +5,11 @@ import addLocationImage from "@/assets/addLocationImage.png";
 
 const AddLocationStreetPage = ({
   onBack,
+  onClose,
   setStreet,
 }: {
   onBack: () => void;
+  onClose: () => void;
   setStreet: (street: string) => void;
 }) => {
   const [streetInput, setStreetInput] = useState("");
@@ -31,7 +33,7 @@ const AddLocationStreetPage = ({
 
             <button
               className="w-8 h-8 text-black rounded-full bg-gray-200 hover:bg-gray-300 text-lg"
-              onClick={onBack}
+              onClick={onClose}
             >
               ✕
             </button>
@@ -50,6 +52,7 @@ const AddLocationStreetPage = ({
               <Input
                 id="Street"
                 type="text"
+                value={streetInput}
                 placeholder="Street name and number"
                 onChange={(e) => setStreetInput(e.target.value)}
                 required

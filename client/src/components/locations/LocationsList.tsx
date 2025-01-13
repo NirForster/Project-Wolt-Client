@@ -25,20 +25,20 @@ const LocationsList = ({ onClose }: { onClose: () => void }) => {
   };
 
   return isAddLocationModalOpen ? (
-    <AddNewLocationModal onBack={backFromAddLocationModal} />
+    <AddNewLocationModal onBack={backFromAddLocationModal} onClose={onClose} />
   ) : (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
       <div className="bg-white rounded-lg shadow-lg max-w-[400px] w-full p-6">
         {/* Header */}
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-3xl font-bold font-woltHeader">Where?</h2>
+        <div className="flex justify-end items-center ">
           <button
-            className="text-gray-500 hover:text-gray-700"
+            className="w-8 h-8 text-black rounded-full bg-gray-200 hover:bg-gray-300 text-lg"
             onClick={onClose}
           >
             ✕
           </button>
         </div>
+        <h2 className="text-3xl font-bold font-woltHeader">Where?</h2>
 
         {/* Address List */}
         <ul className="divide-y divide-gray-300">

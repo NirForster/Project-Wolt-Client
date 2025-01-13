@@ -1,8 +1,12 @@
 import { FaBuilding, FaHome, FaMapMarkerAlt } from "react-icons/fa";
 
 const AddLocationKindPage = ({
+  onBack,
+  onClose,
   setKind,
 }: {
+  onBack: (street: string) => void;
+  onClose: () => void;
   setKind: (kind: string) => void;
 }) => {
   const locationsKindsArray = ["House", "Apartment", "Office", "Other"];
@@ -12,14 +16,23 @@ const AddLocationKindPage = ({
       <div className="bg-white rounded-lg shadow-lg max-w-[400px] w-full p-6">
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-3xl font-bold font-woltHeader">Where?</h2>
           <button
-            className="text-gray-500 hover:text-gray-700"
-            // onClick={onClose}
+            className="w-8 h-8 text-black rounded-full bg-gray-200 hover:bg-gray-300 text-lg"
+            onClick={() => onBack("")}
+          >
+            ←
+          </button>
+
+          <button
+            className="w-8 h-8 text-black rounded-full bg-gray-200 hover:bg-gray-300 text-lg"
+            onClick={onClose}
           >
             ✕
           </button>
         </div>
+        <h2 className="text-3xl font-bold font-woltHeader">
+          What kind of location is this?
+        </h2>
         {/* Address List */}
         <ul className="divide-y divide-gray-300">
           {locationsKindsArray.map((kind, index) => (
