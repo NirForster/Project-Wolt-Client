@@ -36,5 +36,5 @@ export interface Details {
 
   numberOnDoor: string;
 
-  locationLabel: string;
+  locationLabel: "Home" | "Work" | "Other";
 }

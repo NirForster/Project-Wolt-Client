@@ -8,6 +8,7 @@ import SignUpModel from "../auth-components/register/RegisterModel";
 import { userContext } from "../../providers/userContext";
 import AppBarLocation from "../locations/AppBarLocation";
 import LocationsModel from "../locations/LocationsModel";
+import AvatarMenu from "../avatarMenu/avatarMenu";
 
 const AppBar = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -50,24 +51,14 @@ const AppBar = () => {
       {/* Right Side */}
       <div className="flex-1">
         <div className="flex gap-4 items-center justify-end">
-          <button
-            className={`px-4 py-2 text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200 ${
-              isSearchActive ? "opacity-0" : "opacity-100"
-            }`}
-          >
-            HB
-          </button>
-
+          {!isSearchActive && <AvatarMenu />}
           {/* Cart Icon */}
           <CartModel />
-
           {/* Conditional Rendering Based on User Authentication */}
           {user ? (
             <>
               {/* Show only if the user is logged in */}
-              <p className="text-sm font-medium text-gray-700">
-                Welcome, {user.fname}
-              </p>
+
               <Button
                 className="text-sm font-medium bg-red-500 text-white hover:bg-red-600"
                 onClick={providerLogout}
@@ -87,7 +78,6 @@ const AppBar = () => {
               </Button>
             </>
           )}
-
           {/* Modals */}
           {isLoginModalOpen && (
             <LoginModel onClose={() => setIsLoginModalOpen(false)} />
