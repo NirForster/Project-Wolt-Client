@@ -6,30 +6,23 @@ import { Button } from "../ui/button";
 import LoginModel from "../auth-components/Login/LoginModel";
 import SignUpModel from "../auth-components/register/RegisterModel";
 import { userContext } from "../../providers/userContext";
-<<<<<<< HEAD
-import AddressModel from "../address/AddressModel";
-=======
 import AppBarLocation from "../locations/AppBarLocation";
 import LocationsModel from "../locations/LocationsModel";
->>>>>>> haviv
+import LoginModel from "../auth-components/Login/LoginModel";
+import SignUpModel from "../auth-components/register/RegisterModel";
+import { userContext } from "../../providers/userContext";
+import AddressModel from "../address/AddressModel";
 
 const AppBar = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-<<<<<<< HEAD
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
-  const userContextValue = useContext(userContext);
-  const { user, providerLogout } = useContext(userContext); // Access user context
-  const userLoggedIn = userContextValue.user;
-  const address = userLoggedIn?.locations?.[1] || "Halizon 3 Ramat Gan";
-=======
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
-
+  const { user, providerLogout } = useContext(userContext); // Access user context
   // const userContextValue = useContext(userContext);
   const { user, providerLogout } = useContext(userContext); // Access user context
->>>>>>> haviv
 
   return (
     <div className="flex h-[70px] bg-white w-full px-5 py-3 border-b border-gray-200">
@@ -47,18 +40,6 @@ const AppBar = () => {
           >
             <AppBarLocation />
           </div>
-<<<<<<< HEAD
-          {/* Address */}
-          <button
-            className={`text-sm font-medium text-blue-600 hover:underline ${
-              isSearchActive ? "opacity-0" : "opacity-100"
-            }`}
-            onClick={() => setIsAddressModalOpen(true)}
-          >
-            {address}
-          </button>
-=======
->>>>>>> haviv
         </div>
       </div>
       {/* Search Bar */}
@@ -105,11 +86,7 @@ const AppBar = () => {
           ) : (
             <>
               {/* Show only if the user is not logged in */}
-<<<<<<< HEAD
-              <button onClick={() => setIsModalOpen(true)}>Log in</button>
-=======
               <button onClick={() => setIsLoginModalOpen(true)}>Log in</button>
->>>>>>> haviv
               <Button
                 className="bg-BlueLightBackground text-woltColors-brandBg hover:bg-woltColors-brandHovered"
                 onClick={() => setIsSignUpModalOpen(true)}
@@ -120,14 +97,6 @@ const AppBar = () => {
           )}
 
           {/* Modals */}
-<<<<<<< HEAD
-          {isModalOpen && <LoginModel onClose={() => setIsModalOpen(false)} />}
-          {isAddressModalOpen && (
-            <AddressModel onClose={() => setIsAddressModalOpen(false)} />
-          )}
-          {isSignUpModalOpen && (
-            <SignUpModel onClose={() => setIsSignUpModalOpen(false)} />
-=======
           {isLoginModalOpen && (
             <LoginModel onClose={() => setIsLoginModalOpen(false)} />
           )}
@@ -136,7 +105,6 @@ const AppBar = () => {
           )}
           {isAddressModalOpen && (
             <LocationsModel onClose={() => setIsAddressModalOpen(false)} />
->>>>>>> haviv
           )}
         </div>
       </div>
