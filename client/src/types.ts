@@ -28,3 +28,13 @@ export interface IOrder {
   hasSent: boolean;
   totalPrice: number; // Virtual property
 }
+
+export interface Details {
+  kind: string;
+
+  entrance: string;
+
+  numberOnDoor: string;
+
+  locationLabel: string;
+}

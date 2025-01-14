@@ -12,7 +12,9 @@ const LocationsList = ({ onClose }: { onClose: () => void }) => {
 
   // State for the current selected address
   const [currentAddress, setCurrentAddress] = useState<string | null>(
-    loggedInUserLocationList[0].address
+    loggedInUserLocationList && loggedInUserLocationList.length > 0
+      ? loggedInUserLocationList[0].address
+      : null
   );
 
   const handleChooseAddress = (address: string) => {
@@ -28,7 +30,7 @@ const LocationsList = ({ onClose }: { onClose: () => void }) => {
     <AddNewLocationModal onBack={backFromAddLocationModal} onClose={onClose} />
   ) : (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-      <div className="bg-white rounded-lg shadow-lg max-w-[400px] w-full p-6">
+      <div className="bg-white rounded-lg shadow-lg max-w-[500px] w-full p-6">
         {/* Header */}
         <div className="flex justify-end items-center ">
           <button

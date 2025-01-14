@@ -31,7 +31,7 @@ const AppBarLocation = () => {
         {loggedInUserLocationIcon()}
       </div>
       {/* Address */}
-      <p className={`text-sm font-medium text-blue-600  `}>
+      <p className={`truncate-text text-sm font-medium text-blue-600  `}>
         {loggedInUserLocation
           ? `${loggedInUserLocation?.type} (${loggedInUserLocation?.address})`
           : "There is no location saved"}

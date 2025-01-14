@@ -8,30 +8,42 @@ import {
 } from "@/components/ui/select";
 
 import { useState } from "react";
-import AddressTypeSelector from "./AddressTypeSelctor";
+import AddressTypeSelector from "./AddressTypeSelector";
+import { Details } from "@/types";
 
 const AddLocationDetailsPage = ({
   street,
   kind,
   onBack,
   onClose,
+  setDetails,
 }: {
   street: string;
   kind: string;
   onBack: (kind: string) => void;
   onClose: () => void;
+  setDetails: (allDetails: Details) => void;
 }) => {
   const [selectedType, setSelectedType] = useState(`${kind}`);
   const [entrance, setEntrance] = useState("");
-  const [numberOnDoor, setnumberOnDoor] = useState("");
+  const [numberOnDoor, setNumberOnDoor] = useState("");
+  const [locationLabel, setLocationLabel] = useState("Home");
+  const isSaveDisabled = numberOnDoor.trim() === "";
 
-  // const handleContinue = () => {
-  //   setStreet(streetInput);
-  // };
+  const handleSave = () => {
+    const allDetails = {
+      kind: selectedType,
+      entrance: entrance,
+      numberOnDoor: numberOnDoor,
+      locationLabel: locationLabel,
+    };
+    setDetails(allDetails);
+  };
+
   return (
     <div>
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-        <div className="bg-white rounded-lg shadow-lg max-w-[400px] w-full p-6">
+        <div className="bg-white rounded-lg shadow-lg max-w-[500px] w-full p-6">
           {/* Header */}
           <div className="flex justify-between items-center mb-4">
             <button
@@ -58,8 +70,8 @@ const AddLocationDetailsPage = ({
           <p className="text-gray-400">{street}</p>
 
           {/* Form */}
-          <div className="space-y-4">
-            <div>
+          <div>
+            <div className="mt-4 mb-4">
               <Select value={selectedType} onValueChange={setSelectedType}>
                 <SelectTrigger>
                   <SelectValue>{selectedType}</SelectValue>
@@ -77,37 +89,40 @@ const AddLocationDetailsPage = ({
               type="text"
               placeholder="Entrance / Staircase"
               onChange={(e) => setEntrance(e.target.value)}
-              className="h-[40px] "
+              className="h-[40px] mt-4 "
             />
-            <p className="text-gray-400">Optional</p>
+            <p className="text-gray-400 ml-2">Optional</p>
             <Input
               type="text"
               placeholder="Name / Number on door"
-              onChange={(e) => setnumberOnDoor(e.target.value)}
+              onChange={(e) => setNumberOnDoor(e.target.value)}
               required
-              className="h-[40px] "
+              className="h-[40px] mt-4 mb-4"
             />
             <Input
               type="text"
               placeholder="Other instructions for the courier"
               onChange={(e) => setEntrance(e.target.value)}
-              className="h-[40px] "
+              className="h-[40px] mt-4 "
             />
-            <p className="text-gray-400">Optional</p>
+            <p className="text-gray-400 ml-2 mb-4">Optional</p>
 
-            <AddressTypeSelector />
+            <AddressTypeSelector
+              label={locationLabel}
+              setLocationLabel={setLocationLabel}
+            />
 
-            {/* <button
-              disabled={isContinueDisabled}
-              className={`w-full px-4 py-2 rounded-lg text-white text-center ${
-                isContinueDisabled
+            <button
+              disabled={isSaveDisabled}
+              className={`w-full mt-4 px-4 py-2 rounded-lg text-white text-center ${
+                isSaveDisabled
                   ? "bg-blue-200 cursor-not-allowed"
                   : "bg-blue-500 hover:bg-blue-600"
               }`}
-              // onClick={() => handleContinue()}
+              onClick={() => handleSave()}
             >
-              Continue
-            </button> */}
+              Save
+            </button>
           </div>
         </div>
       </div>

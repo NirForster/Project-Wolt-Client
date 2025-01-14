@@ -2,6 +2,7 @@ import { useState } from "react";
 import AddLocationStreetPage from "./AddLocationStreetPage";
 import AddLocationKindPage from "./AddLocationKindPage";
 import AddLocationDetailsPage from "./AddLocationDetailsPage";
+import { Details } from "@/types";
 
 const AddNewLocationModal = ({
   onBack,
@@ -12,6 +13,12 @@ const AddNewLocationModal = ({
 }) => {
   const [street, setStreet] = useState("");
   const [kind, setKind] = useState("");
+  const [details, setDetails] = useState<Details>({
+    kind: "",
+    entrance: "",
+    numberOnDoor: "",
+    locationLabel: "",
+  });
 
   if (street === "")
     return (
@@ -29,15 +36,17 @@ const AddNewLocationModal = ({
         setKind={setKind}
       />
     );
-  else
+  if (details.numberOnDoor === "")
     return (
       <AddLocationDetailsPage
         onBack={setKind}
         onClose={onClose}
         street={street}
         kind={kind}
+        setDetails={setDetails}
       />
     );
+  else onClose();
 };
 
 export default AddNewLocationModal;
