@@ -8,20 +8,12 @@ import SignUpModel from "../auth-components/register/RegisterModel";
 import { userContext } from "../../providers/userContext";
 import AppBarLocation from "../locations/AppBarLocation";
 import LocationsModel from "../locations/LocationsModel";
-import LoginModel from "../auth-components/Login/LoginModel";
-import SignUpModel from "../auth-components/register/RegisterModel";
-import { userContext } from "../../providers/userContext";
-import AddressModel from "../address/AddressModel";
 
 const AppBar = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const [isLocationsModel, setIsLocationsModel] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
-  const { user, providerLogout } = useContext(userContext); // Access user context
-  // const userContextValue = useContext(userContext);
   const { user, providerLogout } = useContext(userContext); // Access user context
 
   return (
@@ -33,7 +25,7 @@ const AppBar = () => {
             <img src={woltLogo} alt="wolt-logo" />
           </div>
           <div
-            onClick={() => setIsAddressModalOpen(true)}
+            onClick={() => setIsLocationsModel(true)}
             className={`hover:cursor-pointer ${
               isSearchActive ? "opacity-0" : "opacity-100"
             }`}
@@ -103,8 +95,8 @@ const AppBar = () => {
           {isSignUpModalOpen && (
             <SignUpModel onClose={() => setIsSignUpModalOpen(false)} />
           )}
-          {isAddressModalOpen && (
-            <LocationsModel onClose={() => setIsAddressModalOpen(false)} />
+          {isLocationsModel && (
+            <LocationsModel onClose={() => setIsLocationsModel(false)} />
           )}
         </div>
       </div>
