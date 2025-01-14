@@ -4,6 +4,12 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        "2xs": "550px",
+        smd: "720px",
+        xlg: "1200px",
+        "3xl": "1600px",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -80,6 +86,7 @@ module.exports = {
         woltColors: {
           white: "#fff",
           black: "#000",
+          gray: "#242424",
           transparent: "transparent",
           current: "currentColor",
           facebookBlueBg: "rgba(57, 117, 234, 1)",
