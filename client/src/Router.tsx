@@ -3,7 +3,7 @@ import { lazy, Suspense } from "react";
 import MainLayout from "../src/components/MainLayout";
 import ScrollToTop from "./services/ScrollToTop";
 
-const HomePage = lazy(() => import("./pages/HomePage"));
+const LandingPage = lazy(() => import("./pages/LandingPage"));
 const DiscoveryPage = lazy(
   () => import("./pages/discovery-pages/DiscoveryPage")
 );
@@ -29,7 +29,7 @@ function AppRoutes() {
           path="/"
           element={
             <Suspense fallback={<div>Loading...</div>}>
-              <HomePage />
+              <LandingPage />
             </Suspense>
           }
         />
