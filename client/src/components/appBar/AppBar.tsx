@@ -8,21 +8,27 @@ import SignUpModel from "../auth-components/register/RegisterModel";
 import { userContext } from "../../providers/userContext";
 import AppBarLocation from "../locations/AppBarLocation";
 import LocationsModel from "../locations/LocationsModel";
-import AvatarMenu from "../avatarMenu/avatarMenu";
+import AvatarMenu from "../avatarMenu/AvatarMenu";
+import { useNavigate } from "react-router-dom";
 
 const AppBar = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isLocationsModel, setIsLocationsModel] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const { user, providerLogout } = useContext(userContext); // Access user context
+
+  const { user } = useContext(userContext);
+  const navigate = useNavigate();
 
   return (
     <div className="flex h-[70px] bg-white w-full px-5 py-3 border-b border-gray-200">
       <div className="flex-1">
         <div className="flex items-center h-full justify-start ">
           {/* Wolt Logo */}
-          <div className="flex w-[80px] justify-end mr-2">
+          <div
+            className="flex w-[80px] justify-end mr-2 hover:cursor-pointer"
+            onClick={() => navigate("/discovery")}
+          >
             <img src={woltLogo} alt="wolt-logo" />
           </div>
           <div
@@ -51,22 +57,8 @@ const AppBar = () => {
       {/* Right Side */}
       <div className="flex-1">
         <div className="flex gap-4 items-center justify-end">
-          {!isSearchActive && <AvatarMenu />}
-          {/* Cart Icon */}
-          <CartModel />
           {/* Conditional Rendering Based on User Authentication */}
-          {user ? (
-            <>
-              {/* Show only if the user is logged in */}
-
-              <Button
-                className="text-sm font-medium bg-red-500 text-white hover:bg-red-600"
-                onClick={providerLogout}
-              >
-                Logout
-              </Button>
-            </>
-          ) : (
+          {!user ? (
             <>
               {/* Show only if the user is not logged in */}
               <button onClick={() => setIsLoginModalOpen(true)}>Log in</button>
@@ -76,6 +68,11 @@ const AppBar = () => {
               >
                 Sign up
               </Button>
+            </>
+          ) : (
+            <>
+              {!isSearchActive && <AvatarMenu />}
+              <CartModel />
             </>
           )}
           {/* Modals */}

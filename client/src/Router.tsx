@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import MainLayout from "../src/components/MainLayout";
 import ScrollToTop from "./services/ScrollToTop";
+import MeInfoLayout from "./components/MeInfoLayot";
+import MeAddress from "./components/me-section/profilePages/MeAddress";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const DiscoveryPage = lazy(
@@ -13,7 +15,6 @@ const DiscoveryRestaurants = lazy(
 const DiscoveryStorePage = lazy(
   () => import("./pages/discovery-pages/DiscoveryStorePage")
 );
-const AccountInfoPage = lazy(() => import("./pages/AccountInfoPage"));
 const CategoryBrowse = lazy(
   () => import("./pages/browsing-pages/CategoryBrowse")
 );
@@ -58,14 +59,7 @@ function AppRoutes() {
               </Suspense>
             }
           />
-          <Route
-            path="account-info"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <AccountInfoPage />
-              </Suspense>
-            }
-          />
+
           <Route
             path="browse/:category"
             element={
@@ -79,6 +73,66 @@ function AppRoutes() {
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <RestaurantPage />
+              </Suspense>
+            }
+          />
+        </Route>
+        <Route path="/me" element={<MeInfoLayout />}>
+          <Route
+            path="personal-info"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <div className="flex justify-center"></div>
+              </Suspense>
+            }
+          />
+          <Route
+            path="payment"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <div className="flex justify-center"></div>
+              </Suspense>
+            }
+          />
+          <Route
+            path="addresses"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <div className="flex justify-center">
+                  <MeAddress />
+                </div>
+              </Suspense>
+            }
+          />
+          <Route
+            path="order-history"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <div className="flex justify-center"></div>
+              </Suspense>
+            }
+          />
+          <Route
+            path="earn-credits"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <div className="flex justify-center"></div>
+              </Suspense>
+            }
+          />
+          <Route
+            path="redeem-code"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <div className="flex justify-center"></div>
+              </Suspense>
+            }
+          />
+          <Route
+            path="settings"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <div className="flex justify-center"></div>
               </Suspense>
             }
           />
