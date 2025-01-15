@@ -17,7 +17,7 @@ const AddNewLocationModal = ({
     kind: "",
     entrance: "",
     numberOnDoor: "",
-    locationLabel: "",
+    locationLabel: "Home",
   });
 
   if (street === "")
@@ -36,17 +36,16 @@ const AddNewLocationModal = ({
         setKind={setKind}
       />
     );
-  if (details.numberOnDoor === "")
-    return (
-      <AddLocationDetailsPage
-        onBack={setKind}
-        onClose={onClose}
-        street={street}
-        kind={kind}
-        setDetails={setDetails}
-      />
-    );
-  else onClose();
+  else details.numberOnDoor === "";
+  return (
+    <AddLocationDetailsPage
+      onBack={setKind}
+      onClose={onClose}
+      street={street}
+      kind={kind}
+      setDetails={setDetails}
+    />
+  );
 };
 
 export default AddNewLocationModal;

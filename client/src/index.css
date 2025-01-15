@@ -92,7 +92,7 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     text-transform: none;
-    padding-inline: 0.5rem;
+    /* padding-inline: 0.5rem; */
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 500;

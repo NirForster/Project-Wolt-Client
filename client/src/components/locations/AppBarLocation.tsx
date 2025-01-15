@@ -26,7 +26,7 @@ const AppBarLocation = () => {
     <div className="flex items-center">
       {/* Location Icon */}
       <div
-        className={`flex p-2 text-blue-600 mr-1 h-8 bg-blue-100 rounded-full items-center z`}
+        className={`flex p-2 text-blue-600 mr-1 h-8 bg-blue-100 rounded-full items-center `}
       >
         {loggedInUserLocationIcon()}
       </div>
