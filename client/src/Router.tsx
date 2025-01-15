@@ -79,6 +79,7 @@ function AppRoutes() {
             }
           />
         </Route>
+
         <Route path="en/me" element={<MeInfoLayout />}>
           <Route
             path="personal-info"

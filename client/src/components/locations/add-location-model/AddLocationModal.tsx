@@ -3,6 +3,7 @@ import AddLocationStreetPage from "./AddLocationStreetPage";
 import AddLocationKindPage from "./AddLocationKindPage";
 import AddLocationDetailsPage from "./AddLocationDetailsPage";
 import { Details } from "@/types";
+import addLocationToUser from "@/api/users/addLocation";
 
 const AddNewLocationModal = ({
   onBack,
