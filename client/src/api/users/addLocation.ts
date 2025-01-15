@@ -1,9 +1,13 @@
 import api from "@/services/api";
 
-const addLocationToUser = async (type) => {
+const addLocationToUser = async (
+  type: "Home" | "Work" | "Other",
+  address: string
+) => {
   try {
-    const response = await api.get(`/v1/user/locations/add`, {
-      withCredentials: true,
+    const response = await api.put(`/api/v1/user/locations/add`, {
+      type,
+      address,
     });
     return response.data;
   } catch (error) {

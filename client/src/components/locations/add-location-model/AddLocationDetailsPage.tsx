@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import AddressTypeSelector from "./AddressTypeSelector";
 import { Details } from "@/types";
+import addLocationToUser from "@/api/users/addLocation";
 
 const AddLocationDetailsPage = ({
   street,
@@ -27,17 +28,22 @@ const AddLocationDetailsPage = ({
   const [selectedType, setSelectedType] = useState(`${kind}`);
   const [entrance, setEntrance] = useState("");
   const [numberOnDoor, setNumberOnDoor] = useState("");
-  const [locationLabel, setLocationLabel] = useState("Home");
+  const [locationLabel, setLocationLabel] = useState<"Home" | "Work" | "Other">(
+    "Home"
+  );
   const isSaveDisabled = numberOnDoor.trim() === "";
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const allDetails = {
       kind: selectedType,
       entrance: entrance,
       numberOnDoor: numberOnDoor,
       locationLabel: locationLabel,
     };
-    setDetails(allDetails);
+    // setDetails(allDetails);
+    const hara = await addLocationToUser(allDetails.locationLabel, street);
+    console.log(hara);
+    onClose();
   };
 
   return (
