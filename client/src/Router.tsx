@@ -19,19 +19,23 @@ const CategoryBrowse = lazy(
   () => import("./pages/browsing-pages/CategoryBrowse")
 );
 const RestaurantPage = lazy(() => import("./pages/RestaurantPage"));
-const Error404Page = lazy(() => import("./pages/404Page")); // Importing 404 Page
+const Error404Page = lazy(() => import("./pages/404Page"));
+const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
+  <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+);
 
 function AppRoutes() {
   return (
     <Router>
       <ScrollToTop />
       <Routes>
+        {/* Landing Page */}
         <Route
           path="/"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <SuspenseWrapper>
               <LandingPage />
-            </Suspense>
+            </SuspenseWrapper>
           }
         />
 
@@ -40,144 +44,103 @@ function AppRoutes() {
           <Route
             index
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <SuspenseWrapper>
                 <DiscoveryPage />
-              </Suspense>
+              </SuspenseWrapper>
             }
           />
           <Route
             path="restaurants"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <SuspenseWrapper>
                 <DiscoveryRestaurants />
-              </Suspense>
+              </SuspenseWrapper>
             }
           />
           <Route
             path="stores"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <SuspenseWrapper>
                 <DiscoveryStorePage />
-              </Suspense>
+              </SuspenseWrapper>
             }
           />
 
           <Route
             path="browse/:category"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <SuspenseWrapper>
                 <CategoryBrowse />
-              </Suspense>
+              </SuspenseWrapper>
             }
           />
           <Route
             path="restaurant/:id"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <SuspenseWrapper>
                 <RestaurantPage />
-              </Suspense>
+              </SuspenseWrapper>
             }
           />
         </Route>
 
-        <Route path="en/me" element={<MeInfoLayout />}>
-          <Route
-            path="personal-info"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <div className="flex justify-center"></div>
-              </Suspense>
-            }
-          />
-          <Route
-            path="payment"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <div className="flex justify-center"></div>
-              </Suspense>
-            }
-          />
+        {/* Me Section */}
+        <Route path="/en/me" element={<MeInfoLayout />}>
           <Route
             path="addresses"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <div className="flex justify-center">
-                  <MeAddress />
-                </div>
-              </Suspense>
+              <SuspenseWrapper>
+                <MeAddress />
+              </SuspenseWrapper>
             }
           />
-          <Route
-            path="order-history"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <div className="flex justify-center"></div>
-              </Suspense>
-            }
-          />
-          <Route
-            path="earn-credits"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <div className="flex justify-center"></div>
-              </Suspense>
-            }
-          />
-          <Route
-            path="redeem-code"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <div className="flex justify-center"></div>
-              </Suspense>
-            }
-          />
-          <Route
-            path="settings"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <div className="flex justify-center"></div>
-              </Suspense>
-            }
-          />
+          {[
+            "personal-info",
+            "payment",
+            "order-history",
+            "earn-credits",
+            "redeem-code",
+            "settings",
+          ].map((path) => (
+            <Route
+              key={path}
+              path={path}
+              element={
+                <SuspenseWrapper>
+                  <div className="flex justify-center">{path}</div>
+                </SuspenseWrapper>
+              }
+            />
+          ))}
         </Route>
 
-        {/* Restaurant Details with Region and City */}
+        {/* Restaurant and Store Details */}
         <Route
           path="/en/:region/:city/restaurant/:id"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <SuspenseWrapper>
               <RestaurantPage />
-            </Suspense>
+            </SuspenseWrapper>
           }
         />
-
-        {/* Store Details with Region and City */}
         <Route
           path="/en/:region/:city/venue/:id"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <SuspenseWrapper>
               <DiscoveryStorePage />
-            </Suspense>
+            </SuspenseWrapper>
           }
         />
 
-        <Route
-          path="/en/discovery/browse/:category"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <CategoryBrowse />
-            </Suspense>
-          }
-        />
-        {/* 404 Error Page - Catch All Route
+        {/* 404 Page */}
         <Route
           path="*"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <SuspenseWrapper>
               <Error404Page />
-            </Suspense>
+            </SuspenseWrapper>
           }
-        /> */}
+        />
       </Routes>
     </Router>
   );
