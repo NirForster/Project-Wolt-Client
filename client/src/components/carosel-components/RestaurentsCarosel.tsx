@@ -16,8 +16,10 @@ const RestaurentsCarosel = () => {
     const fetchRestaurants = async () => {
       try {
         const response = await api.get("/api/v1/shop/all");
-        if (Array.isArray(response.data)) {
-          setRestaurants(response.data);
+
+        // ✅ Accessing the 'shops' array correctly
+        if (response.data && Array.isArray(response.data.shops)) {
+          setRestaurants(response.data.shops);
         } else {
           console.error("API response is not an array", response.data);
           setRestaurants([]); // Prevents runtime errors
