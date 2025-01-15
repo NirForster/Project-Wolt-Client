@@ -18,13 +18,13 @@ const CategoryBrowse = lazy(
   () => import("./pages/browsing-pages/CategoryBrowse")
 );
 const RestaurantPage = lazy(() => import("./pages/RestaurantPage"));
+const Error404Page = lazy(() => import("./pages/404Page")); // Importing 404 Page
 
 function AppRoutes() {
   return (
     <Router>
       <ScrollToTop />
       <Routes>
-        {/* Define root route */}
         <Route
           path="/"
           element={
@@ -33,7 +33,9 @@ function AppRoutes() {
             </Suspense>
           }
         />
-        <Route path="/discovery" element={<MainLayout />}>
+
+        {/* Discovery Section */}
+        <Route path="/en/discovery" element={<MainLayout />}>
           <Route
             index
             element={
@@ -51,38 +53,62 @@ function AppRoutes() {
             }
           />
           <Route
-            path="store"
+            path="stores"
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <DiscoveryStorePage />
               </Suspense>
             }
           />
-          <Route
-            path="account-info"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <AccountInfoPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="browse/:category"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <CategoryBrowse />
-              </Suspense>
-            }
-          />
-          <Route
-            path="restaurant/:id"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <RestaurantPage />
-              </Suspense>
-            }
-          />
         </Route>
+
+        {/* Account Section */}
+        <Route
+          path="/en/me/personal-info"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <AccountInfoPage />
+            </Suspense>
+          }
+        />
+
+        {/* Restaurant Details with Region and City */}
+        <Route
+          path="/en/:region/:city/restaurant/:id"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <RestaurantPage />
+            </Suspense>
+          }
+        />
+
+        {/* Store Details with Region and City */}
+        <Route
+          path="/en/:region/:city/venue/:id"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <DiscoveryStorePage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/en/discovery/browse/:category"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <CategoryBrowse />
+            </Suspense>
+          }
+        />
+        {/* 404 Error Page - Catch All Route
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Error404Page />
+            </Suspense>
+          }
+        /> */}
       </Routes>
     </Router>
   );
