@@ -16,7 +16,7 @@ const AppBarHomePage = () => {
   // ✅ Corrected: Navigate when user is logged in using useEffect
   useEffect(() => {
     if (user) {
-      navigate("/discovery");
+      navigate("/en/discovery");
     }
   }, [user, navigate]); // Ensure it only runs when the user state changes
 
