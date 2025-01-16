@@ -1,7 +1,11 @@
-import React from "react";
+import GridRestaurantsView from "@/components/restaurants-page-components/GridRestaurantsView";
 
 const RestaurantPage = () => {
-  return <div>RestaurantsPage</div>;
+  return (
+    <div>
+      <GridRestaurantsView />;
+    </div>
+  );
 };
 
 export default RestaurantPage;
