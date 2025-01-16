@@ -28,6 +28,7 @@ const RestaurantsGrid: React.FC = () => {
             name={restaurant.name}
             description={restaurant.description}
             photo={restaurant.image}
+            link={restaurant.link}
             deliveryTime={restaurant.deliveryTime} // Temporary placeholder
             deliveryFee={restaurant.deliveryFee} // Temporary placeholder
             priceRange={restaurant.dollarCount} // Placeholder

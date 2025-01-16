@@ -115,22 +115,24 @@ function AppRoutes() {
         </Route>
 
         {/* Restaurant and Store Details */}
-        <Route
-          path="/en/:region/:city/restaurant/:id"
-          element={
-            <SuspenseWrapper>
-              <RestaurantPage />
-            </SuspenseWrapper>
-          }
-        />
-        <Route
-          path="/en/:region/:city/venue/:id"
-          element={
-            <SuspenseWrapper>
-              <DiscoveryStorePage />
-            </SuspenseWrapper>
-          }
-        />
+        <Route path="/en/isr/:city" element={<MainLayout />}>
+          <Route
+            path="restaurant/:id"
+            element={
+              <SuspenseWrapper>
+                <RestaurantPage />
+              </SuspenseWrapper>
+            }
+          />
+          <Route
+            path="venue/:id"
+            element={
+              <SuspenseWrapper>
+                <DiscoveryStorePage />
+              </SuspenseWrapper>
+            }
+          />
+        </Route>
 
         {/* 404 Page */}
         <Route

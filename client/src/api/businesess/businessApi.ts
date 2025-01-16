@@ -6,6 +6,7 @@ export interface Restaurant {
   description: string;
   deliveryTime: string;
   image: string;
+  link: string;
   deliveryFee: string;
   dollarCount: String;
   rating: number;
@@ -18,6 +19,7 @@ export interface Shop {
   description: string;
   deliveryTime: string;
   image: string;
+  link: string;
   deliveryFee: string;
   dollarCount: String;
   rating: number;

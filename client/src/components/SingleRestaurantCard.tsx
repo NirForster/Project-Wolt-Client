@@ -4,6 +4,7 @@ interface RestaurantCardProps {
   name: string;
   description: string;
   photo: string;
+  link: string; // Link to restaurant details page.
   deliveryTime: string;
   deliveryFee: string;
   priceRange: String;
@@ -14,6 +15,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
   name,
   description,
   photo,
+  link,
   deliveryTime,
   deliveryFee,
   priceRange,
@@ -27,7 +29,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
             <div className="w-full h-full flex absolute overflow-hidden no-scrollbar rounded-t-[8px]">
               <div className="content-auto flex-[1_0_100%]">
                 <a
-                  href="#{link}"
+                  href={link}
                   className="inline text-[#009de0] leading-inherit cursor-pointer no-underline"
                 >
                   <span className="block relative w-full h-full">
@@ -51,7 +53,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
           <div className="whitespace-nowrap flex justify-between items-center gap-[var(--horizontal-padding)] py-[12px] px-[16px]">
             {/* Name and Category */}
             <div className="flex flex-col justify-center items-stretch min-w-0 gap-0.5">
-              <h3 className="antialiased text-[1rem] font-sans text-normal font-medium font-semibold leading-[1.5rem] normal-case text-start overflow-hidden text-ellipsis text-[#202125] m-0">
+              <h3 className="antialiased text-[1rem] font-sans text-normal font-semibold leading-[1.5rem] normal-case text-start overflow-hidden text-ellipsis text-[#202125] m-0">
                 {name}
               </h3>
               <div className="antialiased text-start font-sans normal-case min-w-0 m-0 text-[0.875rem] font-normal leading-[1.25rem]">

@@ -28,6 +28,7 @@ const RestaurantsCarousel = () => {
           name={restaurant.name}
           description={restaurant.description}
           photo={restaurant.image}
+          link={restaurant.link}
           deliveryTime={restaurant.deliveryTime} // Placeholder data
           deliveryFee={restaurant.deliveryFee} // Placeholder data
           priceRange={restaurant.dollarCount} // Placeholder data
