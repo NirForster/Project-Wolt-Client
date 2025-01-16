@@ -2,7 +2,7 @@ import FoodItemCard, { Item } from "@/components/FoodItemCard";
 import { ItemViewCard } from "@/components/ItemViewCard";
 import api from "@/services/api";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 interface Shop {
@@ -43,57 +43,42 @@ interface Shop {
 }
 
 function RestaurantPage() {
-  const [restaurant, setRestaurant] = useState<Shop | null>(null);
+  const [someState, setSOmeState] = useState(0);
+  const [menu, setMenu] = useState<any>(null);
   const [itemModal, setItemModal] = useState<Item | null>(null);
   const shopID = useParams().id;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:3000/api/v1/shop/new`
-        );
-        console.log(data);
-        console.log("bababababababababa");
+        const { data } = await api.get(`/shop/${shopID}`);
 
-        setRestaurant(data.shop);
+        setMenu(data.menu);
       } catch (err: any) {
-        console.error(err.message);
+        console.log(err.message);
       }
     };
     fetchData();
   }, []);
-  console.log(itemModal);
 
-  if (restaurant) {
-    const categories: { [key: string]: Item[] } = {};
-    restaurant.menu.forEach((item) => {
-      const currentItem = item as Item;
-      const currentCategory = currentItem.category;
-      if (categories[currentCategory]) {
-        categories[currentCategory].push(currentItem as Item);
-      } else {
-        categories[currentCategory] = [currentItem as Item];
-      }
-    });
-    const categoriesKeys = Object.keys(categories);
-
+  if (menu) {
     return (
       <>
         <div className="bg-white sm:bg-[#FBFBFB] grid sm:grid-cols-1 smd:grid-cols-2 xlg:grid-cols-3 items-stretch justify-stretch">
-          {categoriesKeys.map((category) => {
+          {menu.sections.map((section: any) => {
+            const sectionTitle = section.sectionTitle;
             return (
               <>
                 <div
                   className="col-start-1 -col-end-1 pt-10 sm:pl-[10px]"
-                  key={category}
+                  key={sectionTitle}
                 >
                   <span className="text-[28px] font-woltHeader  ">
-                    {category}
+                    {sectionTitle}
                   </span>
                 </div>
 
-                {categories[category].map((item, index) => {
+                {section.items.map((item: any, index: number) => {
                   return (
                     <button
                       onClick={() => {
@@ -104,9 +89,7 @@ function RestaurantPage() {
                       <FoodItemCard item={item as Item} key={item._id} />
                       <hr
                         className={`${
-                          index === categories[category].length - 1
-                            ? "hidden"
-                            : ""
+                          index === section.items.length - 1 ? "hidden" : ""
                         } sm:hidden bg-woltColors-bgSurfaceSelected`}
                       />
                     </button>
@@ -131,7 +114,10 @@ function RestaurantPage() {
               ev.stopPropagation();
             }}
           >
-            <ItemViewCard item={itemModal as Item} />
+            <ItemViewCard
+              item={itemModal as Item}
+              setItemModal={setItemModal}
+            />
             <img
               src="/assets/photos/x-img.png"
               className="absolute rounded-full w-10 h-10 top-4 right-4 cursor-pointer"
@@ -147,3 +133,65 @@ function RestaurantPage() {
 }
 
 export default RestaurantPage;
+
+// import { useForm } from "react-hook-form";
+// import { z } from "zod";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import { Form, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+// import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+// import { Button } from "@/components/ui/button";
+
+// // 🛠 Define validation schema
+// const formSchema = z.object({
+//   deliveryMethod: z.enum(["standard", "express"], {
+//     required_error: "You must select a delivery method",
+//   }),
+// });
+
+// export default function MyForm() {
+//   const {
+//     control,
+//     handleSubmit,
+//     formState: { errors },
+//   } = useForm({
+//     resolver: zodResolver(formSchema),
+//   });
+
+//   const onSubmit = (data: any) => {
+//     console.log("Form Submitted:", data);
+//   };
+
+//   return (
+//     <Form onSubmit={handleSubmit(onSubmit)}>
+//       {/* ✅ Radio Group Field */}
+//       <FormField
+//         control={control}
+//         name="deliveryMethod"
+//         render={({ field }) => (
+//           <FormItem>
+//             <FormLabel>Choose Delivery Method</FormLabel>
+//             <RadioGroup
+//               onValueChange={field.onChange}
+//               value={field.value}
+//               className="flex flex-col space-y-2"
+//             >
+//               <FormItem>
+//                 <RadioGroupItem value="standard" id="standard" />
+//                 <FormLabel htmlFor="standard">Standard Delivery</FormLabel>
+//               </FormItem>
+
+//               <FormItem>
+//                 <RadioGroupItem value="express" id="express" />
+//                 <FormLabel htmlFor="express">Express Delivery</FormLabel>
+//               </FormItem>
+//             </RadioGroup>
+//             <FormMessage>{errors.deliveryMethod?.message}</FormMessage>
+//           </FormItem>
+//         )}
+//       />
+
+//       {/* Submit Button */}
+//       <Button type="submit" className="mt-4">Submit</Button>
+//     </Form>
+//   );
+// }

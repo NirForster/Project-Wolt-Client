@@ -1,20 +1,29 @@
 import { useState } from "react";
+import { Item } from "./FoodItemCard";
 
-interface UpdateItemQuantityPorps {
-  price: number;
+interface UpdateItemQuantityProps {
+  price: string;
+  setItemModal: React.Dispatch<React.SetStateAction<Item | null>>;
 }
 
-export default function UpdateItemQuantity({ price }: UpdateItemQuantityPorps) {
+export default function UpdateItemQuantity({
+  price,
+  setItemModal,
+}: UpdateItemQuantityProps) {
   const [quantity, setQuantity] = useState(1);
-  const totalPrice = price * quantity;
+  const numericPrice = +price.slice(1);
+
+  const totalPrice = numericPrice * quantity;
 
   function handleUpdating(update: number) {
     setQuantity((prev) => {
-      return quantity + update;
+      return prev + update;
     });
   }
 
-  function handleSubmit() {}
+  function handleSubmit() {
+    setItemModal(null);
+  }
 
   return (
     <>

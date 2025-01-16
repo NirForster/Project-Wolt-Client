@@ -1,11 +1,11 @@
 export interface Item {
-  currentPrice: number;
   description: string;
-  foodName: string;
+  formData: any[];
+  image: string;
   id: string;
-  photo: string;
-  shop: string;
-  category: string;
+  isPopular: boolean;
+  name: string;
+  price: string;
   __v: number;
   _id: string;
 }
@@ -14,7 +14,7 @@ interface foodItemCardPropsType {
   item: Item;
 }
 
-export default function FoodItemCard({ item }: foodItemCardPropsType) {
+export default function FoodItemCard({ item }: any) {
   if (item) {
     // console.log(item);
 
@@ -25,22 +25,22 @@ export default function FoodItemCard({ item }: foodItemCardPropsType) {
           <div className="flex flex-col justify-around text-start pr-4 overflow-hidden">
             <div className="items-start">
               <p className="text-woltColors-textDefault truncate">
-                {item.foodName}
+                {item.name}
               </p>
               <p className="text-[#717173] break-words">
                 {item.description || ""}
               </p>
             </div>
             <div>
-              <p className="text-BlueBackgroundAndText">{item.currentPrice}₪</p>
+              <p className="text-BlueBackgroundAndText">{item.price}₪</p>
             </div>
           </div>
 
           {/* Image Section */}
           <div className="relative h-[116px] w-[174px]">
             <img
-              src={item.photo}
-              alt={`A picture of ${item.foodName}`}
+              src={item.image}
+              alt={`A picture of ${item.name}`}
               className="h-full w-full object-cover rounded-lg"
             />
             <img
