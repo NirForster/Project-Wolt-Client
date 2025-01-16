@@ -5,7 +5,7 @@ import api from "./api";
 export const login = async (email: string, password: string) => {
   try {
     const response = await api.post(
-      "/api/v1/auth/login",
+      "/auth/login",
       { email, password },
       { withCredentials: true } // Ensure cookies are sent
     );
@@ -31,7 +31,7 @@ export const signup = async (
 ) => {
   try {
     const response = await api.post(
-      "/api/v1/auth/signup",
+      "/auth/signup",
       {
         fname,
         lname, // Optional last name
@@ -55,7 +55,7 @@ export const signup = async (
 // Logout Function with Cookies
 export const logout = async () => {
   try {
-    await api.get("/api/v1/auth/logout", { withCredentials: true }); // Use GET for logout
+    await api.get("/auth/logout", { withCredentials: true }); // Use GET for logout
     alert("You have been logged out.");
   } catch (error: any) {
     console.error(
@@ -69,7 +69,7 @@ export const logout = async () => {
 // Fetch Current User (Updated to call /me)
 export const fetchCurrentUser = async () => {
   try {
-    const response = await api.get("/api/v1/auth/me", {});
+    const response = await api.get("/auth/me", {});
     return response.data.user;
   } catch (error: any) {
     console.error(
