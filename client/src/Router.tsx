@@ -88,7 +88,7 @@ function AppRoutes() {
         </Route>
 
         <Route path="en/me" element={<MeInfoLayout />}>
-          <Route
+          {/* <Route
             path="personal-info"
             element={
               <Suspense fallback={<div>Loading...</div>}>
@@ -112,24 +112,27 @@ function AppRoutes() {
             path="addresses"
             element={
               <SuspenseWrapper>
-                <MeAddress />
+                <div className="flex justify-center">
+                  <MeAddress />
+                </div>
               </SuspenseWrapper>
             }
-          />
+          /> */}
           {[
-            "personal-info",
-            "payment",
-            "order-history",
-            "earn-credits",
-            "redeem-code",
-            "settings",
-          ].map((path) => (
+            { path: "personal-info", components: <MePersonalInfo /> },
+            { path: "payment", components: <MePayment /> },
+            { path: "addresses", components: <MeAddress /> },
+            { path: "order-history", components: <MeAddress /> },
+            { path: "earn-credits", components: <MeAddress /> },
+            { path: "redeem-code", components: <MeAddress /> },
+            { path: "settings", components: <MeAddress /> },
+          ].map((page) => (
             <Route
-              key={path}
-              path={path}
+              key={page.path}
+              path={page.path}
               element={
                 <SuspenseWrapper>
-                  <div className="flex justify-center">{path}</div>
+                  <div className="flex justify-center">{page.components}</div>
                 </SuspenseWrapper>
               }
             />

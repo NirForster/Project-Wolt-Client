@@ -44,7 +44,7 @@ const AvatarMenu = () => {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <div onClick={() => navigate("/en/me")}>
+        <div onClick={() => navigate("/en/me/personal-info")}>
           <DropdownMenuItem>
             <div className="flex items-center gap-4 hover:cursor-pointer">
               <div className="flex items-center justify-center w-10 h-10 text-gray-600 bg-yellow-100 rounded-full">
