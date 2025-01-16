@@ -15,7 +15,7 @@ function MeInfoLayout() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen ">
       <AppBar />
       <ProfilePageHeader />
       <NavigationMenu tabs={tabs} />

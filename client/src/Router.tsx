@@ -7,6 +7,7 @@ import MeAddress from "./components/me-section/profilePages/MeAddress";
 import UserDetails from "./components/me-section/profilePages/personal-info/UserDetails";
 import MePersonalInfo from "./components/me-section/profilePages/personal-info/MePersonalInfo";
 import MePayment from "./components/me-section/profilePages/MePayment";
+import MeEarnCredits from "./components/me-section/profilePages/MeEarnCredits";
 
 const LandingPage = lazy(() => import("./pages/LandingPage"));
 const DiscoveryPage = lazy(
@@ -88,42 +89,12 @@ function AppRoutes() {
         </Route>
 
         <Route path="en/me" element={<MeInfoLayout />}>
-          {/* <Route
-            path="personal-info"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <div className="flex justify-center">
-                  <MePersonalInfo />
-                </div>
-              </Suspense>
-            }
-          />
-          <Route
-            path="payment"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <div className="flex justify-center">
-                  <MePayment />
-                </div>
-              </Suspense>
-            }
-          />
-          <Route
-            path="addresses"
-            element={
-              <SuspenseWrapper>
-                <div className="flex justify-center">
-                  <MeAddress />
-                </div>
-              </SuspenseWrapper>
-            }
-          /> */}
           {[
             { path: "personal-info", components: <MePersonalInfo /> },
             { path: "payment", components: <MePayment /> },
             { path: "addresses", components: <MeAddress /> },
             { path: "order-history", components: <MeAddress /> },
-            { path: "earn-credits", components: <MeAddress /> },
+            { path: "earn-credits", components: <MeEarnCredits /> },
             { path: "redeem-code", components: <MeAddress /> },
             { path: "settings", components: <MeAddress /> },
           ].map((page) => (
