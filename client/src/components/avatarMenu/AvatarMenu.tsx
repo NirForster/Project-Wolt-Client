@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useNavigate } from "react-router-dom";
+import { firstLetters } from "@/lib/utils";
 
 const AvatarMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -81,11 +82,3 @@ const AvatarMenu = () => {
 };
 
 export default AvatarMenu;
-
-function firstLetters(str?: string): string {
-  if (!str) return "";
-  const words = str.trim().split(" ");
-  const firstLetter = words[0][0].toUpperCase();
-  const lastLetter = words[words.length - 1][0].toUpperCase();
-  return firstLetter + lastLetter;
-}

@@ -4,6 +4,9 @@ import MainLayout from "../src/components/MainLayout";
 import ScrollToTop from "./services/ScrollToTop";
 import MeInfoLayout from "./components/MeInfoLayot";
 import MeAddress from "./components/me-section/profilePages/MeAddress";
+import UserDetails from "./components/me-section/profilePages/personal-info/UserDetails";
+import MePersonalInfo from "./components/me-section/profilePages/personal-info/MePersonalInfo";
+import MePayment from "./components/me-section/profilePages/MePayment";
 
 const LandingPage = lazy(() => import("./pages/LandingPage"));
 const DiscoveryPage = lazy(
@@ -85,7 +88,9 @@ function AppRoutes() {
             path="personal-info"
             element={
               <Suspense fallback={<div>Loading...</div>}>
-                <div className="flex justify-center"></div>
+                <div className="flex justify-center">
+                  <MePersonalInfo />
+                </div>
               </Suspense>
             }
           />
@@ -93,7 +98,9 @@ function AppRoutes() {
             path="payment"
             element={
               <Suspense fallback={<div>Loading...</div>}>
-                <div className="flex justify-center"></div>
+                <div className="flex justify-center">
+                  <MePayment />
+                </div>
               </Suspense>
             }
           />
