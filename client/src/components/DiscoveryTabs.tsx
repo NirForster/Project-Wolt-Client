@@ -2,18 +2,24 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const DiscoveryTabs = () => {
-  const [activeTab, setActiveTab] = useState<string>("/discovery");
+  const [activeTab, setActiveTab] = useState<string>("/en/discovery");
   const navigate = useNavigate();
 
   const tabs = [
-    { label: "חנויות", route: "/discovery/store", icon: StoresIcon },
-    { label: "מסעדות", route: "/discovery/restaurants", icon: RestaurantsIcon },
-    { label: "המלצות", route: "/discovery", icon: RecommendationsIcon },
+    { label: "חנויות", route: "/en/discovery/stores", icon: StoresIcon },
+    {
+      label: "מסעדות",
+      route: "/en/discovery/restaurants",
+      icon: RestaurantsIcon,
+    },
+    { label: "המלצות", route: "/en/discovery", icon: RecommendationsIcon },
   ];
 
   const handleTabClick = (route: string) => {
-    setActiveTab(route);
-    navigate(route);
+    if (activeTab !== route) {
+      setActiveTab(route);
+      navigate(route);
+    }
   };
 
   return (
@@ -22,7 +28,7 @@ const DiscoveryTabs = () => {
         <div
           key={tab.route}
           onClick={() => handleTabClick(tab.route)}
-          className={`flex justify-center items-center py-[0.5rem] px-[1rem] m-1  cursor-pointer rounded-full transition-all duration-200 ${
+          className={`flex justify-center items-center py-[0.5rem] px-[1rem] m-1 cursor-pointer rounded-full transition-all duration-200 ${
             activeTab === tab.route
               ? "bg-woltColors-brandBg text-woltColors-white font-bold shadow-brand"
               : "bg-bg-surface-secondary text-woltColors-textSubdued hover:bg-woltColors-bgSurfaceHovered hover:text-woltColors-textHovered"

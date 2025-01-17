@@ -1,3 +1,4 @@
+
 import FoodItemCard, { Item } from "@/components/FoodItemCard";
 import { ItemViewCard } from "@/components/ItemViewCard";
 import api from "@/services/api";
@@ -131,6 +132,7 @@ function RestaurantPage() {
     );
   }
 }
+
 
 export default RestaurantPage;
 

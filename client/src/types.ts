@@ -4,10 +4,15 @@ export interface User {
   lname: string;
   phone: string;
   photo: string;
-  locations: object[];
+  locations: UserLocation[];
   favoritesShops: string[];
   cart: IOrder[];
   fullname: string;
+}
+
+interface UserLocation {
+  type: string;
+  address: string;
 }
 
 export interface IOrder {
@@ -22,4 +27,14 @@ export interface IOrder {
   }[];
   hasSent: boolean;
   totalPrice: number; // Virtual property
+}
+
+export interface Details {
+  kind: string;
+
+  entrance: string;
+
+  numberOnDoor: string;
+
+  locationLabel: "Home" | "Work" | "Other";
 }

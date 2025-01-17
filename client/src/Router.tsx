@@ -2,8 +2,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import MainLayout from "../src/components/MainLayout";
 import ScrollToTop from "./services/ScrollToTop";
+import MeInfoLayout from "./components/MeInfoLayot";
+import MeAddress from "./components/me-section/profilePages/MeAddress";
 
-const HomePage = lazy(() => import("./pages/HomePage"));
+const LandingPage = lazy(() => import("./pages/LandingPage"));
 const DiscoveryPage = lazy(
   () => import("./pages/discovery-pages/DiscoveryPage")
 );
@@ -13,76 +15,132 @@ const DiscoveryRestaurants = lazy(
 const DiscoveryStorePage = lazy(
   () => import("./pages/discovery-pages/DiscoveryStorePage")
 );
-const AccountInfoPage = lazy(() => import("./pages/AccountInfoPage"));
 const CategoryBrowse = lazy(
   () => import("./pages/browsing-pages/CategoryBrowse")
 );
 const RestaurantPage = lazy(() => import("./pages/RestaurantPage"));
+const Error404Page = lazy(() => import("./pages/404Page"));
+const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
+  <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+);
 
 function AppRoutes() {
   return (
     <Router>
       <ScrollToTop />
       <Routes>
-        {/* Define root route */}
+        {/* Landing Page */}
         <Route
           path="/"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <HomePage />
-            </Suspense>
+            <SuspenseWrapper>
+              <LandingPage />
+            </SuspenseWrapper>
           }
         />
-        <Route path="/discovery" element={<MainLayout />}>
+
+        {/* Discovery Section */}
+        <Route path="/en/discovery" element={<MainLayout />}>
           <Route
             index
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <SuspenseWrapper>
                 <DiscoveryPage />
-              </Suspense>
+              </SuspenseWrapper>
             }
           />
           <Route
             path="restaurants"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <SuspenseWrapper>
                 <DiscoveryRestaurants />
-              </Suspense>
+              </SuspenseWrapper>
             }
           />
           <Route
-            path="store"
+            path="stores"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <SuspenseWrapper>
                 <DiscoveryStorePage />
-              </Suspense>
+              </SuspenseWrapper>
             }
           />
-          <Route
-            path="account-info"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <AccountInfoPage />
-              </Suspense>
-            }
-          />
+
           <Route
             path="browse/:category"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <SuspenseWrapper>
                 <CategoryBrowse />
-              </Suspense>
+              </SuspenseWrapper>
             }
           />
           <Route
             path="restaurant/:id"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <SuspenseWrapper>
                 <RestaurantPage />
-              </Suspense>
+              </SuspenseWrapper>
             }
           />
         </Route>
+
+        {/* Me Section */}
+        <Route path="/en/me" element={<MeInfoLayout />}>
+          <Route
+            path="addresses"
+            element={
+              <SuspenseWrapper>
+                <MeAddress />
+              </SuspenseWrapper>
+            }
+          />
+          {[
+            "personal-info",
+            "payment",
+            "order-history",
+            "earn-credits",
+            "redeem-code",
+            "settings",
+          ].map((path) => (
+            <Route
+              key={path}
+              path={path}
+              element={
+                <SuspenseWrapper>
+                  <div className="flex justify-center">{path}</div>
+                </SuspenseWrapper>
+              }
+            />
+          ))}
+        </Route>
+
+        {/* Restaurant and Store Details */}
+        <Route
+          path="/en/:region/:city/restaurant/:id"
+          element={
+            <SuspenseWrapper>
+              <RestaurantPage />
+            </SuspenseWrapper>
+          }
+        />
+        <Route
+          path="/en/:region/:city/venue/:id"
+          element={
+            <SuspenseWrapper>
+              <DiscoveryStorePage />
+            </SuspenseWrapper>
+          }
+        />
+
+        {/* 404 Page */}
+        <Route
+          path="*"
+          element={
+            <SuspenseWrapper>
+              <Error404Page />
+            </SuspenseWrapper>
+          }
+        />
       </Routes>
     </Router>
   );

@@ -1,12 +1,13 @@
-import RestaurentsCarosel from "@/components/carosel-components/RestaurentsCarosel";
+import CategoriesCarousel from "@/components/carosel-components/CategoriesCarousel";
+import RestaurantsCarousel from "@/components/carosel-components/RestaurantsCarousel";
+import StoresCarousel from "@/components/carosel-components/StoresCarousel";
 
 const DiscoveryPage = () => {
   return (
     <div className="p-0">
-      <RestaurentsCarosel />
-      <RestaurentsCarosel />
-      <RestaurentsCarosel />
-      <RestaurentsCarosel />
+      <RestaurantsCarousel />
+      <StoresCarousel />
+      <CategoriesCarousel />
     </div>
   );
 };
