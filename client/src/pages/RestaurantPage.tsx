@@ -1,51 +1,95 @@
 import FoodItemCard, { Item } from "@/components/FoodItemCard";
 import { ItemViewCard } from "@/components/ItemViewCard";
 import api from "@/services/api";
-import axios from "axios";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
 
-interface Shop {
-  avgDeliveryTime: number;
-  categories: string[];
-  deliveryFee: number;
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Error404Page from "./404Page";
+
+interface Business {
+  address: {
+    _id: string;
+    id: string;
+    name: string;
+    zip: string;
+  };
+  businessDescription: string;
+  deliveryFeeStructure: {
+    _id: string;
+    id: string;
+    spanText: string;
+    text: string;
+  }[];
+  deliveryTimes: TimeObj[];
   description: string;
   id: string;
-  locations: {
-    branchName: string;
-    address: string;
-    _id: string;
-    id: string;
-  }[];
-  menu: Item[];
   name: string;
-  phone: string;
-  photo: string;
-  rate: number;
-  reviews: any[];
-  tags: string[];
-  workingTime: {
-    closing: string;
-    opening: string;
-    day:
-      | "Sunday"
-      | "Monday"
-      | "Tuesday"
-      | "Wednesday"
-      | "Thursday"
-      | "Friday"
-      | "Saturday";
-    id: string;
-    _id: string;
-  }[];
-  __V: number;
+  openingTimes: TimeObj[];
+  phoneNumber: string;
+  rating: number;
+  reviews: [];
+  type: string;
+  website: string;
+  __v: number;
   _id: string;
 }
 
+interface TimeObj {
+  day:
+    | "Sunday"
+    | "Monday"
+    | "Tuesday"
+    | "Wednesday"
+    | "Thursday"
+    | "Friday"
+    | "Saturday";
+  time: string;
+  _id: string;
+}
+
+interface Menu {
+  business: string;
+  businessName: string;
+  id: string;
+  __b: number;
+  _id: string;
+  sections: {
+    sectionDescription: string;
+    sectionTitle: string;
+    _id: string;
+    items: {
+      description: string;
+      id: string;
+      image: string;
+      isPopular: boolean;
+      name: string;
+      price: string;
+      _id: string;
+      formData: {
+        description: string;
+        id: string;
+        title: string;
+        type: "radio" | "checkbox";
+        options: {
+          id: string;
+          _id: string;
+          optionLabel: string;
+          optionPrice: string;
+        }[];
+      }[];
+    }[];
+  }[];
+}
+
 function RestaurantPage() {
-  const [someState, setSOmeState] = useState(0);
-  const [menu, setMenu] = useState<any>(null);
-  const [itemModal, setItemModal] = useState<Item | null>(null);
+  const [business, setBusiness] = useState<{
+    business: Business;
+    menu: Menu;
+  } | null>(null);
+  const [itemModal, setItemModal] = useState<{
+    item: Item;
+    sectionTitle: string;
+  } | null>(null);
   const shopID = useParams().id;
 
   useEffect(() => {
@@ -53,7 +97,7 @@ function RestaurantPage() {
       try {
         const { data } = await api.get(`/shop/${shopID}`);
 
-        setMenu(data.menu);
+        setBusiness({ menu: data.menu, business: data.shop });
       } catch (err: any) {
         console.error(err.message);
       }
@@ -61,11 +105,13 @@ function RestaurantPage() {
     fetchData();
   }, []);
 
-  if (menu) {
+  if (business?.business && business.menu) {
+    console.log(business);
+
     return (
       <>
         <div className="bg-white sm:bg-[#FBFBFB] grid sm:grid-cols-1 smd:grid-cols-2 xlg:grid-cols-3 items-stretch justify-stretch">
-          {menu.sections.map((section: any) => {
+          {business.menu.sections.map((section: any) => {
             const sectionTitle = section.sectionTitle;
             return (
               <>
@@ -82,7 +128,7 @@ function RestaurantPage() {
                   return (
                     <button
                       onClick={() => {
-                        setItemModal(item);
+                        setItemModal({ item, sectionTitle });
                       }}
                       className=" gap-y-6 gap-x-4 min-w-full  items-start justify-items-stretch cursor-pointer"
                     >
@@ -115,8 +161,11 @@ function RestaurantPage() {
             }}
           >
             <ItemViewCard
-              item={itemModal as Item}
+              item={itemModal?.item as Item}
               setItemModal={setItemModal}
+              shopID={business.business._id}
+              menuID={business.menu._id}
+              sectionTitle={itemModal?.sectionTitle || ""}
             />
             <img
               src="/assets/photos/x-img.png"
@@ -129,69 +178,9 @@ function RestaurantPage() {
         </div>
       </>
     );
+  } else {
+    return <Error404Page />;
   }
 }
 
 export default RestaurantPage;
-
-// import { useForm } from "react-hook-form";
-// import { z } from "zod";
-// import { zodResolver } from "@hookform/resolvers/zod";
-// import { Form, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-// import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-// import { Button } from "@/components/ui/button";
-
-// // 🛠 Define validation schema
-// const formSchema = z.object({
-//   deliveryMethod: z.enum(["standard", "express"], {
-//     required_error: "You must select a delivery method",
-//   }),
-// });
-
-// export default function MyForm() {
-//   const {
-//     control,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm({
-//     resolver: zodResolver(formSchema),
-//   });
-
-//   const onSubmit = (data: any) => {
-//     console.log("Form Submitted:", data);
-//   };
-
-//   return (
-//     <Form onSubmit={handleSubmit(onSubmit)}>
-//       {/* ✅ Radio Group Field */}
-//       <FormField
-//         control={control}
-//         name="deliveryMethod"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Choose Delivery Method</FormLabel>
-//             <RadioGroup
-//               onValueChange={field.onChange}
-//               value={field.value}
-//               className="flex flex-col space-y-2"
-//             >
-//               <FormItem>
-//                 <RadioGroupItem value="standard" id="standard" />
-//                 <FormLabel htmlFor="standard">Standard Delivery</FormLabel>
-//               </FormItem>
-
-//               <FormItem>
-//                 <RadioGroupItem value="express" id="express" />
-//                 <FormLabel htmlFor="express">Express Delivery</FormLabel>
-//               </FormItem>
-//             </RadioGroup>
-//             <FormMessage>{errors.deliveryMethod?.message}</FormMessage>
-//           </FormItem>
-//         )}
-//       />
-
-//       {/* Submit Button */}
-//       <Button type="submit" className="mt-4">Submit</Button>
-//     </Form>
-//   );
-// }

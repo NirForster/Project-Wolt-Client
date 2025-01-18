@@ -1,126 +1,127 @@
 import { Item } from "./FoodItemCard";
-import RadioGroupForm from "./item-card-form/RadioGroupForm";
+
 import UpdateItemQuantity from "./UpdateItemQuantity";
 
-import { z } from "zod";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import FormRadioGroup from "./item-card-form/FormRadioGroup";
+import { useContext, useRef, useState } from "react";
+import FormCheckbox from "./item-card-form/FormCheckbox";
+import { userContext } from "@/providers/userContext";
+import api from "@/services/api";
 
 interface ItemViewCardProps {
   item: Item;
-  setItemModal: React.Dispatch<React.SetStateAction<Item | null>>;
+  setItemModal: React.Dispatch<
+    React.SetStateAction<{ item: Item; sectionTitle: string } | null>
+  >;
+  shopID: string;
+  menuID: string;
+  sectionTitle: string;
 }
 
-let toAdd = 0;
-
-export function ItemViewCard({ item, setItemModal }: ItemViewCardProps) {
+export function ItemViewCard({
+  item,
+  setItemModal,
+  shopID,
+  menuID,
+  sectionTitle,
+}: ItemViewCardProps) {
   if (!item) {
     return <></>;
   }
 
-  function changeAddedPrice(update: number, isNowIncluded = false) {
-    if (isNowIncluded) {
-      toAdd -= update;
+  const { user } = useContext(userContext);
+
+  const itemRef = useRef<{ item: Item; totalPrice: number }>({
+    item,
+    totalPrice: parseFloat(item.price.slice(1)),
+  });
+  const [, forceUpdate] = useState({});
+  const [formResponse, setFormResponse] = useState<{
+    quantity: number;
+    finalPrice: number;
+  }>({ quantity: 1, finalPrice: +item.price.slice(1) });
+
+  function getPriceFromFormResult(str: string) {
+    const matches = [...str.matchAll(/\(([^)]+)\)/g)];
+
+    // Extracting the parts
+    if (matches.length > 0) {
+      const insideParentheses = matches.map((match) => match[0]).join(" "); // Keep parentheses
+      const lastExtracted = matches[matches.length - 1][1]; // Only last extracted without parentheses
+      const outsideParentheses = str
+        .replace(matches[matches.length - 1][0], "")
+        .trim(); // Remove last (baba)
+
+      console.log("First string:", outsideParentheses); // Output: "my name (is)"
+      console.log("Second string:", lastExtracted); // Output: "baba"
     } else {
-      toAdd += update;
+      console.log("No parentheses found");
     }
-    console.log(toAdd);
-  }
-  {
-    // const forms = item.formData.map((currentForm) => {
-    //   return {
-    //     name: currentForm.title.split(" ")[0],
-    //     label: currentForm.title,
-    //     type: currentForm.type,
-    //     options: currentForm.options.map(
-    //       (opt) => `${opt.optionLabel} (${opt.optionPrice})`
-    //     ),
-    //   };
-    // });
-    // // temporal
-    // const generateZodSchema = (fields: any) => {
-    //   const schemaObj: Record<string, ZodTypeAny> = {};
-    //   fields.forEach((field: any) => {
-    //     if (field.type === "radio") {
-    //       schemaObj[field.name] = field.required
-    //         ? z.enum(field.options)
-    //         : z.enum(field.options).optional();
-    //     } else if (field.type === "checkbox") {
-    //       schemaObj[field.name] = z.array(z.string()).optional();
-    //     }
-    //   });
-    //   return z.object(schemaObj);
-    // };
-    // const formSchema = generateZodSchema(forms);
-    // // temporal
-    // const form = useForm<z.infer<typeof formSchema>>({
-    //   resolver: zodResolver(formSchema),
-    //   defaultValues: {
-    //     deliveryMethod: "standard",
-    //   },
-    // });
   }
 
-  // const generateZodSchema = (formData: any[]) => {
-  //   const schemaObj: Record<string, any> = {};
+  function changeAddedPrice(update: number) {
+    if (item._id === itemRef.current.item._id) {
+      itemRef.current.totalPrice += update;
+    } else {
+      itemRef.current.item = item;
+      itemRef.current.totalPrice = +item.price.slice(1) + update;
+    }
+    forceUpdate({});
+  }
 
-  //   formData.forEach((field) => {
-  //     if (field.type === "radio") {
-  //       // Radio buttons must have exactly one selection
-  //       schemaObj[field.title] = z
-  //         .string()
-  //         .min(1, `${field.title} is required`);
-  //     } else if (field.type === "checkbox") {
-  //       // Checkboxes allow multiple selections
-  //       schemaObj[field.title] = z
-  //         .array(z.string())
-  //         .min(1, `Select at least one ${field.title}`);
-  //     }
-  //   });
-
-  //   return z.object(schemaObj);
-  // };
-
-  // const formSchema = generateZodSchema(item.formData);
-
-  // const form = useForm({
-  //   resolver: zodResolver(formSchema), // Use the generated schema for validation
-  //   // defaultValues: item.formData.reduce((acc, form) => {
-  //   //   acc[form.title] = form.type === "checkbox" ? [] : "";
-  //   //   return acc;
-  //   // }, {}),
-  // });
-
-  function handleFormSubmit(ev: React.FormEvent<HTMLFormElement>) {
+  async function handleFormSubmit(ev: React.FormEvent<HTMLFormElement>) {
     ev.preventDefault();
-    const formData = new FormData(ev.currentTarget);
-    const formObject: Record<string, any> = {};
-    formData.forEach((value, key) => {
-      formObject[key] = value;
-    });
+    try {
+      if (user) {
+        const formData = new FormData(ev.currentTarget);
+        const formObject: Record<string, any> = {};
+        formData.forEach((value, key) => {
+          formObject[key] = value;
+        });
+        console.log(formObject);
+        const formNames = Object.keys(formObject);
+        const extras: string[] = [];
+        formNames.forEach((formName) => {
+          const formIndex = +formName.slice(10);
+          if (item.formData[formIndex].type === "radio") {
+            if (formObject[formName]) {
+              return extras.push(formObject[formName]);
+            }
+          } else {
+            const results = formObject[formName].split(" @ ");
+            results.forEach((result: string) => {
+              if (result) {
+                return extras.push(result);
+              }
+            });
+          }
+        });
+        console.log(extras);
+        console.log("quantity is", formResponse.quantity);
+        console.log("finalPrice is", formResponse.finalPrice);
 
-    console.log("----------------------------------");
-    console.log("data is:");
-    console.log(formObject);
-
-    // console.log(data);
-    console.log("----------------------------------");
-    setItemModal(null);
+        const response = await api.put("/orders/", {
+          shopID,
+          menuID,
+          itemName: item.name,
+          itemImg: item.image,
+          itemDesc: item.description,
+          quantity: formResponse.quantity,
+          price: formResponse.finalPrice,
+          sectionTitle,
+          extras,
+        });
+        setItemModal(null);
+      } else {
+        alert(
+          "must be logged in to a registered user in order to add stuff to cart"
+        );
+      }
+    } catch (err: any) {
+      console.log(err.message);
+    }
   }
 
-  // console.log(item);
-  // console.log("Item formData:", item.formData);
   return (
     <div className="rounded-[16px] max-h-[calc(100vh-50px)]">
       <img
@@ -148,130 +149,35 @@ export function ItemViewCard({ item, setItemModal }: ItemViewCardProps) {
                 >
                   {currentForm.description}
                 </p>
-                <FormRadioGroup
-                  options={currentForm.options}
-                  index={index}
-                  changeAddedPrice={changeAddedPrice}
-                  key={index}
-                />
+                {currentForm.type === "radio" ? (
+                  <FormRadioGroup
+                    options={currentForm.options}
+                    index={index}
+                    changeAddedPrice={changeAddedPrice}
+                    key={index}
+                  />
+                ) : (
+                  // <FormRadioGroup
+                  <FormCheckbox
+                    options={currentForm.options}
+                    index={index}
+                    changeAddedPrice={changeAddedPrice}
+                    key={index}
+                  />
+                )}
               </div>
             );
           })}
           <hr />
 
           <div className="sticky bottom-2 z-10 bg-white w-full">
-            <UpdateItemQuantity price={item.price + toAdd} toAdd={toAdd} />
+            <UpdateItemQuantity
+              totalPrice={itemRef.current.totalPrice}
+              setFormResponse={setFormResponse}
+            />
           </div>
         </form>
       </div>
     </div>
   );
-}
-
-{
-  /* 
-  
-  */
-}
-
-{
-  /*
-<Form {...form}>
-
-   <form onSubmit={form.handleSubmit(handleFormSubmit)}>
-     {item.formData.map((currentForm, index) => (
-       <FormField
-         key={index}
-         control={form.control}
-         name={`baba${index}`}
-         render={({ field }) => (
-           <FormItem>
-             <FormLabel>{currentForm.title}</FormLabel>
-             <FormRadioGroup currentForm={currentForm} field={field} />
-             {/* <FormControl>
-             {currentForm.type === "radio" ? (
-               // Render radio buttons
-               <FormRadioGroup
-                 currentForm={currentForm}
-                 field={field}
-               />
-             ) : (
-               // Render checkboxes
-               currentForm.options.map((option, idx) => (
-                 <label
-                   key={idx}
-                   className="flex items-center space-x-2"
-                 >
-                   <input
-                     type="checkbox"
-                     value={option.optionLabel}
-                     {...field}
-                     checked={field.value?.includes(
-                       option.optionLabel
-                     )}
-                     onChange={(e) => {
-                       if (e.target.checked) {
-                         field.onChange([
-                           ...field.value,
-                           option.optionLabel,
-                         ]);
-                       } else {
-                         field.onChange(
-                           field.value.filter(
-                             (val: string) =>
-                               val !== option.optionLabel
-                           )
-                         );
-                       }
-                     }}
-                   />
-                   <span>{`${option.optionLabel} (${option.optionPrice}₪)`}</span>
-                 </label>
-               ))
-             )}
-           </FormControl> */
-  /*
-             <FormMessage />
-           </FormItem>
-         )}
-       />
-     ))}
-
-     <button>Submit</button>
-   </form>
- </Form>
-*/
-}
-
-{
-  /* <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleFormSubmit)}>
-            {/* {item.formData.map((currentForm, index) => {
-              const isRadio = currentForm.type === "radio" || true;
-              if (isRadio) {
-                // Radio form
-                return (
-                  <RadioGroupForm
-                    key={index}
-                    control={control}
-                    name={"baba"}
-                    label={currentForm.title}
-                    options={[
-                      { label: "standard", value: "standard" },
-                      { label: "express", value: "express" },
-                    ]}
-                  />
-                );
-              } else {
-                // Checkbox form
-                return <></>;
-              }
-            })} }
-
-              price={item.price}
-              // setItemModal={setItemModal}
-              // handleFormSubmit={handleFormSubmit}
-            />
-          </form>
-        </Form> */
 }

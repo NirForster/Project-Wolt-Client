@@ -1,34 +1,27 @@
 import { useState } from "react";
-import { Item } from "./FoodItemCard";
 
 interface UpdateItemQuantityProps {
-  price: string;
-  toAdd: number;
+  totalPrice: number;
+  setFormResponse: any;
 }
 
 export default function UpdateItemQuantity({
-  price,
-  toAdd,
+  totalPrice,
+  setFormResponse,
 }: UpdateItemQuantityProps) {
   const [quantity, setQuantity] = useState(1);
-  const numericPrice = +price.slice(1);
-
-  const totalPrice = (numericPrice + toAdd) * quantity;
-
-  console.log("babababbaba");
-  console.log(toAdd);
-  console.log(totalPrice);
-  console.log("babababbaba");
+  totalPrice *= quantity;
 
   function handleUpdating(update: number) {
     setQuantity((prev) => {
-      return prev + update;
+      const newQuantity = Math.max(1, prev + update);
+      setFormResponse({
+        quantity: newQuantity,
+        finalPrice: totalPrice * newQuantity,
+      });
+      return newQuantity;
     });
   }
-
-  // function handleSubmit() {
-  //   setItemModal(null);
-  // }
 
   return (
     <>
