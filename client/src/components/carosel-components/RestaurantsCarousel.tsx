@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import Carousel from "./GenericCarouselComponent";
-import { fetchRestaurants, Restaurant } from "../../api/businesess/businessApi";
-import SingleRestaurantCard from "../SingleRestaurantCard"; // Import the SingleRestaurantCard component
+import {
+  fetchAllRestaurants,
+  BusinessSummary,
+} from "../../api/businesess/businessApi";
+import SingleRestaurantCard from "../BusinessCard"; // Import the SingleRestaurantCard component
 
 const RestaurantsCarousel = () => {
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+  const [restaurants, setRestaurants] = useState<BusinessSummary[]>([]);
 
   useEffect(() => {
     const loadRestaurants = async () => {
       try {
-        const data = await fetchRestaurants();
+        const data = await fetchAllRestaurants();
         setRestaurants(data);
       } catch (error) {
         console.error("Failed to fetch restaurants:", error);
@@ -22,20 +25,24 @@ const RestaurantsCarousel = () => {
   return (
     <Carousel
       items={restaurants}
-      title="Popular Right Now"
+      title="Popular Restaurants Right Now"
       renderItem={(restaurant) => (
         <SingleRestaurantCard
+          key={restaurant.id}
           name={restaurant.name}
           description={restaurant.description}
-          photo={restaurant.image}
+          image={restaurant.image}
           link={restaurant.link}
-          deliveryTime={restaurant.deliveryTime} // Placeholder data
-          deliveryFee={restaurant.deliveryFee} // Placeholder data
-          priceRange={restaurant.dollarCount} // Placeholder data
-          rating={restaurant.rating} // Placeholder data
+          estimatedDeliveryTime={restaurant.estimatedDeliveryTime}
+          rating={restaurant.rating}
+          dollarCount={restaurant.dollarCount}
+          label={{
+            deliveryFee: restaurant.label.deliveryFee || "N/A",
+            storeType: restaurant.label.storeType || "N/A",
+          }}
         />
       )}
-      seeAllLink="/restaurants"
+      seeAllLink="discovery/restaurants"
     />
   );
 };

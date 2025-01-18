@@ -1,5 +1,4 @@
-import RestaurantsGrid from "@/components/restaurants-page-components/GridRestaurantsView";
-import React from "react";
+import RestaurantsGrid from "@/components/discovery-grid-components/GridRestaurantsView";
 
 const DiscoveryRestaurants = () => {
   return (

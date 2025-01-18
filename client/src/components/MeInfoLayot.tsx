@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import AppBar from "./appBar/AppBar";
+import AppBar from "../components/main-layout-components/appBar/AppBar";
 import ProfilePageHeader from "./me-section/ProfilePageHeader";
 import NavigationMenu from "./me-section/NavigationMenu";
 

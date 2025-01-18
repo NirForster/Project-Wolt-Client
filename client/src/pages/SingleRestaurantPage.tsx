@@ -1,4 +1,3 @@
-
 import FoodItemCard, { Item } from "@/components/FoodItemCard";
 import { ItemViewCard } from "@/components/ItemViewCard";
 import api from "@/services/api";
@@ -43,7 +42,7 @@ interface Shop {
   _id: string;
 }
 
-function RestaurantPage() {
+function SingleRestaurantPage() {
   const [someState, setSOmeState] = useState(0);
   const [menu, setMenu] = useState<any>(null);
   const [itemModal, setItemModal] = useState<Item | null>(null);
@@ -133,8 +132,7 @@ function RestaurantPage() {
   }
 }
 
-
-export default RestaurantPage;
+export default SingleRestaurantPage;
 
 // import { useForm } from "react-hook-form";
 // import { z } from "zod";

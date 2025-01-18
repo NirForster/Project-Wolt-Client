@@ -1,8 +1,8 @@
 import { useState, useContext, useEffect } from "react";
-import woltLogo from "../../assets/dummyData/Wolt-Logo-b&w.png";
-import { Button } from "../ui/button";
-import LoginModel from "../auth-components/Login/LoginModel";
-import SignUpModel from "../auth-components/register/RegisterModel";
+import woltLogo from "../../../assets/dummyData/Wolt-Logo-b&w.png";
+import { Button } from "../../ui/button";
+import LoginModel from "../../auth-components/Login/LoginModel";
+import SignUpModel from "../../auth-components/register/RegisterModel";
 import { userContext } from "@/providers/userContext";
 import { useNavigate } from "react-router-dom";
 

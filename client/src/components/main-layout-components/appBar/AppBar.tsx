@@ -1,14 +1,14 @@
 import { useState, useContext } from "react";
 import { FaSearch } from "react-icons/fa";
-import woltLogo from "../../assets/dummyData/Wolt-Logo-b&w.png";
-import CartModel from "../cart/CartModel";
-import { Button } from "../ui/button";
-import LoginModel from "../auth-components/Login/LoginModel";
-import SignUpModel from "../auth-components/register/RegisterModel";
-import { userContext } from "../../providers/userContext";
-import AppBarLocation from "../locations/AppBarLocation";
-import LocationsModel from "../locations/LocationsModel";
-import AvatarMenu from "../avatarMenu/AvatarMenu";
+import woltLogo from "../../../assets/dummyData/Wolt-Logo-b&w.png";
+import CartModel from "../../cart/CartModel";
+import { Button } from "../../ui/button";
+import LoginModel from "../../auth-components/Login/LoginModel";
+import SignUpModel from "../../auth-components/register/RegisterModel";
+import { userContext } from "../../../providers/userContext";
+import AppBarLocation from "../../locations/AppBarLocation";
+import LocationsModel from "../../locations/LocationsModel";
+import AvatarMenu from "../../avatarMenu/AvatarMenu";
 import { useNavigate } from "react-router-dom";
 
 const AppBar = () => {

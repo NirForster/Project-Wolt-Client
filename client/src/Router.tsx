@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import MainLayout from "../src/components/MainLayout";
+import MainLayout from "./components/main-layout-components/MainLayout";
 import ScrollToTop from "./services/ScrollToTop";
 import MeInfoLayout from "./components/MeInfoLayot";
 import MeAddress from "./components/me-section/profilePages/MeAddress";
@@ -18,7 +18,8 @@ const DiscoveryStorePage = lazy(
 const CategoryBrowse = lazy(
   () => import("./pages/browsing-pages/CategoryBrowse")
 );
-const RestaurantPage = lazy(() => import("./pages/RestaurantPage"));
+const SingleRestaurantPage = lazy(() => import("./pages/SingleRestaurantPage"));
+const SingleStorePage = lazy(() => import("./pages/SingleStorePage"));
 const Error404Page = lazy(() => import("./pages/404Page"));
 const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
   <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
@@ -65,20 +66,11 @@ function AppRoutes() {
               </SuspenseWrapper>
             }
           />
-
           <Route
             path="browse/:category"
             element={
               <SuspenseWrapper>
                 <CategoryBrowse />
-              </SuspenseWrapper>
-            }
-          />
-          <Route
-            path="restaurant/:id"
-            element={
-              <SuspenseWrapper>
-                <RestaurantPage />
               </SuspenseWrapper>
             }
           />
@@ -120,7 +112,7 @@ function AppRoutes() {
             path="restaurant/:id"
             element={
               <SuspenseWrapper>
-                <RestaurantPage />
+                <SingleRestaurantPage />
               </SuspenseWrapper>
             }
           />
@@ -128,7 +120,7 @@ function AppRoutes() {
             path="venue/:id"
             element={
               <SuspenseWrapper>
-                <DiscoveryStorePage />
+                <SingleStorePage />
               </SuspenseWrapper>
             }
           />

@@ -23,7 +23,7 @@ const DiscoveryTabs = () => {
   };
 
   return (
-    <div className="w-full flex justify-center py-[1.5rem] rounded-lg">
+    <div className=" hidden sm:flex w-full justify-center py-[1.5rem] rounded-lg 2xs:display">
       {tabs.map((tab) => (
         <div
           key={tab.route}
