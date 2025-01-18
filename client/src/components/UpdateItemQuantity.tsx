@@ -1,28 +1,26 @@
 import { useState } from "react";
-import { Item } from "./FoodItemCard";
 
 interface UpdateItemQuantityProps {
-  price: string;
-  setItemModal: React.Dispatch<React.SetStateAction<Item | null>>;
+  totalPrice: number;
+  setFormResponse: any;
 }
 
 export default function UpdateItemQuantity({
-  price,
-  setItemModal,
+  totalPrice,
+  setFormResponse,
 }: UpdateItemQuantityProps) {
   const [quantity, setQuantity] = useState(1);
-  const numericPrice = +price.slice(1);
-
-  const totalPrice = numericPrice * quantity;
+  totalPrice *= quantity;
 
   function handleUpdating(update: number) {
     setQuantity((prev) => {
-      return prev + update;
+      const newQuantity = Math.max(1, prev + update);
+      setFormResponse({
+        quantity: newQuantity,
+        finalPrice: totalPrice * newQuantity,
+      });
+      return newQuantity;
     });
-  }
-
-  function handleSubmit() {
-    setItemModal(null);
   }
 
   return (
@@ -54,8 +52,8 @@ export default function UpdateItemQuantity({
           />
         </div>
         <button
+          type="submit"
           className="bg-woltColors-brandBg hover:bg-[#1FA9E4] rounded-lg flex justify-around items-center text-white text-[16px] font-bold"
-          onClick={handleSubmit}
         >
           <span>Add to order</span>
           <span>{totalPrice}₪</span>
