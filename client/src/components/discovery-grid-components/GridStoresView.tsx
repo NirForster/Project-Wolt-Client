@@ -5,11 +5,11 @@ import {
 } from "../../api/businesess/businessApi";
 import BusinessCard from "../BusinessCard";
 
-interface StoresGridProps {
+interface GridStoresViewProps {
   cityName: string; // Allow cityName to be passed as a prop
 }
 
-const StoresGrid: React.FC<StoresGridProps> = ({ cityName }) => {
+const GridStoresView: React.FC<GridStoresViewProps> = ({ cityName }) => {
   const [stores, setStores] = useState<BusinessSummary[]>([]);
 
   useEffect(() => {
@@ -54,4 +54,4 @@ const StoresGrid: React.FC<StoresGridProps> = ({ cityName }) => {
   );
 };
 
-export default StoresGrid;
+export default GridStoresView;

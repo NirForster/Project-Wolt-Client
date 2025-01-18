@@ -5,17 +5,22 @@ import {
 } from "../../api/businesess/businessApi";
 import BusinessCard from "../BusinessCard";
 
-interface RestaurantsGridProps {
+interface RestaurantsGridViewProps {
   cityName: string; // Allow cityName to be passed as a prop
 }
 
-const RestaurantsGrid: React.FC<RestaurantsGridProps> = ({ cityName }) => {
+const RestaurantsGridView: React.FC<RestaurantsGridViewProps> = ({
+  cityName,
+}) => {
   const [restaurants, setRestaurants] = useState<BusinessSummary[]>([]);
 
   useEffect(() => {
     const loadRestaurants = async () => {
       try {
-        const data = await fetchBusinessesByCity(cityName, "restaurants");
+        const data = await fetchBusinessesByCity(
+          cityName || "TLV - Herzliya area",
+          "restaurants"
+        );
         console.log(`Loaded Restaurants in ${cityName}:`, data);
         setRestaurants(data);
       } catch (error) {
@@ -54,4 +59,4 @@ const RestaurantsGrid: React.FC<RestaurantsGridProps> = ({ cityName }) => {
   );
 };
 
-export default RestaurantsGrid;
+export default RestaurantsGridView;
