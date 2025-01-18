@@ -1,4 +1,3 @@
-
 import FoodItemCard, { Item } from "@/components/FoodItemCard";
 import { ItemViewCard } from "@/components/ItemViewCard";
 import api from "@/services/api";
@@ -56,7 +55,7 @@ function RestaurantPage() {
 
         setMenu(data.menu);
       } catch (err: any) {
-        console.log(err.message);
+        console.error(err.message);
       }
     };
     fetchData();
@@ -110,7 +109,7 @@ function RestaurantPage() {
           }   h-[calc(100%-24px)] w-full fixed top-0 right-0  flex justify-center items-center bg-[#00000075]`}
         >
           <div
-            className=" h-fit w-full 2xs:m-6 2xs:max-w-[520px] bg-white relative rounded-[16px]"
+            className="h-fit max-h-full w-full 2xs:m-6 2xs:max-w-[520px] bg-white relative rounded-[16px] overflow-y-auto"
             onClick={(ev) => {
               ev.stopPropagation();
             }}
@@ -132,7 +131,6 @@ function RestaurantPage() {
     );
   }
 }
-
 
 export default RestaurantPage;
 

@@ -3,17 +3,22 @@ import { Item } from "./FoodItemCard";
 
 interface UpdateItemQuantityProps {
   price: string;
-  setItemModal: React.Dispatch<React.SetStateAction<Item | null>>;
+  toAdd: number;
 }
 
 export default function UpdateItemQuantity({
   price,
-  setItemModal,
+  toAdd,
 }: UpdateItemQuantityProps) {
   const [quantity, setQuantity] = useState(1);
   const numericPrice = +price.slice(1);
 
-  const totalPrice = numericPrice * quantity;
+  const totalPrice = (numericPrice + toAdd) * quantity;
+
+  console.log("babababbaba");
+  console.log(toAdd);
+  console.log(totalPrice);
+  console.log("babababbaba");
 
   function handleUpdating(update: number) {
     setQuantity((prev) => {
@@ -21,9 +26,9 @@ export default function UpdateItemQuantity({
     });
   }
 
-  function handleSubmit() {
-    setItemModal(null);
-  }
+  // function handleSubmit() {
+  //   setItemModal(null);
+  // }
 
   return (
     <>
@@ -54,8 +59,8 @@ export default function UpdateItemQuantity({
           />
         </div>
         <button
+          type="submit"
           className="bg-woltColors-brandBg hover:bg-[#1FA9E4] rounded-lg flex justify-around items-center text-white text-[16px] font-bold"
-          onClick={handleSubmit}
         >
           <span>Add to order</span>
           <span>{totalPrice}₪</span>

@@ -1,6 +1,14 @@
 export interface Item {
   description: string;
-  formData: any[];
+  formData: {
+    title: string;
+    description?: string;
+    type?: "radio" | "checkbox"; // Limit to allowed types
+    options: {
+      optionLabel: string;
+      optionPrice: string;
+    }[];
+  }[];
   image: string;
   id: string;
   isPopular: boolean;
@@ -14,7 +22,7 @@ interface foodItemCardPropsType {
   item: Item;
 }
 
-export default function FoodItemCard({ item }: any) {
+export default function FoodItemCard({ item }: foodItemCardPropsType) {
   if (item) {
     // console.log(item);
 
