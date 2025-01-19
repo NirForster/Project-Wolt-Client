@@ -5,7 +5,7 @@ const addLocationToUser = async (
   address: string
 ) => {
   try {
-    const response = await api.put(`/api/v1/user/locations/add`, {
+    const response = await api.put(`/user/locations/add`, {
       type,
       address,
     });

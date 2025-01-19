@@ -4,6 +4,12 @@ import MainLayout from "./components/main-layout-components/MainLayout";
 import ScrollToTop from "./utils/ScrollToTop";
 import MeInfoLayout from "./components/MeInfoLayot";
 import MeAddress from "./components/me-section/profilePages/MeAddress";
+import UserDetails from "./components/me-section/profilePages/personal-info/UserDetails";
+import MePersonalInfo from "./components/me-section/profilePages/personal-info/MePersonalInfo";
+import MePayment from "./components/me-section/profilePages/MePayment";
+import MeEarnCredits from "./components/me-section/profilePages/MeEarnCredits";
+import MeRedeemCode from "./components/me-section/profilePages/MeRedeemCode";
+import MeProfileSettings from "./components/me-section/profilePages/meSettings/MeSettings";
 
 const LandingPage = lazy(() => import("./pages/LandingPage"));
 const DiscoveryPage = lazy(
@@ -76,30 +82,22 @@ function AppRoutes() {
           />
         </Route>
 
-        {/* Me Section */}
-        <Route path="/en/me" element={<MeInfoLayout />}>
-          <Route
-            path="addresses"
-            element={
-              <SuspenseWrapper>
-                <MeAddress />
-              </SuspenseWrapper>
-            }
-          />
+        <Route path="en/me" element={<MeInfoLayout />}>
           {[
-            "personal-info",
-            "payment",
-            "order-history",
-            "earn-credits",
-            "redeem-code",
-            "settings",
-          ].map((path) => (
+            { path: "personal-info", components: <MePersonalInfo /> },
+            { path: "payment", components: <MePayment /> },
+            { path: "addresses", components: <MeAddress /> },
+            { path: "order-history", components: <MeAddress /> },
+            { path: "earn-credits", components: <MeEarnCredits /> },
+            { path: "redeem-code", components: <MeRedeemCode /> },
+            { path: "settings", components: <MeProfileSettings /> },
+          ].map((page) => (
             <Route
-              key={path}
-              path={path}
+              key={page.path}
+              path={page.path}
               element={
                 <SuspenseWrapper>
-                  <div className="flex justify-center">{path}</div>
+                  <div className="flex justify-center">{page.components}</div>
                 </SuspenseWrapper>
               }
             />

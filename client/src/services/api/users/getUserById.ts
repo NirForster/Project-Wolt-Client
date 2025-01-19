@@ -2,7 +2,7 @@ import api from "@/services/api/api";
 
 const getUserById = async () => {
   try {
-    const response = await api.get(`/v1/user`, {
+    const response = await api.get(`/user`, {
       withCredentials: true,
     });
     return response.data;

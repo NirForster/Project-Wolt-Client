@@ -29,8 +29,8 @@ const MeAddress = () => {
       onClose={backFromAddLocationModal}
     />
   ) : (
-    <div className="w-[900px] mt-10 flex flex-col items-center">
-      <div className="w-[900px]">
+    <div className="w-full max-w-[800px] mt-10 flex flex-col items-center">
+      <div className="w-full max-w-[800px]">
         {/* Address List */}
         <ul className="divide-y divide-gray-300">
           {loggedInUserLocationList && loggedInUserLocationList.length > 0 ? (

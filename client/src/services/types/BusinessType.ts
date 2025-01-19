@@ -6,6 +6,7 @@ export default interface Business {
     zip: string;
   };
   businessDescription: string;
+  coverImage: string;
   deliveryFeeStructure: {
     _id: string;
     id: string;
