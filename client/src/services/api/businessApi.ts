@@ -75,14 +75,27 @@ export const fetchBusinessesByCity = async (
   try {
     const response = await api.get(`/business/cities/${cityName}/${type}`);
     console.log(`Fetched ${type} in ${cityName}:`, response.data.data);
-    console.log(`Response from API:`, response.data);
-    return response.data.data;
+
+    // Include city in the returned data
+    const businesses = response.data.data.map((business: any) => ({
+      id: business._id, // Ensure mapping to "id"
+      city: business.city, // Include city
+      name: business.name,
+      link: business.link,
+      image: business.image,
+      description: business.description,
+      estimatedDeliveryTime: business.estimatedDeliveryTime,
+      rating: business.rating,
+      dollarCount: business.dollarCount,
+      label: business.label,
+    }));
+
+    return businesses;
   } catch (error) {
     console.error(`Error fetching ${type} in ${cityName}:`, error);
     throw error;
   }
 };
-
 /**
  * Fetch full details of a specific business
  * @param id - Business ID

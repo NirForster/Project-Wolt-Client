@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const cities = [
   "Afula & Emek Yizrael area",
   "Ashdod and Lachish Area",
@@ -21,6 +23,14 @@ const cities = [
   "TLV - Herzliya area",
   "Yokneam - Tivon area",
 ];
+
+const formatCityName = (city: string): string => {
+  return city
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/&/g, "")
+    .replace(/[^\w-]/g, "");
+};
 
 const ExploreCitiesSection = () => {
   return (
@@ -52,7 +62,9 @@ const ExploreCitiesSection = () => {
             key={index}
             className="border border-gray-300 rounded-lg p-4 hover:shadow-md cursor-pointer flex justify-between items-center"
           >
-            <span>{city}</span>
+            <span>
+              <Link to={`/en/discovery/${formatCityName(city)}`}>{city}</Link>
+            </span>
             <span>→</span>
           </div>
         ))}

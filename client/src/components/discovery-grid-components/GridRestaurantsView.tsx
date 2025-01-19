@@ -17,10 +17,7 @@ const RestaurantsGridView: React.FC<RestaurantsGridViewProps> = ({
   useEffect(() => {
     const loadRestaurants = async () => {
       try {
-        const data = await fetchBusinessesByCity(
-          cityName || "TLV - Herzliya area",
-          "restaurants"
-        );
+        const data = await fetchBusinessesByCity(cityName, "restaurants");
         console.log(`Loaded Restaurants in ${cityName}:`, data);
         setRestaurants(data);
       } catch (error) {
