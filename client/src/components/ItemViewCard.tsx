@@ -5,7 +5,7 @@ import { useContext, useRef, useState } from "react";
 import FormCheckbox from "./item-card-form/FormCheckbox";
 import { userContext } from "@/providers/userContext";
 import api from "@/services/api";
-import { Item } from "@/types/MenuType";
+import { Item } from "@/api/types/MenuType";
 
 interface ItemViewCardProps {
   item: Item;

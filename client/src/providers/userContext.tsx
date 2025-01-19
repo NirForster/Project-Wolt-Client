@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { User } from "../types";
+import { User } from "../api/types/types";
 import { fetchCurrentUser, logout } from "../services/auth";
 
 interface UserContextType {

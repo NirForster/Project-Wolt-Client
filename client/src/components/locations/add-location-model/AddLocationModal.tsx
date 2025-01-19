@@ -2,7 +2,7 @@ import { useState } from "react";
 import AddLocationStreetPage from "./AddLocationStreetPage";
 import AddLocationKindPage from "./AddLocationKindPage";
 import AddLocationDetailsPage from "./AddLocationDetailsPage";
-import { Details } from "@/types";
+import { Details } from "@/api/types/types";
 import addLocationToUser from "@/api/users/addLocation";
 
 const AddNewLocationModal = ({

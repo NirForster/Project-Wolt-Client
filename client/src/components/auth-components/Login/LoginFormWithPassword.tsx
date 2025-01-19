@@ -15,7 +15,7 @@ import {
   EMAIL_MESSAGE,
 } from "../../../lib/constants/auth-constants";
 import { userContext } from "@/providers/userContext";
-import { User } from "@/types";
+import { User } from "@/api/types/types";
 import { useNavigate } from "react-router-dom";
 
 interface LoginFormProps {

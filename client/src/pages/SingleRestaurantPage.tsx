@@ -5,8 +5,8 @@ import api from "@/services/api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Error404Page from "./404Page";
-import Business from "@/types/BusinessType";
-import { Item, Menu, Section } from "@/types/MenuType";
+import Business from "@/api/types/BusinessType";
+import { Item, Menu, Section } from "@/api/types/MenuType";
 
 function RestaurantPage() {
   const [business, setBusiness] = useState<{
