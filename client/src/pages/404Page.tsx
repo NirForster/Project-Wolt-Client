@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
-import AppBar from "@/components/appBar/AppBar";
+import AppBar from "@/components/main-layout-components/appBar/AppBarHomePage";
 
 const Error404Page: React.FC = () => {
   const navigate = useNavigate();
