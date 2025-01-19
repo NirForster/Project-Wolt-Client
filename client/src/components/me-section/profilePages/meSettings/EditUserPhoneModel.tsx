@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input";
 import { useContext, useState, useEffect } from "react";
 import { userContext } from "@/providers/userContext";
 import editUser from "@/api/users/editUser";
-import PhoneAnimation from "./PhoneAnimation";
+import PhoneAnimation from "./settingsAnimations/PhoneAnimation";
 
 const EditUserPhoneModel = ({ onClose }: { onClose: () => void }) => {
   const { user, updateUser } = useContext(userContext);
@@ -18,9 +18,14 @@ const EditUserPhoneModel = ({ onClose }: { onClose: () => void }) => {
     if (!newPhoneValue || newPhoneValue === user?.phone) return;
 
     try {
-      await editUser(newPhoneValue); // Call API to update phone
-      updateUser({ phone: newPhoneValue }); // Update phone in context
-      onClose(); // Close modal
+      // Call the API to update the phone
+      await editUser(undefined, undefined, undefined, newPhoneValue);
+
+      // Update the phone in the context
+      updateUser({ phone: newPhoneValue });
+
+      // Close the modal
+      onClose();
     } catch (error) {
       console.error("Failed to update phone:", error);
     }
@@ -42,9 +47,9 @@ const EditUserPhoneModel = ({ onClose }: { onClose: () => void }) => {
           <div>
             <p className="font-woltHeader text-2xl">Phone</p>
             <Input
-              type="text"
+              type="number"
               value={newPhoneValue}
-              onChange={(e) => setNewPhoneValue(e.target.value)}
+              // onChange={(e) => setNewPhoneValue(e.target.value)}
               className="h-[40px] mt-4"
             />
             <div className="flex gap-4 mt-4">

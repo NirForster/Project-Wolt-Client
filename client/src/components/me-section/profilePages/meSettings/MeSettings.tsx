@@ -25,7 +25,7 @@ const MeProfileSettings: React.FC<ProfileSettingsProps> = () => {
         setWhichEditUserModel(<EditUserEmailModel onClose={onClose} />);
         break;
       case "name":
-        setWhichEditUserModel(<EditUserNameModel />);
+        // setWhichEditUserModel(<EditUserNameModel />);
         break;
       case "phone":
         setWhichEditUserModel(<EditUserPhoneModel onClose={onClose} />);

@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import EmailAnimation from "./EmailAnimation";
+import EmailAnimation from "./settingsAnimations/EmailAnimation";
 import { useContext, useState, useEffect } from "react";
 import { userContext } from "@/providers/userContext";
 import editUser from "@/api/users/editUser";

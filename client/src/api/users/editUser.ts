@@ -8,14 +8,14 @@ const editUser = async (
 ) => {
   try {
     const response = await api.put(`/user`, {
-      email,
-      fname,
-      lname,
-      phone,
+      ...(email && { email }),
+      ...(fname && { fname }),
+      ...(lname && { lname }),
+      ...(phone && { phone }),
     });
     return response.data;
   } catch (error) {
-    console.error(`Failed to add location to this user `, error);
+    console.error(`Failed to update the user:`, error);
     return null;
   }
 };
