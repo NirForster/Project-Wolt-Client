@@ -13,16 +13,16 @@ export default function FoodItemCard({ item }: foodItemCardPropsType) {
         <div className="h-[140px] grid grid-cols-[1fr_174px] py-3 sm:px-3 rounded-[0.5rem] m-2 bg-white sm:border sm:border-[#2021251f] bg-clip-border border-separate">
           {/* Text Section */}
           <div className="flex flex-col justify-around text-start pr-4 overflow-hidden">
-            <div className="items-start">
+            <div className="items-start overflow-y-hidden">
               <p className="text-woltColors-textDefault truncate">
                 {item.name}
               </p>
-              <p className="text-[#717173] break-words">
+              <p className="text-[#717173] break-words ">
                 {item.description || ""}
               </p>
             </div>
             <div>
-              <p className="text-BlueBackgroundAndText">{item.price}₪</p>
+              <p className="text-BlueBackgroundAndText">{item.price}</p>
             </div>
           </div>
 
