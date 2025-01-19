@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchRestaurants, Restaurant } from "../../api/businesess/businessApi";
+import { fetchRestaurants, Restaurant } from "../../services/api/businessApi";
 import RestaurantCard from "../SingleRestaurantCard";
 
 const RestaurantsGrid: React.FC = () => {

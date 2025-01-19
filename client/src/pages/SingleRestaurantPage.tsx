@@ -1,14 +1,15 @@
 import FoodItemCard from "@/components/FoodItemCard";
 import { ItemViewCard } from "@/components/ItemViewCard";
-import api from "@/services/api";
+// import api from "@/services/api";
 
 import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import Error404Page from "./404Page";
-import Business from "@/types/BusinessType";
-import { Item, Menu, Section } from "@/types/MenuType";
+import Business from "@/services/types/BusinessType";
+import { Item, Menu, Section } from "@/services/types/MenuType";
 import useSectionOnScreen from "@/hooks/useSectionOnScreen";
 import { userContext } from "../providers/userContext";
+import api from "@/services/api/api";
 
 function RestaurantPage() {
   const { user } = useContext(userContext);

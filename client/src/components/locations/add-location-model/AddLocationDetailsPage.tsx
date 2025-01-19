@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import AddressTypeSelector from "./AddressTypeSelector";
 import { Details } from "@/types";
-import addLocationToUser from "@/api/users/addLocation";
+import addLocationToUser from "@/services/api/users/addLocation";
 
 const AddLocationDetailsPage = ({
   street,

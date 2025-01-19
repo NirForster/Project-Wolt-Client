@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   fetchRestaurants,
   Restaurant,
-} from "../../../api/businesess/businessApi";
+} from "../../../services/api/businessApi";
 
 const RestaurantsCarousel: React.FC = () => {
   const [carouselItems, setCarouselItems] = useState<Restaurant[]>([]);
