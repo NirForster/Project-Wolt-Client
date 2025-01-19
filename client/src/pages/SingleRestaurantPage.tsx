@@ -13,7 +13,7 @@ import { userContext } from "../providers/userContext";
 function RestaurantPage() {
   const { user } = useContext(userContext);
   const shopID = useParams().id;
-  console.log(user);
+  console.log(shopID);
   const [business, setBusiness] = useState<{
     business: Business;
     menu: Menu;
@@ -363,7 +363,7 @@ function RestaurantPage() {
       </>
     );
   } else {
-    return <Error404Page />;
+    return "baba";
   }
 }
 

@@ -49,7 +49,7 @@ const RestaurantsCarousel: React.FC<RestaurantsCarouselProps> = ({
           label={restaurant.label}
         />
       )}
-      seeAllLink={`/discovery/restaurants/${cityName}`}
+      seeAllLink={`${cityName}/restaurants`}
     />
   );
 };
