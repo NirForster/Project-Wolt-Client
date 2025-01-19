@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useNavigate } from "react-router-dom";
+import { firstLetters } from "@/lib/utils";
 
 const AvatarMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +44,7 @@ const AvatarMenu = () => {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <div onClick={() => navigate("/en/me")}>
+        <div onClick={() => navigate("/en/me/personal-info")}>
           <DropdownMenuItem>
             <div className="flex items-center gap-4 hover:cursor-pointer">
               <div className="flex items-center justify-center w-10 h-10 text-gray-600 bg-yellow-100 rounded-full">
@@ -81,11 +82,3 @@ const AvatarMenu = () => {
 };
 
 export default AvatarMenu;
-
-function firstLetters(str?: string): string {
-  if (!str) return "";
-  const words = str.trim().split(" ");
-  const firstLetter = words[0][0].toUpperCase();
-  const lastLetter = words[words.length - 1][0].toUpperCase();
-  return firstLetter + lastLetter;
-}

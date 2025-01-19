@@ -1,14 +1,19 @@
 import FavoritesSection from "./FavoriteSection";
 import InfoCards from "./TokensAndCredits";
 import UserDetails from "./UserDetails";
+import { useContext } from "react";
+
+import { userContext } from "../../../../providers/userContext";
 
 const MePersonalInfo = () => {
+  const { user } = useContext(userContext);
+
   return (
     <div>
       <UserDetails
-        name={"baba mama"}
-        email={"baba@gmail.com"}
-        phone={"0505550550"}
+        name={user?.fullname || "error"}
+        email={user?.email || "error"}
+        phone={user?.phone || "error"}
       />
       <InfoCards />
       <FavoritesSection />

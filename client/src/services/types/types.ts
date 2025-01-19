@@ -2,7 +2,7 @@ export interface User {
   email: string;
   fname: string;
   lname: string;
-  phone: string;
+  phone: number;
   photo: string;
   locations: UserLocation[];
   favoritesShops: string[];
