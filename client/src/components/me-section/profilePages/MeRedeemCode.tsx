@@ -1,13 +1,11 @@
 import React from "react";
-import redeemCodeVideo from "@/assets/reedemVideo.mov";
+import RedeemAnimation from "./RedeemAnimation";
 
 const MeRedeemCode: React.FC = () => {
   return (
     <div className="max-w-[450px] w-full mx-auto flex flex-col items-center rounded-lg p-6">
       <div className="max-w-[350px] w-full">
-        <video autoPlay loop muted src={redeemCodeVideo}>
-          Your browser does not support the video tag.
-        </video>
+        <RedeemAnimation />
       </div>
       <h2 className="text-2xl font-bold text-black mt-2 mb-4 font-woltHeader">
         Redeem code

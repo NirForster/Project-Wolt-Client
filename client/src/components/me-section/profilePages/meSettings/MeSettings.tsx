@@ -3,6 +3,7 @@ import EditUserEmailModel from "./EditUserEmailModel";
 import EditUserNameModel from "./EditUserNameModel";
 import { userContext } from "@/providers/userContext";
 import EditUserPhoneModel from "./EditUserPhoneModel";
+import EditUserDeleteModel from "./EditUserDeleteModel";
 
 interface ProfileSettingsProps {}
 
@@ -14,7 +15,6 @@ const MeProfileSettings: React.FC<ProfileSettingsProps> = () => {
   let { user } = useContext(userContext);
 
   const onClose = () => {
-    console.log(user?.email);
     setIsEditUserModelOpen(false);
   };
 
@@ -25,10 +25,13 @@ const MeProfileSettings: React.FC<ProfileSettingsProps> = () => {
         setWhichEditUserModel(<EditUserEmailModel onClose={onClose} />);
         break;
       case "name":
-        // setWhichEditUserModel(<EditUserNameModel />);
+        setWhichEditUserModel(<EditUserNameModel onClose={onClose} />);
         break;
       case "phone":
         setWhichEditUserModel(<EditUserPhoneModel onClose={onClose} />);
+        break;
+      case "delete":
+        setWhichEditUserModel(<EditUserDeleteModel onClose={onClose} />);
         break;
 
       default:
@@ -78,12 +81,22 @@ const MeProfileSettings: React.FC<ProfileSettingsProps> = () => {
         {/* Name */}
         <div className="flex justify-between items-center py-6 text-[16px]">
           <span className="text-gray-700">Name</span>
-          <span className="text-woltColors-brandPressed">Haviv Bitton</span>
+          <span
+            className="text-woltColors-brandPressed hover:cursor-pointer"
+            onClick={() => handleOpenEditUserModel("name")}
+          >
+            {user?.fullname}
+          </span>
         </div>
         {/* Delete Account */}
         <div className="flex justify-between items-center py-6 text-[16px]">
           <span className="text-gray-700">Delete account</span>
-          <span className="text-red-600 cursor-pointer">Delete</span>
+          <span
+            className="text-red-600 cursor-pointer"
+            onClick={() => handleOpenEditUserModel("delete")}
+          >
+            Delete
+          </span>
         </div>
         {/* Send Receipts to Email */}
         <div className="flex justify-between items-center py-6 text-[16px]">
