@@ -1,13 +1,15 @@
 import api from "./api"; // Axios instance
+import { cityService } from "@/lib/constants/cities-constants";
 
 // Interfaces
 export interface BusinessSummary {
   id: string;
-  city: string;
+  type: "restaurant" | "store";
+  location: { city: string; address: string };
   name: string;
   link: string;
   image: string;
-  description?: string;
+  shortDescription: string;
   estimatedDeliveryTime: { min: number; max: number };
   rating: number;
   dollarCount: "$" | "$$" | "$$$" | "$$$$";
@@ -15,6 +17,22 @@ export interface BusinessSummary {
     deliveryFee?: string;
     storeType?: string;
   };
+}
+
+export interface BusinessAdditionalInfo {
+  coverImage: string;
+  businessDescription?: string;
+  address: { name: string; zip: string };
+  openingTimes: { day: string; time: string }[];
+  deliveryTimes: { day: string; time: string }[];
+  deliveryFeeStructure: { text: string; spanText: string }[];
+  phoneNumber: string;
+  website: string;
+}
+
+export interface BusinessDetails {
+  summary: BusinessSummary; // Summary information
+  additionalInfo: BusinessAdditionalInfo; // Detailed information
 }
 
 export interface MenuItem {
@@ -64,38 +82,35 @@ export const fetchAllBusinesses = async (
 
 /**
  * Fetch businesses in a specific city
- * @param cityName - Name of the city
+ * @param city.name - Name of the city
  * @param type - "restaurants" or "stores"
  * @returns Promise<BusinessSummary[]>
  */
 export const fetchBusinessesByCity = async (
-  cityName: string,
+  citySlug: string,
   type: "restaurants" | "stores"
 ): Promise<BusinessSummary[]> => {
   try {
-    const response = await api.get(`/business/cities/${cityName}/${type}`);
-    console.log(`Fetched ${type} in ${cityName}:`, response.data.data);
+    const city = cityService.find((c) => c.slug === citySlug);
 
-    // Include city in the returned data
-    const businesses = response.data.data.map((business: any) => ({
-      id: business._id, // Ensure mapping to "id"
-      city: business.city, // Include city
-      name: business.name,
-      link: business.link,
-      image: business.image,
-      description: business.description,
-      estimatedDeliveryTime: business.estimatedDeliveryTime,
-      rating: business.rating,
-      dollarCount: business.dollarCount,
-      label: business.label,
-    }));
+    if (!city) {
+      console.error(
+        "City Service:",
+        cityService.map((c) => c.slug)
+      );
+      console.error("Input Slug:", citySlug);
+      throw new Error(`City with slug '${citySlug}' not found.`);
+    }
 
-    return businesses;
+    const response = await api.get(`/business/cities/${city.name}/${type}`);
+    // console.log(`Fetched ${type} in ${city.name}:`, response.data.data);
+    return response.data.data;
   } catch (error) {
-    console.error(`Error fetching ${type} in ${cityName}:`, error);
+    console.error(`Error fetching ${type} in ${citySlug}:`, error);
     throw error;
   }
 };
+
 /**
  * Fetch full details of a specific business
  * @param id - Business ID
@@ -128,32 +143,6 @@ export const fetchMenuByBusinessId = async (
     return response.data;
   } catch (error) {
     console.error(`Error fetching menu for business ID ${businessId}:`, error);
-    throw error;
-  }
-};
-
-// for grid view:
-
-// Fetch all restaurants across all cities
-export const fetchAllRestaurants = async (): Promise<BusinessSummary[]> => {
-  try {
-    const response = await api.get(`/cities/restaurants`);
-    console.log("Fetched all restaurants:", response.data.data);
-    return response.data.data;
-  } catch (error) {
-    console.error("Error fetching all restaurants:", error);
-    throw error;
-  }
-};
-
-// Fetch all stores across all cities
-export const fetchAllStores = async (): Promise<BusinessSummary[]> => {
-  try {
-    const response = await api.get(`/cities/stores`);
-    console.log("Fetched all stores:", response.data.data);
-    return response.data.data;
-  } catch (error) {
-    console.error("Error fetching all stores:", error);
     throw error;
   }
 };

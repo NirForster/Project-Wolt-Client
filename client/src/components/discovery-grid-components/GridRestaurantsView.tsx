@@ -6,7 +6,7 @@ import {
 import BusinessCard from "../BusinessCard";
 
 interface RestaurantsGridViewProps {
-  cityName: string; // Allow cityName to be passed as a prop
+  cityName: string;
 }
 
 const RestaurantsGridView: React.FC<RestaurantsGridViewProps> = ({
@@ -25,7 +25,7 @@ const RestaurantsGridView: React.FC<RestaurantsGridViewProps> = ({
       }
     };
 
-    if (cityName) loadRestaurants();
+    loadRestaurants();
   }, [cityName]);
 
   return (
@@ -34,12 +34,12 @@ const RestaurantsGridView: React.FC<RestaurantsGridViewProps> = ({
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {restaurants.map((restaurant) => (
           <BusinessCard
+            city={cityName}
             key={restaurant.id}
             id={restaurant.id}
-            city={restaurant.city}
             type="restaurant"
             name={restaurant.name}
-            description={restaurant.description}
+            description={restaurant.shortDescription}
             image={restaurant.image}
             link={restaurant.link}
             estimatedDeliveryTime={restaurant.estimatedDeliveryTime}

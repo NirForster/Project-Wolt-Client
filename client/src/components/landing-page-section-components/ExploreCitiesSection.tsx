@@ -1,38 +1,9 @@
 import { Link } from "react-router-dom";
 
-const cities = [
-  "Afula & Emek Yizrael area",
-  "Ashdod and Lachish Area",
-  "Ashkelon",
-  "Beer Sheva",
-  "Eilat",
-  "Haifa & HaKrayot",
-  "Hasharon area",
-  "Jerusalem",
-  "Karmiel area",
-  "Kiryat Shmona area",
-  "Mevaseret Zion Area",
-  "Modi'in",
-  "Nazareth - Nof Hagalil area",
-  "Netanya area",
-  "Netivot - Sderot area",
-  "Pardes Hanna - Hadera area",
-  "Petah Tikva - Bik’at Ono",
-  "Rishon Lezion & Hashfela",
-  "Rosh Pinna - Zefat area",
-  "TLV - Herzliya area",
-  "Yokneam - Tivon area",
-];
-
-const formatCityName = (city: string): string => {
-  return city
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/&/g, "")
-    .replace(/[^\w-]/g, "");
-};
+import { getAllCities } from "../../lib/constants/cities-constants";
 
 const ExploreCitiesSection = () => {
+  const cities = getAllCities();
   return (
     <section className="py-12 px-8">
       <h2 className="text-4xl font-bold mb-6 text-center font-woltHeader">
@@ -63,7 +34,7 @@ const ExploreCitiesSection = () => {
             className="border border-gray-300 rounded-lg p-4 hover:shadow-md cursor-pointer flex justify-between items-center"
           >
             <span>
-              <Link to={`/en/discovery/${formatCityName(city)}`}>{city}</Link>
+              <Link to={`/en/discovery/${city.slug}`}>{city.name}</Link>
             </span>
             <span>→</span>
           </div>

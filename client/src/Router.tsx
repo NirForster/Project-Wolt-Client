@@ -41,7 +41,7 @@ function AppRoutes() {
         />
 
         {/* Discovery Section */}
-        <Route path="/en/discovery" element={<MainLayout />}>
+        <Route path="/en/discovery/:city" element={<MainLayout />}>
           <Route
             index
             element={
