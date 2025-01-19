@@ -4,6 +4,8 @@ import ExploreCitiesSection from "@/components/landing-page-section-components/E
 import WhatIsWoltSection from "@/components/landing-page-section-components/WhatIsWoltSection";
 
 const LandingPage = () => {
+  console.log("baba");
+
   return (
     <div>
       <AppBarHomePage />

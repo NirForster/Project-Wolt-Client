@@ -13,12 +13,12 @@ const AppBarHomePage = () => {
   const navigate = useNavigate(); // Initialize useNavigate hook
   const { user, providerLogout } = useContext(userContext); // Access user context
 
-  // ✅ Corrected: Navigate when user is logged in using useEffect
-  useEffect(() => {
-    if (user) {
-      navigate("/en/discovery");
-    }
-  }, [user, navigate]); // Ensure it only runs when the user state changes
+  // // ✅ Corrected: Navigate when user is logged in using useEffect
+  // useEffect(() => {
+  //   // if (user) {
+  //   //   navigate("/en/discovery/tlv-herzliya-area");
+  //   // }
+  // }, [user, navigate]); // Ensure it only runs when the user state changes
 
   return (
     <div className="flex h-[70px] bg-white w-full px-5 py-3 border-b border-gray-200">
