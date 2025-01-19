@@ -36,9 +36,22 @@ function RestaurantPage() {
 
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const firstSectionTitle = business?.menu.sections.length
-    ? business.menu.sections[0].sectionTitle
-    : "";
+  const getFirstSectionTitle = () => {
+    try {
+      if (business?.menu) {
+        if (business.menu.sections) {
+          return business?.menu.sections.length
+            ? business.menu.sections[0].sectionTitle
+            : "";
+        }
+      }
+    } catch (err: any) {
+      console.log(err.message);
+    }
+    return "";
+  };
+
+  const firstSectionTitle = getFirstSectionTitle();
 
   const currentSectionTitle = useSectionOnScreen(
     { root: null, rootMargin: "0px", threshold: 1 },
@@ -59,7 +72,7 @@ function RestaurantPage() {
       }
     });
   } else if (business) {
-    filteredMenu = business.menu.sections;
+    filteredMenu = business?.menu.sections;
   }
 
   function scrollToSection(index: number) {
@@ -79,12 +92,10 @@ function RestaurantPage() {
     const isCurrent = !isInFavorites;
     if (user) {
       const result = await api.put(
-        `/favorites/${isCurrent ? "add" : "remove"}`,
+        `/favorites/${isCurrent ? "remove" : "add"}`,
         { shopID }
       );
       setIsInFavorites(isCurrent);
-    } else {
-      alert("There is no logged in baba");
     }
   }
 
@@ -169,7 +180,7 @@ function RestaurantPage() {
               >
                 <img
                   src={`/assets/photos/heart${
-                    isInFavorites ? "-fill" : ""
+                    isInFavorites ? "" : "-fill"
                   }.png`}
                   alt={`${
                     isInFavorites ? "Remove from favorites" : "Add to favorites"
