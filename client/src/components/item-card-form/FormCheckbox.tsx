@@ -38,14 +38,14 @@ export default function FormCheckbox({
       {options.map((opt, idx) => (
         <label
           key={idx}
-          className="grid grid-cols-[1.5rem_1fr] gap-2 items-center cursor-pointer hover:border-red-500 p-1 rounded-md transition"
+          className="grid grid-cols-[1.5rem_1fr] gap-2 items-center cursor-pointer rounded-md transition"
         >
           <Checkbox
             checked={selectedOptions.includes(opt.optionLabel)}
             onCheckedChange={() =>
               handleOptionChange(opt.optionLabel, opt.optionPrice)
             }
-            className="w-fit hover:border-[#039de0] transition"
+            className="w-full hover:border-[#039de0] transition"
             name={`formNumber${index}`} // ✅ Name it for the form
             value={opt.optionLabel} // ✅ Add a value for submission
           />

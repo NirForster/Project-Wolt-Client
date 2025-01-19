@@ -1,22 +1,4 @@
-export interface Item {
-  description: string;
-  formData: {
-    title: string;
-    description?: string;
-    type?: "radio" | "checkbox"; // Limit to allowed types
-    options: {
-      optionLabel: string;
-      optionPrice: string;
-    }[];
-  }[];
-  image: string;
-  id: string;
-  isPopular: boolean;
-  name: string;
-  price: string;
-  __v: number;
-  _id: string;
-}
+import { Item } from "@/types/MenuType";
 
 interface foodItemCardPropsType {
   item: Item;

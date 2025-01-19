@@ -1,5 +1,3 @@
-import { Item } from "./FoodItemCard";
-
 import UpdateItemQuantity from "./UpdateItemQuantity";
 
 import FormRadioGroup from "./item-card-form/FormRadioGroup";
@@ -7,6 +5,7 @@ import { useContext, useRef, useState } from "react";
 import FormCheckbox from "./item-card-form/FormCheckbox";
 import { userContext } from "@/providers/userContext";
 import api from "@/services/api";
+import { Item } from "@/types/MenuType";
 
 interface ItemViewCardProps {
   item: Item;
