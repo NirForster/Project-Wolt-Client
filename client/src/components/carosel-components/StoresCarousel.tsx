@@ -47,7 +47,7 @@ const StoresCarousel: React.FC<storesCarouselProps> = ({ cityName }) => {
           label={store.label}
         />
       )}
-      seeAllLink="discovery/stores"
+      seeAllLink={`${cityName}/stores`}
     />
   );
 };
