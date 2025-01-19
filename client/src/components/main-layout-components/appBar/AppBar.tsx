@@ -11,7 +11,11 @@ import LocationsModel from "../../locations/LocationsModel";
 import AvatarMenu from "../../avatarMenu/AvatarMenu";
 import { useNavigate } from "react-router-dom";
 
-const AppBar = () => {
+interface AppBarProps {
+  handleSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const AppBar = ({ handleSearchChange }: AppBarProps) => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isLocationsModel, setIsLocationsModel] = useState(false);
@@ -41,6 +45,7 @@ const AppBar = () => {
           </div>
         </div>
       </div>
+
       {/* Search Bar */}
       <div className={` ${isSearchActive ? "flex-grow" : "flex-1"} `}>
         <div className="flex items-center px-4 py-2 bg-gray-100 rounded-full">
@@ -50,10 +55,12 @@ const AppBar = () => {
             onBlur={() => setIsSearchActive(false)}
             placeholder="search "
             className="w-full text-sm bg-transparent outline-none"
+            onChange={(ev) => handleSearchChange(ev)}
           />
           <FaSearch size={16} className="text-gray-600" />
         </div>
       </div>
+
       {/* Right Side */}
       <div className="flex-1">
         <div className="flex gap-4 items-center justify-end">
