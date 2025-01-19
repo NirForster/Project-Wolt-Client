@@ -1,4 +1,4 @@
-import api from "@/services/api";
+import api from "@/services/api/api";
 
 const addLocationToUser = async (
   type: "Home" | "Work" | "Other",

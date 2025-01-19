@@ -1,12 +1,11 @@
-import RestaurantsGrid from "@/components/restaurants-page-components/GridRestaurantsView";
-import React from "react";
+import RestaurantsGridView from "@/components/discovery-grid-components/GridRestaurantsView";
 
-const DiscoveryRestaurants = () => {
+const DiscoveryRestaurantPage = () => {
   return (
     <div>
-      <RestaurantsGrid />;
+      <RestaurantsGridView cityName="TLV - Herzliya area" />
     </div>
   );
 };
 
-export default DiscoveryRestaurants;
+export default DiscoveryRestaurantPage;

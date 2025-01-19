@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import AppBar from "./appBar/AppBar";
 import Footer from "./Footer";
-import DiscoveryTabs from "./DiscoveryTabs";
+import DiscoveryTabs from "../DiscoveryTabs";
 
 function MainLayout() {
   return (

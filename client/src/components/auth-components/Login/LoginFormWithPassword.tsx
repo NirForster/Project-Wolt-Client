@@ -9,13 +9,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useState, useContext } from "react";
-import { login } from "../../../services/auth";
+import { login } from "../../../services/api/auth";
 import {
   REGEX_EMAIL,
   EMAIL_MESSAGE,
 } from "../../../lib/constants/auth-constants";
 import { userContext } from "@/providers/userContext";
-import { User } from "@/types";
+import { User } from "@/services/types/types";
 import { useNavigate } from "react-router-dom";
 
 interface LoginFormProps {

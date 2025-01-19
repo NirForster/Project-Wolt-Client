@@ -9,8 +9,8 @@ import {
 
 import { useState } from "react";
 import AddressTypeSelector from "./AddressTypeSelector";
-import { Details } from "@/types";
-import addLocationToUser from "@/api/users/addLocation";
+import { Details } from "@/services/types/types";
+import addLocationToUser from "@/services/api/users/addLocation";
 
 const AddLocationDetailsPage = ({
   street,

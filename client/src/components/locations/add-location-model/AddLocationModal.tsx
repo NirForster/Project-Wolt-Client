@@ -2,8 +2,8 @@ import { useState } from "react";
 import AddLocationStreetPage from "./AddLocationStreetPage";
 import AddLocationKindPage from "./AddLocationKindPage";
 import AddLocationDetailsPage from "./AddLocationDetailsPage";
-import { Details } from "@/types";
-import addLocationToUser from "@/api/users/addLocation";
+import { Details } from "@/services/types/types";
+import addLocationToUser from "@/services/api/users/addLocation";
 
 const AddNewLocationModal = ({
   onBack,

@@ -6,13 +6,13 @@ const DiscoveryTabs = () => {
   const navigate = useNavigate();
 
   const tabs = [
-    { label: "חנויות", route: "/en/discovery/stores", icon: StoresIcon },
+    { label: "Discovery", route: "/en/discovery", icon: RecommendationsIcon },
     {
-      label: "מסעדות",
+      label: "Restaurants",
       route: "/en/discovery/restaurants",
       icon: RestaurantsIcon,
     },
-    { label: "המלצות", route: "/en/discovery", icon: RecommendationsIcon },
+    { label: "Stores", route: "/en/discovery/stores", icon: StoresIcon },
   ];
 
   const handleTabClick = (route: string) => {
@@ -23,7 +23,7 @@ const DiscoveryTabs = () => {
   };
 
   return (
-    <div className="w-full flex justify-center py-[1.5rem] rounded-lg">
+    <div className=" hidden sm:flex w-full justify-center py-[1.5rem] rounded-lg 2xs:display">
       {tabs.map((tab) => (
         <div
           key={tab.route}
@@ -36,8 +36,8 @@ const DiscoveryTabs = () => {
           role="tab"
           aria-selected={activeTab === tab.route}
         >
-          <span className="text-sm pr-[0.5rem]">{tab.label}</span>
           <tab.icon className="w-5 h-5 mr-2" />
+          <span className="text-sm pr-[0.5rem]">{tab.label}</span>
         </div>
       ))}
     </div>
