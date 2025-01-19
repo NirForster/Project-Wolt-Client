@@ -1,48 +1,55 @@
 import { useEffect, useState } from "react";
 import Carousel from "./GenericCarouselComponent";
 import {
-  fetchAllRestaurants,
+  fetchBusinessesByCity,
   BusinessSummary,
 } from "../../services/api/businessApi";
-import SingleRestaurantCard from "../BusinessCard"; // Import the SingleRestaurantCard component
+import BusinessCard from "../BusinessCard";
 
-const RestaurantsCarousel = () => {
+interface RestaurantsCarouselProps {
+  cityName: string; // Allow cityName to be passed as a prop
+}
+
+const RestaurantsCarousel: React.FC<RestaurantsCarouselProps> = ({
+  cityName,
+}) => {
   const [restaurants, setRestaurants] = useState<BusinessSummary[]>([]);
 
   useEffect(() => {
     const loadRestaurants = async () => {
       try {
-        const data = await fetchAllRestaurants();
+        const data = await fetchBusinessesByCity(cityName, "restaurants");
+        // console.log(`Loaded Restaurants in ${cityName}:`, data);
         setRestaurants(data);
       } catch (error) {
-        console.error("Failed to fetch restaurants:", error);
+        console.error(`Failed to load restaurants in ${cityName}:`, error);
       }
     };
 
     loadRestaurants();
-  }, []);
+  }, [cityName]);
 
   return (
     <Carousel
       items={restaurants}
       title="Popular Restaurants Right Now"
-      renderItem={(restaurant) => (
-        <SingleRestaurantCard
+      renderItem={(restaurant: BusinessSummary) => (
+        <BusinessCard
+          city={cityName}
           key={restaurant.id}
+          id={restaurant.id}
+          type={restaurant.type}
           name={restaurant.name}
-          description={restaurant.description}
-          image={restaurant.image}
           link={restaurant.link}
+          image={restaurant.image}
+          description={restaurant.shortDescription}
           estimatedDeliveryTime={restaurant.estimatedDeliveryTime}
           rating={restaurant.rating}
           dollarCount={restaurant.dollarCount}
-          label={{
-            deliveryFee: restaurant.label.deliveryFee || "N/A",
-            storeType: restaurant.label.storeType || "N/A",
-          }}
+          label={restaurant.label}
         />
       )}
-      seeAllLink="discovery/restaurants"
+      seeAllLink={`/discovery/restaurants/${cityName}`}
     />
   );
 };

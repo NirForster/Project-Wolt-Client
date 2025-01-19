@@ -1,9 +1,12 @@
-import GridStoresView from "@/components/discovery-grid-components/GridStoresView";
+import { useParams } from "react-router-dom";
+import StoresGridView from "@/components/discovery-grid-components/GridStoresView";
 
 const DiscoveryStorePage = () => {
+  const { city } = useParams<{ city: string }>();
+
   return (
     <div>
-      <GridStoresView cityName="TLV - Herzliya area" />
+      <StoresGridView cityName={city || "TLV - Herzliya area"} />
     </div>
   );
 };

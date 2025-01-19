@@ -1,28 +1,9 @@
-const cities = [
-  "Afula & Emek Yizrael area",
-  "Ashdod and Lachish Area",
-  "Ashkelon",
-  "Beer Sheva",
-  "Eilat",
-  "Haifa & HaKrayot",
-  "Hasharon area",
-  "Jerusalem",
-  "Karmiel area",
-  "Kiryat Shmona area",
-  "Mevaseret Zion Area",
-  "Modi'in",
-  "Nazareth - Nof Hagalil area",
-  "Netanya area",
-  "Netivot - Sderot area",
-  "Pardes Hanna - Hadera area",
-  "Petah Tikva - Bik’at Ono",
-  "Rishon Lezion & Hashfela",
-  "Rosh Pinna - Zefat area",
-  "TLV - Herzliya area",
-  "Yokneam - Tivon area",
-];
+import { Link } from "react-router-dom";
+
+import { getAllCities } from "../../lib/constants/cities-constants";
 
 const ExploreCitiesSection = () => {
+  const cities = getAllCities();
   return (
     <section className="py-12 px-8">
       <h2 className="text-4xl font-bold mb-6 text-center font-woltHeader">
@@ -52,7 +33,9 @@ const ExploreCitiesSection = () => {
             key={index}
             className="border border-gray-300 rounded-lg p-4 hover:shadow-md cursor-pointer flex justify-between items-center"
           >
-            <span>{city}</span>
+            <span>
+              <Link to={`/en/discovery/${city.slug}`}>{city.name}</Link>
+            </span>
             <span>→</span>
           </div>
         ))}
