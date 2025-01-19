@@ -1,4 +1,4 @@
-import api from "../../services/api"; // Axios instance
+import api from "../services/api"; // Axios instance
 
 // Interfaces
 export interface BusinessSummary {
