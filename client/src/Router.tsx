@@ -21,9 +21,9 @@ const DiscoveryRestaurants = lazy(
 const DiscoveryStorePage = lazy(
   () => import("./pages/discovery-pages/DiscoveryStorePage")
 );
-const CategoryBrowse = lazy(
-  () => import("./pages/browsing-pages/CategoryBrowse")
-);
+// const CategoryBrowse = lazy(
+//   () => import("./pages/browsing-pages/CategoryBrowse")
+// );
 const SingleRestaurantPage = lazy(() => import("./pages/SingleRestaurantPage"));
 const SingleStorePage = lazy(() => import("./pages/SingleStorePage"));
 const Error404Page = lazy(() => import("./pages/404Page"));
@@ -72,14 +72,14 @@ function AppRoutes() {
               </SuspenseWrapper>
             }
           />
-          <Route
+          {/* <Route
             path="browse/:category"
             element={
               <SuspenseWrapper>
                 <CategoryBrowse />
               </SuspenseWrapper>
             }
-          />
+          /> */}
         </Route>
 
         <Route path="en/me" element={<MeInfoLayout />}>
