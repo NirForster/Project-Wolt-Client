@@ -5,24 +5,26 @@ import NavigationMenu from "./me-section/NavigationMenu";
 
 function MeInfoLayout() {
   const tabs = [
-    { label: "Personal info", url: "personal-info" },
-    { label: "Payment methods", url: "payment" },
-    { label: "Addresses", url: "addresses" },
-    { label: "Order history", url: "order-history" },
-    { label: "Earn Wolt credits", url: "earn-credits" },
-    { label: "Redeem code", url: "redeem-code" },
-    { label: "Settings", url: "settings" },
+    { label: "Personal info", url: "personal-info", lineLength: "14" },
+    { label: "Payment methods", url: "payment", lineLength: "19" },
+    { label: "Addresses", url: "addresses", lineLength: "11" },
+    { label: "Order history", url: "order-history", lineLength: "15" },
+    { label: "Earn Wolt credits", url: "earn-credits", lineLength: "17" },
+    { label: "Redeem code", url: "redeem-code", lineLength: "15" },
+    { label: "Settings", url: "settings", lineLength: "10" },
   ];
 
   return (
-    <div className="min-h-screen ">
-      <AppBar />
-      <ProfilePageHeader />
-      <NavigationMenu tabs={tabs} />
+    <div className="min-h-screen flex justify-center items-start">
+      <div className="w-full max-w-[1200px] flex flex-col mx-10">
+        <AppBar />
+        <ProfilePageHeader />
+        <NavigationMenu tabs={tabs} />
 
-      <main className="">
-        <Outlet />
-      </main>
+        <main className="">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }

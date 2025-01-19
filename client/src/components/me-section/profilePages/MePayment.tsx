@@ -17,7 +17,7 @@ const otherMethods = [
 
 const MePayment = () => {
   return (
-    <div className="w-[80%] max-w-[800px]">
+    <div className="w-full max-w-[800px]">
       <div className="flex flex-col items-start">
         <h1 className="font-woltHeader text-2xl mt-12">Payment methods</h1>
         <p className="font-woltHeader text-sm mt-8">Credit and debit cards</p>

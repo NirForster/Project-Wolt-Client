@@ -8,6 +8,8 @@ import UserDetails from "./components/me-section/profilePages/personal-info/User
 import MePersonalInfo from "./components/me-section/profilePages/personal-info/MePersonalInfo";
 import MePayment from "./components/me-section/profilePages/MePayment";
 import MeEarnCredits from "./components/me-section/profilePages/MeEarnCredits";
+import MeRedeemCode from "./components/me-section/profilePages/MeRedeemCode";
+import MeProfileSettings from "./components/me-section/profilePages/meSettings/MeSettings";
 
 const LandingPage = lazy(() => import("./pages/LandingPage"));
 const DiscoveryPage = lazy(
@@ -95,8 +97,8 @@ function AppRoutes() {
             { path: "addresses", components: <MeAddress /> },
             { path: "order-history", components: <MeAddress /> },
             { path: "earn-credits", components: <MeEarnCredits /> },
-            { path: "redeem-code", components: <MeAddress /> },
-            { path: "settings", components: <MeAddress /> },
+            { path: "redeem-code", components: <MeRedeemCode /> },
+            { path: "settings", components: <MeProfileSettings /> },
           ].map((page) => (
             <Route
               key={page.path}
