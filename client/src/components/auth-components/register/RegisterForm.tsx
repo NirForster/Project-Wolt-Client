@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { REGEX_EMAIL, EMAIL_MESSAGE } from "@/lib/constants/auth-constants";
-import { signup } from "../../../services/auth";
+import { signup } from "../../../services/api/auth";
 
 interface SignUpFormProps {
   className?: string;

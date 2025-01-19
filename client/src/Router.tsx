@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import MainLayout from "./components/main-layout-components/MainLayout";
-import ScrollToTop from "./services/ScrollToTop";
+import ScrollToTop from "./utils/ScrollToTop";
 import MeInfoLayout from "./components/MeInfoLayot";
 import MeAddress from "./components/me-section/profilePages/MeAddress";
 

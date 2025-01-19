@@ -1,6 +1,30 @@
-****Production Conventions****
+\***\*Production Conventions\*\***
 
 all folders will be kebab-case .
 all pages will be PascalCase and end with "Page" .
 all components will be PascalCase .
 all routes will be kebab-case .
+
+# business:
+
+- Venues (stores)
+- restaurants
+
+# services:
+
+api - for api calls (api.ts, users, auth.ts, businessApi.ts)
+types - for exporting types (businessTypes, menuTypes...)
+
+# critical missing logic:
+
+ordering logic
+search for business
+navigating from the business card > to the business page
+displaying businesses by categeory/label/tag/theme.
+location logic - having location on each business and filtering by location.
+
+# critical missing design:
+
+appBar - mobile design.
+displaying businesses by categeory/label/tag/theme.
+displaying animation carousels

@@ -1,4 +1,4 @@
-import { Item } from "@/api/types/MenuType";
+import { Item } from "@/services/types/MenuType";
 
 interface foodItemCardPropsType {
   item: Item;

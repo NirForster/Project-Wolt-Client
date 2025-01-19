@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import Carousel from "./GenericCarouselComponent";
-import { fetchAllStores, BusinessSummary } from "../../api/businessApi";
+import {
+  fetchAllStores,
+  BusinessSummary,
+} from "../../services/api/businessApi";
 import SingleRestaurantCard from "../BusinessCard"; // Import the SingleRestaurantCard component
 
 const StoresCarousel = () => {

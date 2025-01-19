@@ -1,12 +1,12 @@
 import FoodItemCard from "@/components/FoodItemCard";
 import { ItemViewCard } from "@/components/ItemViewCard";
-import api from "@/services/api";
+import api from "@/services/api/api";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Error404Page from "./404Page";
-import Business from "@/api/types/BusinessType";
-import { Item, Menu, Section } from "@/api/types/MenuType";
+import Business from "@/services/types/BusinessType";
+import { Item, Menu, Section } from "@/services/types/MenuType";
 
 function RestaurantPage() {
   const [business, setBusiness] = useState<{

@@ -4,8 +4,8 @@ import FormRadioGroup from "./item-card-form/FormRadioGroup";
 import { useContext, useRef, useState } from "react";
 import FormCheckbox from "./item-card-form/FormCheckbox";
 import { userContext } from "@/providers/userContext";
-import api from "@/services/api";
-import { Item } from "@/api/types/MenuType";
+import api from "@/services/api/api";
+import { Item } from "@/services/types/MenuType";
 
 interface ItemViewCardProps {
   item: Item;

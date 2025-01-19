@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import { User } from "../api/types/types";
-import { fetchCurrentUser, logout } from "../services/auth";
+import { User } from "../services/types/types";
+import { fetchCurrentUser, logout } from "../services/api/auth";
 
 interface UserContextType {
   user: User | null;

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { fetchBusinessesByCity, BusinessSummary } from "../../api/businessApi";
+import {
+  fetchBusinessesByCity,
+  BusinessSummary,
+} from "../../services/api/businessApi";
 import BusinessCard from "../BusinessCard";
 
 interface GridStoresViewProps {
