@@ -2,13 +2,18 @@ import FoodItemCard from "@/components/FoodItemCard";
 import { ItemViewCard } from "@/components/ItemViewCard";
 import api from "@/services/api/api";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import Error404Page from "./404Page";
 import Business from "@/services/types/BusinessType";
 import { Item, Menu, Section } from "@/services/types/MenuType";
+import useSectionOnScreen from "@/hooks/useSectionOnScreen";
+import { userContext } from "../providers/userContext";
 
 function RestaurantPage() {
+  const { user } = useContext(userContext);
+  const shopID = useParams().id;
+  console.log(user);
   const [business, setBusiness] = useState<{
     business: Business;
     menu: Menu;
@@ -19,8 +24,41 @@ function RestaurantPage() {
   } | null>(null);
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const [filter, setFilter] = useState<string>("");
-  const shopID = useParams().id;
+  const [isInFavorites, setIsInFavorites] = useState<boolean>(
+    user
+      ? user.favoritesShops.some((shop) => {
+          return shop.toString() === shopID;
+        })
+      : false
+  );
+
   let filteredMenu: Section[] = [];
+
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const getFirstSectionTitle = () => {
+    try {
+      if (business?.menu) {
+        if (business.menu.sections) {
+          return business?.menu.sections.length
+            ? business.menu.sections[0].sectionTitle
+            : "";
+        }
+      }
+    } catch (err: any) {
+      console.log(err.message);
+    }
+    return "";
+  };
+
+  const firstSectionTitle = getFirstSectionTitle();
+
+  const currentSectionTitle = useSectionOnScreen(
+    { root: null, rootMargin: "0px", threshold: 1 },
+    sectionRefs,
+    firstSectionTitle
+  );
+
   if (filter) {
     business?.menu.sections.forEach((section) => {
       const items: Item[] = [];
@@ -34,22 +72,37 @@ function RestaurantPage() {
       }
     });
   } else if (business) {
-    filteredMenu = business.menu.sections;
+    filteredMenu = business?.menu.sections;
   }
-  console.log("filter is: ", filter);
-  console.log(`filter is "": ${filter === ""}`);
-  // console.log("filteredMenu is: ", filteredMenu);
 
-  // let filter: string = "";
+  function scrollToSection(index: number) {
+    if (sectionRefs.current[index]) {
+      sectionRefs.current[index]?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }
+
   function handleOnSearchChange(ev: React.ChangeEvent<HTMLInputElement>) {
     setFilter(ev.target.value);
+  }
+
+  async function handleOnHeartClick() {
+    const isCurrent = !isInFavorites;
+    if (user) {
+      const result = await api.put(
+        `/favorites/${isCurrent ? "remove" : "add"}`,
+        { shopID }
+      );
+      setIsInFavorites(isCurrent);
+    }
   }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await api.get(`/shop/${shopID}`);
-
         setBusiness({ menu: data.menu, business: data.shop });
       } catch (err: any) {
         console.error(err.message);
@@ -105,6 +158,39 @@ function RestaurantPage() {
     }
     return (
       <>
+        <div className="w-full h-fit relative">
+          <img
+            src={business.business.coverImage}
+            alt={`cover image for ${business.business.name}`}
+            className="w-full z-0"
+          />
+          <div className="z-10 bg-[#00000075] absolute top-0 h-full left-0 w-full flex justify-between items-end p-10">
+            <div className="flex flex-col text-white gap-8">
+              <p className="text-[28px] sm:text-[46px] font-woltHeader">
+                {business.business.name}
+              </p>
+              <p className="text-[16px] sm:text-[18px]">
+                {business.business.description || ""}
+              </p>
+            </div>
+            <div>
+              <button
+                className="bg-black p-5 rounded-full opacity-85"
+                onClick={handleOnHeartClick}
+              >
+                <img
+                  src={`/assets/photos/heart${
+                    isInFavorites ? "" : "-fill"
+                  }.png`}
+                  alt={`${
+                    isInFavorites ? "Remove from favorites" : "Add to favorites"
+                  }`}
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div className="w-full h-fit p-4 flex flex-col sm:flex-row justify-between bg-white items-center">
           <div className="flex gap-4">
             <div className="flex gap-1">
@@ -133,18 +219,32 @@ function RestaurantPage() {
           </div>
         </div>
         <hr />
+
         <div className="bg-[#fbfbfbf] ">
           <div
             className={`flex flex-col-reverse sm:flex-row sticky top-0 z-20 ${
               isSticky ? "bg-white" : "bg-[#fbfbfb]"
             }`}
           >
-            <nav className={`flex overflow-x-auto justify-around`}>
-              {business.menu.sections.map((section) => {
+            <nav className={`flex overflow-x-auto justify-around items-center`}>
+              {business.menu.sections.map((section, index) => {
                 return (
-                  <p className="p-5 whitespace-nowrap cursor-pointer hover:text-[#039de9]">
-                    {section.sectionTitle}
-                  </p>
+                  <div
+                    className={`p-2 sm:flex sm:items-center h-fit  ${
+                      currentSectionTitle === section.sectionTitle
+                        ? "bg-[#D6EFFA] text-[#27A3E2] rounded-[3rem]"
+                        : ""
+                    }`}
+                    onClick={() => {
+                      scrollToSection(index);
+                    }}
+                  >
+                    <p
+                      className={` whitespace-nowrap cursor-pointer hover:text-[#039de9] `}
+                    >
+                      {section.sectionTitle}
+                    </p>
+                  </div>
                 );
               })}
             </nav>
@@ -188,29 +288,32 @@ function RestaurantPage() {
           )}
 
           <div className="bg-white sm:bg-[#FBFBFB] grid sm:grid-cols-1 smd:grid-cols-2 xlg:grid-cols-3 items-stretch justify-stretch border-none px-2">
-            {filteredMenu!.map((section) => {
+            {filteredMenu!.map((section, index) => {
               if (section.items.length === 0) {
                 return <></>;
               }
               const sectionTitle = section.sectionTitle;
+
               return (
                 <>
                   <div
-                    className="col-start-1 -col-end-1 pt-10 sm:pl-[10px] font-bold"
+                    className={`col-start-1 -col-end-1 pt-10 sm:pl-[10px] font-bold `}
                     key={sectionTitle}
+                    ref={(el) => (sectionRefs.current[index] = el)}
+                    data-section-title={sectionTitle}
                   >
-                    <span className="text-[28px] font-woltHeader  ">
+                    <span className={`text-[28px] font-woltHeader  `}>
                       {sectionTitle}
                     </span>
                   </div>
 
-                  {section.items.map((item: any, index: number) => {
+                  {section.items.map((item: Item, index: number) => {
                     return (
                       <button
                         onClick={() => {
                           setItemModal({ item, sectionTitle });
                         }}
-                        className=" gap-y-6 gap-x-4 min-w-full  items-start justify-items-stretch cursor-pointer"
+                        className=" gap-y-6 gap-x-4 min-w-full  items-start justify-items-stretch cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105"
                       >
                         <FoodItemCard item={item as Item} key={item._id} />
                         <hr
