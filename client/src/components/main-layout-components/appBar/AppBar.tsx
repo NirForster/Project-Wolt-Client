@@ -33,7 +33,7 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
           {/* Wolt Logo */}
           <div
             className="flex w-[80px] justify-end mr-2 hover:cursor-pointer"
-            onClick={() => navigate("/en/discovery")}
+            onClick={() => navigate("/")}
           >
             <img src={woltLogo} alt="wolt-logo" />
           </div>
