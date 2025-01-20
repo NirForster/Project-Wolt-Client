@@ -127,7 +127,7 @@ function RestaurantPage() {
       }
     };
     fetchData();
-    alert("bababababbabababab");
+    // alert("bababababbabababab");
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
