@@ -3,7 +3,6 @@ import EmailAnimation from "./settingsAnimations/EmailAnimation";
 import { useContext, useState, useEffect } from "react";
 import { userContext } from "@/providers/userContext";
 import editUser from "@/services/api/users/editUser";
-// import editUser from "@/api/users/editUser";
 
 const EditUserEmailModel = ({ onClose }: { onClose: () => void }) => {
   const { user, updateUser } = useContext(userContext);

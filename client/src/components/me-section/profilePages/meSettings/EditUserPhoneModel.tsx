@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { useContext, useState, useEffect } from "react";
 import { userContext } from "@/providers/userContext";
-// import editUser from "@/api/users/editUser";
+import editUser from "@/services/api/users/editUser";
 import PhoneAnimation from "./settingsAnimations/PhoneAnimation";
 import editUser from "@/services/api/users/editUser";
 
@@ -20,7 +20,7 @@ const EditUserPhoneModel = ({ onClose }: { onClose: () => void }) => {
 
     try {
       // Call the API to update the phone
-      await editUser(undefined, undefined, undefined, newPhoneValue);
+      await editUser(user?.email, user?.fname, user?.lname, newPhoneValue);
 
       // Update the phone in the context
       updateUser({ phone: newPhoneValue });
@@ -48,9 +48,9 @@ const EditUserPhoneModel = ({ onClose }: { onClose: () => void }) => {
           <div>
             <p className="font-woltHeader text-2xl">Phone</p>
             <Input
-              type="number"
+              type="text"
               value={newPhoneValue}
-              // onChange={(e) => setNewPhoneValue(e.target.value)}
+              onChange={(e) => setNewPhoneValue(e.target.value)}
               className="h-[40px] mt-4"
             />
             <div className="flex gap-4 mt-4">

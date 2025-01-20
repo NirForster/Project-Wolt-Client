@@ -1,11 +1,11 @@
 import { Input } from "@/components/ui/input";
 import { useContext, useState, useEffect } from "react";
 import { userContext } from "@/providers/userContext";
-// import editUser from "@/api/users/editUser";
+import editUser from "@/services/api/users/editUser";
 import NameAnimation from "./settingsAnimations/NameAnimation";
 import editUser from "@/services/api/users/editUser";
 
-const EditUserPhoneModel = ({ onClose }: { onClose: () => void }) => {
+const EditUsernameModel = ({ onClose }: { onClose: () => void }) => {
   const { user, updateUser } = useContext(userContext);
 
   const [canSave, setCanSave] = useState(true);
@@ -26,7 +26,12 @@ const EditUserPhoneModel = ({ onClose }: { onClose: () => void }) => {
 
     try {
       await editUser(newfnameValue, newlnameValue); // Call API to update phone
-      updateUser({ lname: newlnameValue, fname: newfnameValue }); // Update phone in context
+      updateUser({
+        email: user?.email,
+        lname: newlnameValue,
+        fname: newfnameValue,
+        phone: user?.phone,
+      }); // Update phone in context
       onClose(); // Close modal
     } catch (error) {
       console.error("Failed to update name:", error);
@@ -47,11 +52,18 @@ const EditUserPhoneModel = ({ onClose }: { onClose: () => void }) => {
           </div>
           <NameAnimation />
           <div>
-            <p className="font-woltHeader text-2xl">Phone</p>
+            <p className="font-woltHeader text-2xl">First name</p>
             <Input
               type="text"
-              // value={newPhoneValue}
-              // onChange={(e) => setNewPhoneValue(e.target.value)}
+              value={newfnameValue}
+              onChange={(e) => setnewfnameValue(e.target.value)}
+              className="h-[40px] mt-4"
+            />
+            <p className="font-woltHeader text-2xl">Last name</p>
+            <Input
+              type="text"
+              value={newlnameValue}
+              onChange={(e) => setnewlnameValue(e.target.value)}
               className="h-[40px] mt-4"
             />
             <div className="flex gap-4 mt-4">
@@ -80,4 +92,4 @@ const EditUserPhoneModel = ({ onClose }: { onClose: () => void }) => {
   );
 };
 
-export default EditUserPhoneModel;
+export default EditUsernameModel;

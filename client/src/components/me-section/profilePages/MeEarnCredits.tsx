@@ -2,15 +2,13 @@ import React from "react";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import { FiShare2 } from "react-icons/fi";
 import { FaXTwitter } from "react-icons/fa6";
-import earnCreditsVideo from "@/assets/Screen Recording 2025-01-16 at 16.53.59.mov";
+import TokenAnimation from "./TokenAnimation";
 
 const MeEarnCredits: React.FC = () => {
   return (
     <div className="max-w-[500px] w-full mx-auto flex flex-col items-center rounded-lg p-6">
       <div>
-        <video autoPlay loop muted src={earnCreditsVideo}>
-          Your browser does not support the video tag.
-        </video>
+        <TokenAnimation />
       </div>
       <h2 className="text-2xl font-bold text-black mb-4 font-woltHeader">
         Invite friends and get discounts

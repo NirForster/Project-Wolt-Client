@@ -1,16 +1,28 @@
-import mcLogo from "../../assets/dummyData/mcdonaldsIMG.avif";
+import sendOrder from "@/services/api/users/sendOrder";
+import { useNavigate } from "react-router-dom";
 
 interface SavedOrderProps {
+  restaurantID: string;
   restaurantName: string;
   ShippingMessage: string;
   totalPrice: string;
+  coverImage: string;
+  items: string[];
 }
 
 const SavedOrder: React.FC<SavedOrderProps> = ({
+  restaurantID,
   restaurantName,
   ShippingMessage,
   totalPrice,
+  coverImage,
+  items,
 }) => {
+  const navigate = useNavigate();
+
+  const handleSendOrder = () => {
+    sendOrder();
+  };
   return (
     <div className="line-height w-full max-w-md mb-2 p-4 bg-white border border-gray-300 rounded-lg shadow-md">
       {/* Header Section */}
@@ -25,11 +37,25 @@ const SavedOrder: React.FC<SavedOrderProps> = ({
             <p className=" text-gray-500">{ShippingMessage}</p>
           </div>
           <img
-            src={mcLogo}
+            src={coverImage}
             alt="McDonald's Logo"
             className="w-8 h-8 rounded-full"
           />
         </div>
+      </div>
+
+      <div className="h-full max-h-10 flex justify-end">
+        {items.map((item) => {
+          return (
+            <div className="h-full mr-1" key={item.item.id}>
+              <img
+                src={item.item.image}
+                alt={item.item.name}
+                className="h-10 w-auto object-contain" // Set image height to 40px, maintain aspect ratio
+              />
+            </div>
+          );
+        })}
       </div>
 
       {/* Order Details */}
@@ -42,10 +68,16 @@ const SavedOrder: React.FC<SavedOrderProps> = ({
 
       {/* Buttons Section */}
       <div className="flex justify-between gap-3">
-        <button className="flex-1 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+        <button
+          onClick={() => handleSendOrder()}
+          className="flex-1 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+        >
           מעבר לתשלום
         </button>
-        <button className="flex-1 px-4 py-2 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-100">
+        <button
+          onClick={() => navigate(`/en/restaurant/${restaurantID}`)}
+          className="flex-1 px-4 py-2 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-100"
+        >
           להוסיף עוד פריטים
         </button>
       </div>
