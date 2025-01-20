@@ -1,23 +1,32 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const DiscoveryTabs = () => {
-  const [activeTab, setActiveTab] = useState<string>("/en/discovery");
+  const { city } = useParams<{ city: string }>(); // Get city slug from URL
+  // const [activeTab, setActiveTab] = useState<string>("/en/discovery");
+  const location = useLocation(); // Get current location
   const navigate = useNavigate();
 
   const tabs = [
-    { label: "Discovery", route: "/en/discovery", icon: RecommendationsIcon },
+    {
+      label: "Discovery",
+      route: `/en/discovery/${city}`,
+      icon: RecommendationsIcon,
+    },
     {
       label: "Restaurants",
-      route: "/en/discovery/restaurants",
+      route: `/en/discovery/${city}/restaurants`,
       icon: RestaurantsIcon,
     },
-    { label: "Stores", route: "/en/discovery/stores", icon: StoresIcon },
+    {
+      label: "Stores",
+      route: `/en/discovery/${city}/stores`,
+      icon: StoresIcon,
+    },
   ];
 
   const handleTabClick = (route: string) => {
-    if (activeTab !== route) {
-      setActiveTab(route);
+    if (location.pathname !== route) {
       navigate(route);
     }
   };
@@ -29,12 +38,12 @@ const DiscoveryTabs = () => {
           key={tab.route}
           onClick={() => handleTabClick(tab.route)}
           className={`flex justify-center items-center py-[0.5rem] px-[1rem] m-1 cursor-pointer rounded-full transition-all duration-200 ${
-            activeTab === tab.route
+            location.pathname === tab.route
               ? "bg-woltColors-brandBg text-woltColors-white font-bold shadow-brand"
               : "bg-bg-surface-secondary text-woltColors-textSubdued hover:bg-woltColors-bgSurfaceHovered hover:text-woltColors-textHovered"
           }`}
           role="tab"
-          aria-selected={activeTab === tab.route}
+          aria-selected={location.pathname === tab.route}
         >
           <tab.icon className="w-5 h-5 mr-2" />
           <span className="text-sm pr-[0.5rem]">{tab.label}</span>

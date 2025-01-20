@@ -23,7 +23,6 @@ const BusinessCard: React.FC<BusinessCardProps> = ({
   city,
   type,
   name,
-  link,
   image,
   description,
   estimatedDeliveryTime = { min: 0, max: 0 },
@@ -31,20 +30,6 @@ const BusinessCard: React.FC<BusinessCardProps> = ({
   dollarCount,
   label = {}, // Default value to prevent undefined
 }) => {
-  console.log("BusinessCard Props:", {
-    id,
-    city,
-    type,
-    name,
-    link,
-    image,
-    description,
-    estimatedDeliveryTime,
-    rating,
-    dollarCount,
-    label,
-  });
-
   const boldDollarCount = dollarCount ? dollarCount.length : 0; // Fallback to 0 if undefined
   const semiBoldDollarCount = 4 - boldDollarCount; // Remaining count for faded $
 

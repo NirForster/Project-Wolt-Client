@@ -4,8 +4,10 @@ import api from "@/services/api/api";
 
 import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import Error404Page from "./404Page";
-import Business from "@/services/types/BusinessType";
+import Business, {
+  BusinessAdditionalInfo,
+  BusinessSummery,
+} from "@/services/types/BusinessType";
 import { Item, Menu, Section } from "@/services/types/MenuType";
 import useSectionOnScreen from "@/hooks/useSectionOnScreen";
 import { userContext } from "../providers/userContext";
@@ -13,15 +15,16 @@ import { userContext } from "../providers/userContext";
 function RestaurantPage() {
   const { user } = useContext(userContext);
   const shopID = useParams().id;
-  console.log(user);
   const [business, setBusiness] = useState<{
-    business: Business;
+    summary: BusinessSummery;
+    additionalInfo: BusinessAdditionalInfo;
     menu: Menu;
   } | null>(null);
   const [itemModal, setItemModal] = useState<{
     item: Item;
     sectionTitle: string;
   } | null>(null);
+  const [loading, setLoading] = useState(true);
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const [filter, setFilter] = useState<string>("");
   const [isInFavorites, setIsInFavorites] = useState<boolean>(
@@ -103,7 +106,15 @@ function RestaurantPage() {
     const fetchData = async () => {
       try {
         const { data } = await api.get(`/shop/${shopID}`);
-        setBusiness({ menu: data.menu, business: data.shop });
+
+        // console.log(data);
+
+        setLoading(false);
+        setBusiness({
+          menu: data.menu,
+          additionalInfo: data.shop.additionalInfo,
+          summary: data.shop.summary,
+        });
       } catch (err: any) {
         console.error(err.message);
       }
@@ -116,12 +127,19 @@ function RestaurantPage() {
       }
     };
     fetchData();
+    alert("bababababbabababab");
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (business?.business && business.menu) {
+  if (loading) {
+    return "Loading...";
+  }
+
+  // console.log(business);
+
+  if (business?.additionalInfo && business?.summary && business?.menu) {
     const dayIndex = new Date().getDay();
     const currentDay = [
       "Sunday",
@@ -132,9 +150,11 @@ function RestaurantPage() {
       "Friday",
       "Saturday",
     ][dayIndex];
-    const openingTimesOfToday = business.business.openingTimes.find((times) => {
-      return times.day === currentDay;
-    });
+    const openingTimesOfToday = business.additionalInfo.openingTimes.find(
+      (times) => {
+        return times.day === currentDay;
+      }
+    );
     let openTimeMsg: string = "Open Until ";
     if (openingTimesOfToday) {
       const workingTime = openingTimesOfToday.time;
@@ -148,7 +168,7 @@ function RestaurantPage() {
     }
 
     let ratingMsg = "";
-    const businessRating = business.business.rating;
+    let businessRating = business.summary.rating | 0;
     if (businessRating > 7.5) {
       ratingMsg = `😊 ${businessRating.toFixed(1)}`;
     } else if (businessRating > 5) {
@@ -160,17 +180,17 @@ function RestaurantPage() {
       <>
         <div className="w-full h-fit relative">
           <img
-            src={business.business.coverImage}
-            alt={`cover image for ${business.business.name}`}
+            src={business.additionalInfo.coverImage}
+            alt={`cover image for ${business.summary.name}`}
             className="w-full z-0"
           />
           <div className="z-10 bg-[#00000075] absolute top-0 h-full left-0 w-full flex justify-between items-end p-10">
             <div className="flex flex-col text-white gap-8">
               <p className="text-[28px] sm:text-[46px] font-woltHeader">
-                {business.business.name}
+                {business.summary.name}
               </p>
               <p className="text-[16px] sm:text-[18px]">
-                {business.business.description || ""}
+                {business.additionalInfo.businessDescription || ""}
               </p>
             </div>
             <div>
@@ -255,7 +275,7 @@ function RestaurantPage() {
                 className=""
               />
               <input
-                placeholder={`Search in ${business.business.name}`}
+                placeholder={`Search in ${business.summary.name}`}
                 className="bg-[#DBDBDC] text-black flex-1"
                 onChange={(ev) => handleOnSearchChange(ev)}
               />
@@ -333,7 +353,7 @@ function RestaurantPage() {
             onClick={(ev) => {
               setItemModal(null);
             }}
-            className={`${
+            className={`z-30 ${
               itemModal ? "" : "hidden"
             }   h-[calc(100%-24px)] w-full fixed top-0 right-0  flex justify-center items-center bg-[#00000075] cursor-pointer`}
           >
@@ -346,7 +366,7 @@ function RestaurantPage() {
               <ItemViewCard
                 item={itemModal?.item as Item}
                 setItemModal={setItemModal}
-                shopID={business.business._id}
+                shopID={shopID as string}
                 menuID={business.menu._id}
                 sectionTitle={itemModal?.sectionTitle || ""}
               />
@@ -363,7 +383,7 @@ function RestaurantPage() {
       </>
     );
   } else {
-    return <Error404Page />;
+    return "mama";
   }
 }
 

@@ -12,7 +12,9 @@ import AvatarMenu from "../../avatarMenu/AvatarMenu";
 import { useNavigate } from "react-router-dom";
 
 interface AppBarProps {
-  handleSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSearchChange?: (
+    ev: React.ChangeEvent<HTMLInputElement>
+  ) => void | undefined;
 }
 
 const AppBar = ({ handleSearchChange }: AppBarProps) => {
@@ -31,7 +33,7 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
           {/* Wolt Logo */}
           <div
             className="flex w-[80px] justify-end mr-2 hover:cursor-pointer"
-            onClick={() => navigate("/en/discovery")}
+            onClick={() => navigate("/")}
           >
             <img src={woltLogo} alt="wolt-logo" />
           </div>
@@ -55,7 +57,6 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
             onBlur={() => setIsSearchActive(false)}
             placeholder="search "
             className="w-full text-sm bg-transparent outline-none"
-            onChange={(ev) => handleSearchChange(ev)}
           />
           <FaSearch size={16} className="text-gray-600" />
         </div>

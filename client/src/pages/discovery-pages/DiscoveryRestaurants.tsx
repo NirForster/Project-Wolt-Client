@@ -1,11 +1,14 @@
+import { useParams } from "react-router-dom";
 import RestaurantsGridView from "@/components/discovery-grid-components/GridRestaurantsView";
 
-const DiscoveryRestaurantPage = () => {
+const DiscoveryRestaurants = () => {
+  const { city } = useParams<{ city: string }>();
+
   return (
     <div>
-      <RestaurantsGridView cityName="TLV - Herzliya area" />
+      <RestaurantsGridView cityName={city || "TLV - Herzliya area"} />
     </div>
   );
 };
 
-export default DiscoveryRestaurantPage;
+export default DiscoveryRestaurants;
