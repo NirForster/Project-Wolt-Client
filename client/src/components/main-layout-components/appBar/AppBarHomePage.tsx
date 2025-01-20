@@ -33,9 +33,9 @@ const AppBarHomePage = () => {
             {user ? (
               <>
                 {/* Show only if the user is logged in */}
-                <p className="text-sm font-medium text-gray-700">
+                {/* <p className="text-sm font-medium text-gray-700">
                   Welcome, {user.fname}
-                </p>
+                </p> */}
                 <Button
                   className="text-sm font-medium bg-red-500 text-white hover:bg-red-600"
                   onClick={providerLogout}
@@ -48,7 +48,7 @@ const AppBarHomePage = () => {
                 {/* Show only if the user is not logged in */}
                 <button onClick={() => setIsModalOpen(true)}>Log in</button>
                 <Button
-                  className="bg-BlueLightBackground text-woltColors-brandBg hover:bg-woltColors-brandHovered"
+                  className="bg-BlueLightBackground text-woltColors-brandBg hover:bg-woltColors-brandHovered ml-4"
                   onClick={() => setIsSignUpModalOpen(true)}
                 >
                   Sign up

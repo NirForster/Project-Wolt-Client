@@ -7,7 +7,7 @@ const getUserCart = async () => {
     });
     return response.data;
   } catch (error) {
-    console.error(`Failed to fetch post with ID `, error);
+    console.error(`Failed to fetch cart with ID `, error);
     return null;
   }
 };

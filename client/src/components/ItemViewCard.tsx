@@ -111,11 +111,12 @@ export function ItemViewCard({
           extras,
         });
         setItemModal(null);
-      } else {
-        alert(
-          "must be logged in to a registered user in order to add stuff to cart"
-        );
       }
+      // } else {
+      //   alert(
+      //     "must be logged in to a registered user in order to add stuff to cart"
+      //   );
+      // }
     } catch (err: any) {
       console.log(err.message);
     }

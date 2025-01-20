@@ -8,8 +8,13 @@ import {
 } from "@/components/ui/sheet";
 import CartTabs from "./CartTabs";
 import { FaShoppingCart } from "react-icons/fa";
+import { userContext } from "../../providers/userContext";
+import { useContext } from "react";
 
 const CartModel = () => {
+  const { user } = useContext(userContext);
+  console.log(user ? user.cart : "baba");
+
   return (
     <div>
       <Sheet>
@@ -19,7 +24,8 @@ const CartModel = () => {
               <FaShoppingCart size={16} />
             </button>
             <span className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-black rounded-full">
-              3
+              {/* {user?.cart.length || 1} */}
+              {user ? user.cart.length : 1}
             </span>
           </div>
         </SheetTrigger>
