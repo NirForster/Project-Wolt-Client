@@ -3,7 +3,6 @@ import { useContext, useState, useEffect } from "react";
 import { userContext } from "@/providers/userContext";
 import editUser from "@/services/api/users/editUser";
 import PhoneAnimation from "./settingsAnimations/PhoneAnimation";
-import editUser from "@/services/api/users/editUser";
 
 const EditUserPhoneModel = ({ onClose }: { onClose: () => void }) => {
   const { user, updateUser } = useContext(userContext);
