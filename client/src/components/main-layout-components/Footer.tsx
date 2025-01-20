@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-black text-white py-8 px-4 w-full">
+    <footer className="bg-black text-white py-8 px-4 w-full mt-24">
       <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 ">
         {/* Logo and App Links */}
         <div>
