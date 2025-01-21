@@ -127,7 +127,7 @@ function RestaurantPage() {
       }
     };
     fetchData();
-    alert("bababababbabababab");
+    // alert("bababababbabababab");
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -242,7 +242,7 @@ function RestaurantPage() {
 
         <div className="bg-[#fbfbfbf] ">
           <div
-            className={`flex flex-col-reverse sm:flex-row sticky top-0 z-20 ${
+            className={`flex flex-col-reverse sm:flex-row sm:justify-between sm:p-2 sticky top-0 z-20 ${
               isSticky ? "bg-white" : "bg-[#fbfbfb]"
             }`}
           >
@@ -268,7 +268,7 @@ function RestaurantPage() {
                 );
               })}
             </nav>
-            <form className="bg-[#DBDBDC] rounded-3xl w-[95%] sm:w-[280px] sm:max-w-[280px] sm:min-w-[280px] h-10 flex items-center m-4 p-2 ">
+            <form className="bg-[#DBDBDC] rounded-3xl w-[95%] sm:w-[280px] sm:max-w-[280px] sm:min-w-[280px] h-10 flex items-center m-4 p-2">
               <img
                 src="/assets/photos/black-magnifyingglass.png"
                 alt="search"

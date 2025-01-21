@@ -60,7 +60,7 @@ export function LoginFormWithPassword({
 
     try {
       const userData = await login(email, password);
-      alert("Login successful!");
+      // alert("Login successful!");
 
       //update the user in context
       providerLogin(userData.user);

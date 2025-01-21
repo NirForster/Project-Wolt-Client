@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BsBuildingsFill } from "react-icons/bs";
 import { SlHome, SlLocationPin } from "react-icons/sl";
 import { userContext } from "../../providers/userContext";
 
 const AppBarLocation = () => {
   const { user } = useContext(userContext); // Access user context
+  const [currentLoc, setCurrentLoc] = useState(user?.locations?.[0]);
 
   // Update in the app bar ths user address and icon
   const loggedInUserLocation = user?.locations?.[0];
@@ -15,12 +16,19 @@ const AppBarLocation = () => {
   //   }
   // }
 
-  let loggedInUserLocationIcon = () => {
-    if (loggedInUserLocation?.type === "Home") return <SlHome size={16} />;
-    if (loggedInUserLocation?.type === "Work")
+  const loggedInUserLocationIcon = () => {
+    if (loggedInUserLocation?.type === "Home") {
+      return <SlHome size={16} />;
+    }
+    if (loggedInUserLocation?.type === "Work") {
       return <BsBuildingsFill size={16} />;
+    }
     return <SlLocationPin size={16} />; // Default icon
   };
+
+  useEffect(() => {
+    setCurrentLoc(user?.locations[user.locations.length - 1]);
+  }, [user?.locations]);
 
   return (
     <div className="flex items-center">
@@ -32,9 +40,12 @@ const AppBarLocation = () => {
       </div>
       {/* Address */}
       <p className={`truncate-text text-sm font-medium text-blue-600  `}>
-        {loggedInUserLocation
-          ? `${loggedInUserLocation?.type} (${loggedInUserLocation?.address})`
+        {currentLoc
+          ? `${currentLoc?.type} (${currentLoc?.address})`
           : "There is no location saved"}
+        {/* {loggedInUserLocation
+          ? `${loggedInUserLocation?.type} (${loggedInUserLocation?.address})`
+          : "There is no location saved"} */}
       </p>
     </div>
   );
