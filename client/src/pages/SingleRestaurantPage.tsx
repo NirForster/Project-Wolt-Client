@@ -1,7 +1,8 @@
 import FoodItemCard from "@/components/FoodItemCard";
 import { ItemViewCard } from "@/components/ItemViewCard";
 import api from "@/services/api/api";
-
+import smiley_web_happy from "@/assets/smiley_web_happy.json";
+import smiley_web_speechless from "@/assets/smiley_web_speechless.json";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import Business, {
@@ -11,9 +12,11 @@ import Business, {
 import { Item, Menu, Section } from "@/services/types/MenuType";
 import useSectionOnScreen from "@/hooks/useSectionOnScreen";
 import { userContext } from "../providers/userContext";
+import Lottie from "lottie-react";
 
 function RestaurantPage() {
   const { user } = useContext(userContext);
+  const [animationKey, setAnimationKey] = useState(0); // Used to restart animation
   const shopID = useParams().id;
   const [business, setBusiness] = useState<{
     summary: BusinessSummery;
@@ -168,14 +171,22 @@ function RestaurantPage() {
     }
 
     let ratingMsg = "";
-    let businessRating = business.summary.rating | 0;
+    let ratingLottie = null;
+
+    // Use Math.floor or Math.round for integer conversion if needed
+    const businessRating = business.summary.rating;
+
     if (businessRating > 7.5) {
-      ratingMsg = `😊 ${businessRating.toFixed(1)}`;
+      ratingMsg = `${businessRating.toFixed(1)}`;
+      ratingLottie = smiley_web_happy;
     } else if (businessRating > 5) {
-      ratingMsg = `😐 ${businessRating.toFixed(1)}`;
+      ratingMsg = ` ${businessRating.toFixed(1)}`;
+      ratingLottie = smiley_web_speechless;
     } else {
-      ratingMsg = `🙂‍↔️ ${businessRating.toFixed(1)}`;
+      ratingMsg = ` ${businessRating.toFixed(1)}`;
+      ratingLottie = smiley_web_speechless; // Optionally add a different animation for low ratings
     }
+
     return (
       <>
         <div className="w-full h-fit relative">
@@ -218,6 +229,14 @@ function RestaurantPage() {
               <span>{openTimeMsg}</span>
             </div>
             <p>{ratingMsg}</p>
+            <div onMouseLeave={() => setAnimationKey((prev) => prev + 1)}>
+              <Lottie
+                animationData={ratingLottie}
+                loop={false}
+                autoplay={true} // Start animation on first render
+                key={animationKey} // Change key to restart animation
+              />
+            </div>
             <p>Service fee ₪2.00</p>
             <p className="cursor-pointer text-[#039de0]">More</p>
           </div>

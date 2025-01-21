@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { FaSearch } from "react-icons/fa";
-import woltLogo from "../../../assets/dummyData/Wolt-Logo-b&w.png";
 import CartModel from "../../cart/CartModel";
 import { Button } from "../../ui/button";
 import LoginModel from "../../auth-components/Login/LoginModel";
