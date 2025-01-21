@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-// import AppBar from "../components/main-layout-components/appBar/AppBar";
+import AppBar from "../components/main-layout-components/appBar/AppBar";
 import ProfilePageHeader from "./me-section/ProfilePageHeader";
 import NavigationMenu from "./me-section/NavigationMenu";
 import Footer from "./main-layout-components/Footer";
@@ -18,7 +18,7 @@ function MeInfoLayout() {
   return (
     <div className="min-h-screen flex justify-center flex-col items-start">
       <div className="w-full max-w-[1200px] flex flex-col mx-10">
-        {/* <AppBar /> */}
+        <AppBar />
         <ProfilePageHeader />
         <NavigationMenu tabs={tabs} />
 
