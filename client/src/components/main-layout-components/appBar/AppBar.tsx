@@ -10,6 +10,24 @@ import AppBarLocation from "../../locations/AppBarLocation";
 import LocationsModel from "../../locations/LocationsModel";
 import AvatarMenu from "../../avatarMenu/AvatarMenu";
 import { useNavigate } from "react-router-dom";
+import Lottie from "lottie-react";
+import woltLogoLottie from "@/assets/wolt_logo_animation_themeable.json";
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const { latitude, longitude } = position.coords;
+      console.log("User's Location:", latitude, longitude);
+      // Send this data to the backend
+    },
+    (error) => {
+      console.error("Error fetching location:", error);
+      // Handle error or show manual location input
+    }
+  );
+} else {
+  console.error("Geolocation is not supported by this browser.");
+}
 
 interface AppBarProps {
   handleSearchChange?: (
@@ -35,7 +53,14 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
             className="flex w-[80px] justify-end mr-2 hover:cursor-pointer"
             onClick={() => navigate("/")}
           >
-            <img src={woltLogo} alt="wolt-logo" />
+            {/* <img src={woltLogo} alt="wolt-logo" /> */}
+            <div style={{ filter: "invert(100%)" }}>
+              <Lottie
+                animationData={woltLogoLottie}
+                loop={false}
+                autoplay={true}
+              />
+            </div>
           </div>
           <div
             onClick={() => setIsLocationsModel(true)}
