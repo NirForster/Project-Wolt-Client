@@ -132,9 +132,10 @@ const SingleStorePage = () => {
       "Friday",
       "Saturday",
     ][dayIndex];
-    const openingTimesOfToday = business.business.openingTimes.find((times) => {
-      return times.day === currentDay;
-    });
+    const openingTimesOfToday =
+      business.business.additionalInfo.openingTimes.find((times) => {
+        return times.day === currentDay;
+      });
     let openTimeMsg: string = "Open Until ";
     if (openingTimesOfToday) {
       const workingTime = openingTimesOfToday.time;
@@ -148,7 +149,7 @@ const SingleStorePage = () => {
     }
 
     let ratingMsg = "";
-    const businessRating = business.business.rating;
+    const businessRating = business.business.summery.rating;
     if (businessRating > 7.5) {
       ratingMsg = `😊 ${businessRating.toFixed(1)}`;
     } else if (businessRating > 5) {
@@ -160,17 +161,17 @@ const SingleStorePage = () => {
       <>
         <div className="w-full h-fit relative">
           <img
-            src={business.business.coverImage}
-            alt={`cover image for ${business.business.name}`}
+            src={business.business.additionalInfo.coverImage}
+            alt={`cover image for ${business.business.summery.name}`}
             className="w-full z-0"
           />
           <div className="z-10 bg-[#00000075] absolute top-0 h-full left-0 w-full flex justify-between items-end p-10">
             <div className="flex flex-col text-white gap-8">
               <p className="text-[28px] sm:text-[46px] font-woltHeader">
-                {business.business.name}
+                {business.business.summery.name}
               </p>
               <p className="text-[16px] sm:text-[18px]">
-                {business.business.description || ""}
+                {business.business.additionalInfo.businessDescription || ""}
               </p>
             </div>
             <div>
@@ -255,7 +256,7 @@ const SingleStorePage = () => {
                 className=""
               />
               <input
-                placeholder={`Search in ${business.business.name}`}
+                placeholder={`Search in ${business.business.summery.name}`}
                 className="bg-[#DBDBDC] text-black flex-1"
                 onChange={(ev) => handleOnSearchChange(ev)}
               />

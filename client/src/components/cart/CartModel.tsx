@@ -9,11 +9,24 @@ import {
 import CartTabs from "./CartTabs";
 import { FaShoppingCart } from "react-icons/fa";
 import { userContext } from "../../providers/userContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const CartModel = () => {
   const { user } = useContext(userContext);
-  console.log(user ? user.cart : "baba");
+  if (!user) {
+    return "an error, no user detected";
+  }
+  const [itemsInCart, setItemsInCart] = useState(user.cart.length);
+
+  useEffect(() => {
+    console.log("My name is baba: what yours?");
+    console.log(user.cart.length);
+    setItemsInCart(user.cart.length);
+  }, [user.cart]);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
     <div>
@@ -25,7 +38,8 @@ const CartModel = () => {
             </button>
             <span className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-black rounded-full">
               {/* {user?.cart.length || 1} */}
-              {user ? user.cart.length : 1}
+              {/* {user ? user.cart.length : 1} */}
+              {itemsInCart}
             </span>
           </div>
         </SheetTrigger>

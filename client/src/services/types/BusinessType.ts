@@ -11,7 +11,6 @@ export interface BusinessAdditionalInfo {
     name: string;
     zip: string;
   };
-
   businessDescription: string;
   coverImage: string;
   deliveryFeeStructure: {
