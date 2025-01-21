@@ -51,7 +51,7 @@ export function SignUpForm({ className, onClose, ...props }: SignUpFormProps) {
 
     try {
       await signup(fname, lname, email, password, phone);
-      alert("Account created successfully!");
+      // alert("Account created successfully!");
       onClose(); // Close modal after success
     } catch (error) {
       alert("Error creating account. Please try again.");

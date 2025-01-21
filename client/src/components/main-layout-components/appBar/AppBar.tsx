@@ -11,7 +11,13 @@ import LocationsModel from "../../locations/LocationsModel";
 import AvatarMenu from "../../avatarMenu/AvatarMenu";
 import { useNavigate } from "react-router-dom";
 
-const AppBar = () => {
+interface AppBarProps {
+  handleSearchChange?: (
+    ev: React.ChangeEvent<HTMLInputElement>
+  ) => void | undefined;
+}
+
+const AppBar = ({ handleSearchChange }: AppBarProps) => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isLocationsModel, setIsLocationsModel] = useState(false);
@@ -27,7 +33,7 @@ const AppBar = () => {
           {/* Wolt Logo */}
           <div
             className="flex w-[80px] justify-end mr-2 hover:cursor-pointer"
-            onClick={() => navigate("/en/discovery")}
+            onClick={() => navigate("/")}
           >
             <img src={woltLogo} alt="wolt-logo" />
           </div>
@@ -41,6 +47,7 @@ const AppBar = () => {
           </div>
         </div>
       </div>
+
       {/* Search Bar */}
       <div className={` ${isSearchActive ? "flex-grow" : "flex-1"} `}>
         <div className="flex items-center px-4 py-2 bg-gray-100 rounded-full">
@@ -54,6 +61,7 @@ const AppBar = () => {
           <FaSearch size={16} className="text-gray-600" />
         </div>
       </div>
+
       {/* Right Side */}
       <div className="flex-1">
         <div className="flex gap-4 items-center justify-end">

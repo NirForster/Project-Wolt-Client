@@ -9,7 +9,7 @@ export const login = async (email: string, password: string) => {
       { email, password },
       { withCredentials: true } // Ensure cookies are sent
     );
-    alert("Login successful!");
+    // alert("Login successful!");
     localStorage.setItem("token", response.data.token); // Store the token if needed
     return response.data;
   } catch (error: any) {
@@ -41,7 +41,7 @@ export const signup = async (
       },
       { withCredentials: true }
     );
-    alert("Signup successful!");
+    // alert("Signup successful!");
     return response.data;
   } catch (error: any) {
     console.error(
@@ -56,7 +56,7 @@ export const signup = async (
 export const logout = async () => {
   try {
     await api.get("/auth/logout", { withCredentials: true }); // Use GET for logout
-    alert("You have been logged out.");
+    // alert("You have been logged out.");
   } catch (error: any) {
     console.error(
       "Logout error:",

@@ -21,16 +21,22 @@ import { useNavigate } from "react-router-dom";
 interface LoginFormProps {
   className?: string;
   onClose: () => void;
+  lastURL?: string;
 }
 
 export function LoginFormWithPassword({
   className,
   onClose,
+  lastURL,
   ...props
 }: LoginFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [_emailError, setEmailError] = useState<string | null>(null);
+
+  if (!lastURL) {
+    lastURL = "/";
+  }
 
   const navigate = useNavigate(); // Initialize useNavigate hook
 
@@ -54,13 +60,13 @@ export function LoginFormWithPassword({
 
     try {
       const userData = await login(email, password);
-      alert("Login successful!");
+      // alert("Login successful!");
 
       //update the user in context
       providerLogin(userData.user);
 
       onClose(); // Close the form on successful login
-      navigate("/discovery"); // Redirect to Discovery page after successful login
+      navigate(lastURL); // Redirect to Discovery page after successful login
     } catch (error) {
       alert("Login failed. Please check your credentials.");
       console.error("Login error:", error);

@@ -1,31 +1,53 @@
 export default interface Business {
+  summery: BusinessSummery;
+  _id: string;
+  __v: number;
+  id: string;
+  additionalInfo: BusinessAdditionalInfo;
+}
+
+export interface BusinessAdditionalInfo {
   address: {
-    _id: string;
-    id: string;
     name: string;
     zip: string;
   };
   businessDescription: string;
   coverImage: string;
   deliveryFeeStructure: {
-    _id: string;
     id: string;
     spanText: string;
     text: string;
+    _id: string;
   }[];
   deliveryTimes: TimeObj[];
-  description: string;
-  id: string;
-  name: string;
   openingTimes: TimeObj[];
   phoneNumber: string;
-  rating: number;
-  reviews: [];
-  type: string;
   website: string;
-  __v: number;
+}
+
+export interface BusinessSummery {
+  dollarCount: string;
+  estimatedDeliveryTime: {
+    min: string;
+    max: string;
+  };
+  image: string;
+  label: {
+    deliveryFee: string;
+    storeType: any;
+  };
+  link: string;
+  location: {
+    address: string;
+    city: string;
+  };
+  name: string;
+  rating: number;
+  shortDescription: string;
+  type: "restaurant" | "store";
   _id: string;
 }
+
 interface TimeObj {
   day:
     | "Sunday"

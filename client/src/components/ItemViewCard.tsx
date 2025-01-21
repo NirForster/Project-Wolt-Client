@@ -110,7 +110,11 @@ export function ItemViewCard({
           sectionTitle,
           extras,
         });
-        setItemModal(null);
+        if (response.data.status === "Success") {
+          setItemModal(null);
+        } else {
+          alert(response.data.message);
+        }
       } else {
         alert(
           "must be logged in to a registered user in order to add stuff to cart"

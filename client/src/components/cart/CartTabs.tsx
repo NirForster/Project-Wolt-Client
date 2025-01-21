@@ -32,6 +32,7 @@ const CartTabs = () => {
       </div>
     );
   }
+  // console.log(item);
 
   return (
     <div>
@@ -50,13 +51,13 @@ const CartTabs = () => {
         <TabsContent value="savedOrder">
           <div className="overflow-y-auto max-h-full">
             {/* Button for debugging */}
-            <button
+            {/* <button
               onClick={() => {
                 console.log(userCart.cart); // Log the cart items
               }}
             >
               Log Cart
-            </button>
+            </button> */}
 
             {/* Render saved orders dynamically */}
             {userCart.cart.map((item) => {
@@ -67,10 +68,10 @@ const CartTabs = () => {
                 <SavedOrder
                   key={item.id}
                   restaurantID={item.shop.id}
-                  restaurantName={item.shop.name || "No Name"} // Make sure it's a string
-                  ShippingMessage="אוי, אנחנו לא מגיעים למיקום שלך"
+                  restaurantName={item.shop.summary.name || "No Name"} // Make sure it's a string
+                  ShippingMessage="נהדר, אנחנו מגיעים למיקום שלך"
                   totalPrice={item.totalPrice ? `₪${item.totalPrice}` : "₪0.00"} // Ensure it's a string or number
-                  coverImage={item.shop.coverImage}
+                  coverImage={item.shop.summary.image}
                   items={item.items}
                 />
               );

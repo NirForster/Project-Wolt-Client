@@ -1,48 +1,53 @@
 import { useEffect, useState } from "react";
 import Carousel from "./GenericCarouselComponent";
 import {
-  fetchAllStores,
+  fetchBusinessesByCity,
   BusinessSummary,
 } from "../../services/api/businessApi";
-import SingleRestaurantCard from "../BusinessCard"; // Import the SingleRestaurantCard component
+import BusinessCard from "../BusinessCard";
 
-const StoresCarousel = () => {
-  const [stores, setstores] = useState<BusinessSummary[]>([]);
+interface storesCarouselProps {
+  cityName: string; // Allow cityName to be passed as a prop
+}
+
+const StoresCarousel: React.FC<storesCarouselProps> = ({ cityName }) => {
+  const [stores, setStores] = useState<BusinessSummary[]>([]);
 
   useEffect(() => {
-    const loadstores = async () => {
+    const loadStores = async () => {
       try {
-        const data = await fetchAllStores();
-        setstores(data);
+        const data = await fetchBusinessesByCity(cityName, "stores");
+        // console.log(`Loaded Stores in ${cityName}:`, data);
+        setStores(data);
       } catch (error) {
-        console.error("Failed to fetch stores:", error);
+        console.error(`Failed to load Stores in ${cityName}:`, error);
       }
     };
 
-    loadstores();
-  }, []);
+    loadStores();
+  }, [cityName]);
 
   return (
     <Carousel
       items={stores}
       title="Popular Stores Right Now"
-      renderItem={(stores) => (
-        <SingleRestaurantCard
-          key={stores.id}
-          name={stores.name}
-          description={stores.description}
-          image={stores.image}
-          link={stores.link}
-          estimatedDeliveryTime={stores.estimatedDeliveryTime}
-          rating={stores.rating}
-          dollarCount={stores.dollarCount}
-          label={{
-            deliveryFee: stores.label.deliveryFee || "N/A",
-            storeType: stores.label.storeType || "N/A",
-          }}
+      renderItem={(store: BusinessSummary) => (
+        <BusinessCard
+          city={cityName}
+          key={store.id}
+          id={store.id}
+          type={store.type}
+          name={store.name}
+          link={store.link}
+          image={store.image}
+          description={store.shortDescription}
+          estimatedDeliveryTime={store.estimatedDeliveryTime}
+          rating={store.rating}
+          dollarCount={store.dollarCount}
+          label={store.label}
         />
       )}
-      seeAllLink="discovery/stores"
+      seeAllLink={`${cityName}/stores`}
     />
   );
 };

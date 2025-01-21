@@ -2,7 +2,7 @@ export interface Menu {
   business: string;
   businessName: string;
   id: string;
-  __b: number;
+  __v: number;
   _id: string;
   sections: Section[];
 }
