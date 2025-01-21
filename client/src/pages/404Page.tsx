@@ -2,26 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import AppBar from "@/components/main-layout-components/appBar/AppBarHomePage";
+import scientist_error_3 from "@/assets/lottie-files/scientist_error_3-2.json";
 
 const Error404Page: React.FC = () => {
   const navigate = useNavigate();
-  const [animationData, setAnimationData] = useState(null);
-
-  // Fetch the animation data on component mount
-  useEffect(() => {
-    const fetchAnimation = async () => {
-      try {
-        const response = await fetch(
-          "https://consumer-static-assets.wolt.com/lottie/assets/scientist_error_3-2.json"
-        );
-        const data = await response.json();
-        setAnimationData(data);
-      } catch (error) {
-        console.error("Error loading animation:", error);
-      }
-    };
-    fetchAnimation();
-  }, []);
 
   const handleBackToHome = () => {
     navigate("/");
@@ -33,9 +17,9 @@ const Error404Page: React.FC = () => {
       <div className="flex flex-col items-center justify-start pt-12 lg:justify-center min-h-screen bg-white text-center px-6 h-[100vh]">
         {/* Lottie Animation */}
         <div className="relative mb-8 ">
-          {animationData ? (
+          {scientist_error_3 ? (
             <Lottie
-              animationData={animationData}
+              animationData={scientist_error_3}
               loop={true}
               className="w-full h-full"
             />

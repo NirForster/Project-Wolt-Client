@@ -10,7 +10,7 @@ import LocationsModel from "../../locations/LocationsModel";
 import AvatarMenu from "../../avatarMenu/AvatarMenu";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
-import woltLogoLottie from "@/assets/wolt_logo_animation_themeable.json";
+import woltLogoLottie from "@/assets/lottie-files/wolt_logo_animation_themeable.json";
 
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(
