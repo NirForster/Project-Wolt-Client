@@ -30,6 +30,9 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
 
   // Check if the current path is the landing page
   const isLandingPage = location.pathname === "/";
+  if (isLandingPage) {
+    navigate("/en/discovery/tlv-herzliya-area");
+  }
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(

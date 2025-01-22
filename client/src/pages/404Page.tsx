@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
-import AppBar from "@/components/main-layout-components/appBar/AppBarHomePage";
+import AppBar from "@/components/main-layout-components/AppBar";
 import scientist_error_3 from "@/assets/lottie-files/scientist_error_3-2.json";
 
 const Error404Page: React.FC = () => {
