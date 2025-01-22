@@ -1,10 +1,10 @@
 import FoodItemCard from "@/components/FoodItemCard";
 import { ItemViewCard } from "@/components/ItemViewCard";
-import api from "@/services/api/api";
-import smiley_web_happy from "@/assets/smiley_web_happy.json";
-import smiley_web_speechless from "@/assets/smiley_web_speechless.json";
+import smiley_web_happy from "@/assets/lottie-files/smiley_web_happy.json";
+import smiley_web_speechless from "@/assets/lottie-files/smiley_web_speechless.json";
 import { useContext, useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+import api from "@/services/api/api";
 import Business, {
   BusinessAdditionalInfo,
   BusinessSummery,
@@ -17,6 +17,8 @@ import Lottie from "lottie-react";
 function RestaurantPage() {
   const { user } = useContext(userContext);
   const [animationKey, setAnimationKey] = useState(0); // Used to restart animation
+  const navigate = useNavigate();
+  const location = useLocation();
   const shopID = useParams().id;
   const [business, setBusiness] = useState<{
     summary: BusinessSummery;
@@ -120,6 +122,7 @@ function RestaurantPage() {
         });
       } catch (err: any) {
         console.error(err.message);
+        navigate(`${location.pathname}/404`);
       }
     };
     const handleScroll = () => {
