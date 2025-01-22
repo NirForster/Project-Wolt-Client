@@ -8,25 +8,9 @@ import { userContext } from "../../../providers/userContext";
 import AppBarLocation from "../../locations/AppBarLocation";
 import LocationsModel from "../../locations/LocationsModel";
 import AvatarMenu from "../../avatarMenu/AvatarMenu";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Lottie from "lottie-react";
 import woltLogoLottie from "@/assets/lottie-files/wolt_logo_animation_themeable.json";
-
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      const { latitude, longitude } = position.coords;
-      console.log("User's Location:", latitude, longitude);
-      // Send this data to the backend
-    },
-    (error) => {
-      console.error("Error fetching location:", error);
-      // Handle error or show manual location input
-    }
-  );
-} else {
-  console.error("Geolocation is not supported by this browser.");
-}
 
 interface AppBarProps {
   handleSearchChange?: (
@@ -42,6 +26,26 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
 
   const { user } = useContext(userContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Check if the current path is the landing page
+  const isLandingPage = location.pathname === "/";
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        console.log("User's Location:", latitude, longitude);
+        // Send this data to the backend
+      },
+      (error) => {
+        console.error("Error fetching location:", error);
+        // Handle error or show manual location input
+      }
+    );
+  } else {
+    console.error("Geolocation is not supported by this browser.");
+  }
 
   return (
     <div className="flex h-[70px] bg-white w-full px-5 py-3 border-b border-gray-200">
@@ -49,10 +53,9 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
         <div className="flex items-center h-full justify-start ">
           {/* Wolt Logo */}
           <div
-            className="flex w-[80px] justify-end mr-2 hover:cursor-pointer"
+            className="flex max-w-[120px] justify-end mr-2 hover:cursor-pointer"
             onClick={() => navigate("/")}
           >
-            {/* <img src={woltLogo} alt="wolt-logo" /> */}
             <div style={{ filter: "invert(100%)" }}>
               <Lottie
                 animationData={woltLogoLottie}
@@ -61,30 +64,36 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
               />
             </div>
           </div>
-          <div
-            onClick={() => setIsLocationsModel(true)}
-            className={`hover:cursor-pointer ${
-              isSearchActive ? "opacity-0" : "opacity-100"
-            }`}
-          >
-            <AppBarLocation />
-          </div>
+          {/* Location Component - Hide on Landing Page */}
+          {!isLandingPage && (
+            <div
+              onClick={() => setIsLocationsModel(true)}
+              className={`hover:cursor-pointer ${
+                isSearchActive ? "opacity-0" : "opacity-100"
+              }`}
+            >
+              <AppBarLocation />
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Search Bar */}
-      <div className={` ${isSearchActive ? "flex-grow" : "flex-1"} `}>
-        <div className="flex items-center px-4 py-2 bg-gray-100 rounded-full">
-          <input
-            type="text"
-            onFocus={() => setIsSearchActive(true)}
-            onBlur={() => setIsSearchActive(false)}
-            placeholder="search "
-            className="w-full text-sm bg-transparent outline-none"
-          />
-          <FaSearch size={16} className="text-gray-600" />
+      {/* Search Bar - Hide on Landing Page */}
+      {!isLandingPage && (
+        <div className={` ${isSearchActive ? "flex-grow" : "flex-1"} `}>
+          <div className="flex items-center px-4 py-2 bg-gray-100 rounded-full">
+            <input
+              type="text"
+              onFocus={() => setIsSearchActive(true)}
+              onBlur={() => setIsSearchActive(false)}
+              placeholder="Search"
+              className="w-full text-sm bg-transparent outline-none"
+              onChange={handleSearchChange}
+            />
+            <FaSearch size={16} className="text-gray-600" />
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Right Side */}
       <div className="flex-1">
