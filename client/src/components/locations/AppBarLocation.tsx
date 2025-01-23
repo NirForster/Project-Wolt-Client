@@ -26,9 +26,9 @@ const AppBarLocation = () => {
     return <SlLocationPin size={16} />; // Default icon
   };
 
-  useEffect(() => {
-    setCurrentLoc(user?.locations[user.locations.length - 1]);
-  }, [user?.locations]);
+  // useEffect(() => {
+  //   setCurrentLoc(user?.locations[user.locations.length - 1]);
+  // }, [user]);
 
   return (
     <div className="flex items-center">

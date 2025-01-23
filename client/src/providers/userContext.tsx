@@ -25,7 +25,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(currentUser);
     };
     loadUser();
-  }, []);
+  }, [user]);
 
   const providerLogin = (user: User) => setUser(user);
 
