@@ -17,6 +17,7 @@ import MapGuyErr from "@/components/business-page/MapMan";
 import SingleStorePage from "./SingleStorePage";
 import SearchInBusinessForm from "@/components/SearchInBusinessForm";
 import { userContext } from "../providers/userContext";
+import Lottie from "lottie-react";
 
 export default function RestaurantPage() {
   const { user } = useContext(userContext);
@@ -105,6 +106,7 @@ export default function RestaurantPage() {
       } catch (err: any) {
         navigate("/404");
         console.error(err.message);
+        navigate(`${location.pathname}/404`);
       }
     };
     const handleScroll = () => {

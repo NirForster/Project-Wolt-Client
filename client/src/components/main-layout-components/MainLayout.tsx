@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import AppBar from "./appBar/AppBar";
+import AppBar from "./AppBar";
 import Footer from "./Footer";
 import DiscoveryTabs from "../DiscoveryTabs";
 
