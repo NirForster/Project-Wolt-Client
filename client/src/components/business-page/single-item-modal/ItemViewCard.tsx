@@ -1,28 +1,26 @@
-import UpdateItemQuantity from "./UpdateItemQuantity";
+import UpdateItemQuantity from "../../UpdateItemQuantity";
 
-import FormRadioGroup from "./item-card-form/FormRadioGroup";
 import { useContext, useRef, useState } from "react";
-import FormCheckbox from "./item-card-form/FormCheckbox";
 import { userContext } from "@/providers/userContext";
 import api from "@/services/api/api";
 import { Item } from "@/services/types/MenuType";
+import FormRadioGroup from "../item-card-form/FormRadioGroup";
+import FormCheckbox from "../item-card-form/FormCheckbox";
 
 interface ItemViewCardProps {
   item: Item;
-  setItemModal: React.Dispatch<
-    React.SetStateAction<{ item: Item; sectionTitle: string } | null>
-  >;
   shopID: string;
   menuID: string;
   sectionTitle: string;
+  onClose: () => void;
 }
 
 export function ItemViewCard({
   item,
-  setItemModal,
   shopID,
   menuID,
   sectionTitle,
+  onClose,
 }: ItemViewCardProps) {
   if (!item) {
     return <></>;
@@ -111,7 +109,7 @@ export function ItemViewCard({
           extras,
         });
         if (response.data.status === "Success") {
-          setItemModal(null);
+          onClose;
         } else {
           alert(response.data.message);
         }

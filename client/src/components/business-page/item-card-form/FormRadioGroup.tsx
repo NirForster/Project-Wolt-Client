@@ -59,11 +59,11 @@ export default function FormRadioGroup({
                 className="w-fit hover:border-[#039de0] transition"
               />
 
-              <div>
+              <div className="flex justify-between">
                 <p>{opt.optionLabel}</p>
                 <p
                   className={`${
-                    opt.optionPrice === "Included" ? "hidden" : ""
+                    opt.optionPrice === "Included" ? "hidden" : "text-[#A0A0A2]"
                   }`}
                 >
                   {opt.optionPrice}
