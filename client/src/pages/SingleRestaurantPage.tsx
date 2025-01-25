@@ -2,9 +2,9 @@ import FoodItemCard from "@/components/FoodItemCard";
 
 import api from "@/services/api/api";
 
-import { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import {
+import { useEffect, useRef, useContext, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import Business, {
   BusinessAdditionalInfo,
   BusinessSummery,
 } from "@/services/types/BusinessType";
@@ -16,8 +16,11 @@ import BusinessHeader from "@/components/business-page/BusinessHeader";
 import MapGuyErr from "@/components/business-page/MapMan";
 import SingleStorePage from "./SingleStorePage";
 import SearchInBusinessForm from "@/components/SearchInBusinessForm";
+import { userContext } from "../providers/userContext";
 
 export default function RestaurantPage() {
+  const { user } = useContext(userContext);
+  const location = useLocation();
   const shopID = useParams().id;
   const [business, setBusiness] = useState<{
     summary: BusinessSummery;

@@ -7,6 +7,9 @@ import {
   BusinessSummery,
 } from "@/services/types/BusinessType";
 import BusinessMoreInfoModal from "./BusinessMoreInfoModal";
+import smiley_web_happy from "@/assets/lottie-files/smiley_web_happy.json";
+import smiley_web_speechless from "@/assets/lottie-files/smiley_web_speechless.json";
+import Lottie from "lottie-react";
 
 interface BusinessHeaderProps {
   business: {
@@ -21,6 +24,7 @@ export default function BusinessHeader({
   shopID,
 }: BusinessHeaderProps) {
   const { user } = useContext(userContext);
+  const [animationKey, setAnimationKey] = useState(0); // Used to restart animation
   const [isInFavorites, setIsInFavorites] = useState<boolean>(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isMoreModalOpen, setIsMoreModalOpen] = useState(false);
@@ -88,12 +92,20 @@ export default function BusinessHeader({
   }
 
   let ratingMsg = "";
-  if (business.summary.rating > 7.5) {
-    ratingMsg = `😊 ${business.summary.rating.toFixed(1)}`;
-  } else if (business.summary.rating > 5) {
-    ratingMsg = `😐 ${business.summary.rating.toFixed(1)}`;
+  let ratingLottie = null;
+
+  // Use Math.floor or Math.round for integer conversion if needed
+  const businessRating = business.summary.rating;
+
+  if (businessRating > 7.5) {
+    ratingMsg = `${businessRating.toFixed(1)}`;
+    ratingLottie = smiley_web_happy;
+  } else if (businessRating > 5) {
+    ratingMsg = ` ${businessRating.toFixed(1)}`;
+    ratingLottie = smiley_web_speechless;
   } else {
-    ratingMsg = `🙂‍↔️ ${business.summary.rating.toFixed(1)}`;
+    ratingMsg = ` ${businessRating.toFixed(1)}`;
+    ratingLottie = smiley_web_speechless; // Optionally add a different animation for low ratings
   }
 
   return (
@@ -149,6 +161,14 @@ export default function BusinessHeader({
             <span>{openTimeMsg}</span>
           </div>
           <p>{ratingMsg}</p>
+          <div onMouseLeave={() => setAnimationKey((prev) => prev + 1)}>
+            <Lottie
+              animationData={ratingLottie}
+              loop={false}
+              autoplay={true} // Start animation on first render
+              key={animationKey} // Change key to restart animation
+            />
+          </div>
           <p>{serviceFeeMsg}</p>
           <button
             onClick={() => {
@@ -173,7 +193,7 @@ export default function BusinessHeader({
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Modals */}
       {isLoginModalOpen && (
         <LoginModel onClose={() => setIsLoginModalOpen(false)} />
       )}
