@@ -37,11 +37,20 @@ const BusinessCard: React.FC<BusinessCardProps> = ({
   const businessPath = type === "restaurant" ? "restaurant" : "venue";
 
   return (
-    <div className=" relative ">
-      <div className="relative z-0 ">
+    <div className=" relative group">
+      <div
+        className="rounded-lg relative overflow-hidden bg-cb-bg transform group-hover:scale-102 group-hover:shadow-lg transition-scale-shadow shadow-md"
+        style={
+          {
+            "--tw-transition-duration": "300ms",
+            "--tw-transition-timing-function": "cubic-bezier(.45, 0, .55, 1)",
+          } as React.CSSProperties
+        }
+      >
+        {" "}
         <div className="transition-transform duration-300 ease-in-out aspect-[1/.46] w-full relative ">
           <div className="w-full h-full relative ">
-            <div className="w-full h-full flex absolute overflow-hidden no-scrollbar rounded-t-[8px]">
+            <div className="w-full h-full flex absolute overflow-hidden no-scrollbar ">
               <div className="content-auto flex-[1_0_100%]">
                 <Link
                   to={`/en/isr/${city}/${businessPath}/${id}`} // Use city, type, and ID for dynamic routing
@@ -85,7 +94,6 @@ const BusinessCard: React.FC<BusinessCardProps> = ({
             )}
           </div>
         </div>
-
         {/* Content */}
         <div className="p-2">
           {/* Tags */}
