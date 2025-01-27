@@ -34,10 +34,10 @@ const GridStoresView: React.FC<GridStoresViewProps> = ({ cityName }) => {
           <BusinessCard
             key={store.id}
             id={store.id}
-            city={store.city}
+            city={store.location.city}
             type="store"
             name={store.name}
-            description={store.description}
+            description={store.shortDescription}
             image={store.image}
             link={store.link}
             estimatedDeliveryTime={store.estimatedDeliveryTime}
