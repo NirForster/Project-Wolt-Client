@@ -34,7 +34,7 @@ export default function FormCheckbox({
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       {options.map((opt, idx) => (
         <label
           key={idx}
@@ -50,9 +50,13 @@ export default function FormCheckbox({
             value={opt.optionLabel} // ✅ Add a value for submission
           />
 
-          <div>
+          <div className="flex justify-between">
             <p>{opt.optionLabel}</p>
-            <p className={`${opt.optionPrice === "Included" ? "hidden" : ""}`}>
+            <p
+              className={`${
+                opt.optionPrice === "Included" ? "hidden" : "text-[#A0A0A2]"
+              }`}
+            >
               {opt.optionPrice}
             </p>
           </div>
