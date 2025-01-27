@@ -123,8 +123,8 @@ const BusinessCard: React.FC<BusinessCardProps> = ({
           </div>
 
           {/* Delivery rating and pricing Info */}
-          <div className="flex items-center h-8 text-xs font-normal leading-4 font-sans text-woltColors-textSubdued border-t border-dashed border-woltColors-borderDefault ">
-            <div className="flex whitespace-nowrap w-full">
+          <div className="flex h-8 text-xs font-normal leading-4 font-sans text-woltColors-textSubdued border-t border-dashed border-woltColors-borderDefault ">
+            <div className="flex whitespace-nowrap justify-around w-full">
               <span className="flex items-center gap-1 overflow-hidden">
                 <svg
                   viewBox="0 0 24 24"
