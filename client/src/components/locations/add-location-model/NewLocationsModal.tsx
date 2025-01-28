@@ -3,13 +3,13 @@ import { Input } from "@/components/ui/input";
 import { BiTargetLock } from "react-icons/bi";
 import { useLoadScript, Autocomplete } from "@react-google-maps/api";
 import Lottie from "lottie-react";
-import cityAnimation from "@/assets/city_3-2.json";
+import cityAnimation from "@/assets/lottie-files/city_3-2.json";
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 type Library = "places" | "drawing" | "geometry";
 const libraries: Library[] = ["places"];
 
-const AddLocationStreetPage = ({
+const NewLocationsModal = ({
   onBack,
   onClose,
   setStreet,
@@ -182,4 +182,4 @@ const AddLocationStreetPage = ({
   );
 };
 
-export default AddLocationStreetPage;
+export default NewLocationsModal;

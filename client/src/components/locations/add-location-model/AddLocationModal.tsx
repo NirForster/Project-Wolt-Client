@@ -1,9 +1,10 @@
 import { useState } from "react";
-import AddLocationStreetPage from "./AddLocationStreetPage";
+// import AddLocationStreetPage from "./AddLocationStreetPage";
 import AddLocationKindPage from "./AddLocationKindPage";
 import AddLocationDetailsPage from "./AddLocationDetailsPage";
 import { Details } from "@/services/types/types";
 import addLocationToUser from "@/services/api/users/addLocation";
+import NewLocationsModal from "./NewLocationsModal";
 
 const AddNewLocationModal = ({
   onBack,
@@ -23,7 +24,8 @@ const AddNewLocationModal = ({
 
   if (street === "")
     return (
-      <AddLocationStreetPage
+      // <AddLocationStreetPage
+      <NewLocationsModal
         onBack={onBack}
         onClose={onClose}
         setStreet={setStreet}
