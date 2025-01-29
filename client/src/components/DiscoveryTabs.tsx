@@ -40,7 +40,7 @@ const DiscoveryTabs = () => {
           className={`flex justify-center items-center py-[0.5rem] px-[1rem] m-1 cursor-pointer rounded-full transition-all duration-200 ${
             location.pathname === tab.route
               ? "bg-woltColors-brandBg text-woltColors-white font-bold shadow-brand"
-              : "bg-bg-surface-secondary text-woltColors-textSubdued hover:bg-woltColors-bgSurfaceHovered hover:text-woltColors-textHovered"
+              : "bg-bg-surface-secondary text-woltColors-textSubdued font-semibold hover:bg-woltColors-bgSurfaceHovered hover:text-woltColors-textHovered"
           }`}
           role="tab"
           aria-selected={location.pathname === tab.route}
