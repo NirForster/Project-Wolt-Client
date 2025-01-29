@@ -27,7 +27,7 @@ const DiscoveryPage = () => {
         categoryProp="Lunch"
         titleProp="Lunch near you"
       />
-      {/* <MarketingBanner /> */}
+      <MarketingBanner />
       <CategoriesCarosel
       // I feel like eating..
       // Restaurant Categories
