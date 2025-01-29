@@ -177,9 +177,15 @@ export default function BusinessMoreInfoModal({
                 <hr />
                 <div className="flex justify-between">
                   <p>Website</p>
-                  <p className="text-[#039de0] cursor-pointer">
-                    {business.summary.link}
-                  </p>
+                  <button
+                    onClick={() =>
+                      window.open(`https://wolt.com${business.summary.link}`)
+                    }
+                  >
+                    <p className="text-[#039de0] cursor-pointer">
+                      {business.summary.link}
+                    </p>
+                  </button>
                 </div>
                 <hr />
                 <div className="flex justify-between">

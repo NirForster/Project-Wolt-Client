@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  safelist: ["bg-green-500", "bg-red-500"],
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-
       screens: {
         "2xs": "550px",
         smd: "720px",
@@ -15,7 +15,6 @@ module.exports = {
       contentVisibility: {
         auto: "auto",
       },
-
 
       borderRadius: {
         lg: "var(--radius)",

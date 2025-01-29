@@ -116,7 +116,14 @@ export default function BusinessHeader({
           alt={`cover image for ${name}`}
           className="w-full z-0"
         />
-        <div className="z-10 bg-[#00000075] absolute top-0 h-full left-0 w-full flex justify-between items-end p-10">
+        <div className="z-10 bg-[#00000075] absolute top-0 h-full left-0 w-full flex justify-start items-end p-10 gap-4">
+          <div>
+            <img
+              src={business.summary.image}
+              alt=""
+              className="w-20 h-20 rounded-xl"
+            />
+          </div>
           <div className="flex flex-col text-white gap-8">
             <p className="text-[28px] sm:text-[46px] font-woltHeader">
               {business.summary.name}
@@ -124,7 +131,7 @@ export default function BusinessHeader({
             <p className="text-[16px] sm:text-[18px]">
               {business.additionalInfo.businessDescription || ""}
             </p>
-            <div className="flex flex-wrap gap-2">
+            {/* <div className="flex flex-wrap gap-2">
               {badges.map((currentBadge, index) => {
                 return (
                   <p
@@ -135,32 +142,13 @@ export default function BusinessHeader({
                   </p>
                 );
               })}
-            </div>
-          </div>
-          <div>
-            <button
-              className="bg-black p-5 rounded-full opacity-85"
-              onClick={handleOnHeartClick}
-            >
-              <img
-                src={`/assets/photos/heart${isInFavorites ? "-fill" : ""}.png`}
-                alt={`${
-                  isInFavorites ? "Remove from favorites" : "Add to favorites"
-                }`}
-                className="min-w-5"
-              />
-            </button>
+            </div> */}
           </div>
         </div>
       </div>
 
-      <div className="w-full h-fit p-4 flex flex-col sm:flex-row justify-between bg-white items-center">
-        <div className="flex gap-4">
-          <div className="flex gap-1">
-            <img src="/assets/photos/clock.png" alt="clock" className="h-5" />
-            <span>{openTimeMsg}</span>
-          </div>
-          <p>{ratingMsg}</p>
+      <div className="w-full h-fit p-4 flex flex-col sm:flex-row justify-between bg-white items-center text-[#202125a3]">
+        <div className="flex gap-2 items-center">
           <div onMouseLeave={() => setAnimationKey((prev) => prev + 1)}>
             <Lottie
               animationData={ratingLottie}
@@ -169,6 +157,12 @@ export default function BusinessHeader({
               key={animationKey} // Change key to restart animation
             />
           </div>
+          <p>{ratingMsg}</p>
+          <p>&bull;</p>
+          <div className="flex gap-1">
+            <span>{openTimeMsg}</span>
+          </div>
+          <p>&bull;</p>
           <p>{serviceFeeMsg}</p>
           <button
             onClick={() => {
@@ -178,7 +172,7 @@ export default function BusinessHeader({
             <p className="cursor-pointer text-[#039de0]">More</p>
           </button>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-center items-center">
           <div className="flex bg-[#D6EFFA] text-[#009de0] p-2 rounded-lg cursor-pointer gap-1 w-fit whitespace-nowrap items-center">
             <img src="/assets/photos/calendar-badge-clock.png" alt="calender" />
             <span className="">Schedule order</span>
@@ -189,6 +183,15 @@ export default function BusinessHeader({
               alt="order together"
             />
             <span className="">Order together</span>
+          </div>
+          <div
+            className="bg-[#D6EFFA] rounded-full flex justify-center items-center w-fit h-fit p-2"
+            onClick={handleOnHeartClick}
+          >
+            <img
+              src={`/assets/photos/heart${isInFavorites ? "-fill" : ""}.png`}
+              alt=""
+            />
           </div>
         </div>
       </div>

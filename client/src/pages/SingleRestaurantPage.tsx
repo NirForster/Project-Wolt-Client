@@ -98,6 +98,10 @@ export default function RestaurantPage() {
       try {
         const { data } = await api.get(`/shop/${shopID}`);
         setLoading(false);
+        console.log(data);
+        data.menu.sections = data.menu.sections.filter((section: Section) => {
+          return section.items.length;
+        });
         setBusiness({
           menu: data.menu,
           additionalInfo: data.shop.additionalInfo,
@@ -126,9 +130,9 @@ export default function RestaurantPage() {
     return "Loading...";
   }
 
-  // if (true) {
-  //   return <SingleStorePage />;
-  // }
+  if (true) {
+    return <SingleStorePage />;
+  }
   if (business?.additionalInfo && business?.summary && business?.menu) {
     return (
       <>
