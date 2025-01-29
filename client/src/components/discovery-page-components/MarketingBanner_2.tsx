@@ -1,4 +1,3 @@
-import React from "react";
 import wolt_plus from "@/assets/banner_wolt_plus.avif";
 import styles from "./MarketingBanner.module.css";
 
