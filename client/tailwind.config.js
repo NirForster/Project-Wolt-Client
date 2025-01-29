@@ -2,10 +2,12 @@
 const plugin = require("tailwindcss/plugin");
 
 module.exports = {
+  safelist: ["bg-green-500", "bg-red-500"],
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+
       scale: {
         102: "1.02", // Slightly scaled for subtle effect
       },
@@ -15,6 +17,7 @@ module.exports = {
       transitionDuration: {
         cb: "300ms", // Equivalent to .3s
       },
+
       screens: {
         "2xs": "550px",
         smd: "720px",

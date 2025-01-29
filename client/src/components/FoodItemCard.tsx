@@ -10,7 +10,7 @@ export default function FoodItemCard({
   isRestaurant,
 }: foodItemCardPropsType) {
   if (item) {
-    console.log(item);
+    // console.log(item);
 
     return (
       <>
