@@ -1,10 +1,23 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss/plugin");
+
 module.exports = {
   safelist: ["bg-green-500", "bg-red-500"],
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+
+      scale: {
+        102: "1.02", // Slightly scaled for subtle effect
+      },
+      transitionTimingFunction: {
+        "cb-ease": "cubic-bezier(.45, 0, .55, 1)",
+      },
+      transitionDuration: {
+        cb: "300ms", // Equivalent to .3s
+      },
+
       screens: {
         "2xs": "550px",
         smd: "720px",
@@ -44,6 +57,8 @@ module.exports = {
         small: "var(--cb-font-leading-small)",
       },
       colors: {
+        "cb-bg": "#fff",
+        "cb-shadow": "#0000001f",
         // main colors
         BlueBackgroundAndText: "#009de0",
         BlueLightBackground: "#ebf7fd",
@@ -163,9 +178,21 @@ module.exports = {
             "0 4px 6px -1px rgba(249, 58, 37, 0.1), 0 2px 4px -1px rgba(249, 58, 37, 0.06)",
           positive:
             "0 4px 6px -1px rgba(31, 199, 10, 0.1), 0 2px 4px -1px rgba(31, 199, 10, 0.06)",
+          "cb-xsmall":
+            "0px 1px 2px 0px var(--cb-color-shadow), 0px 0px 1px 0px var(--cb-color-shadow)",
         },
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        ".transition-scale-shadow": {
+          transition:
+            "transform var(--tw-transition-duration, 300ms) var(--tw-transition-timing-function, cubic-bezier(.45, 0, .55, 1)), box-shadow var(--tw-transition-duration, 300ms) var(--tw-transition-timing-function, cubic-bezier(.45, 0, .55, 1))",
+        },
+      });
+    }),
+  ],
 };

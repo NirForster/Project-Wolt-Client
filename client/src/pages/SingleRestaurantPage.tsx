@@ -148,7 +148,7 @@ export default function RestaurantPage() {
 
         <div className="bg-[#fbfbfbf] ">
           <div
-            className={`flex flex-col-reverse sm:flex-row sm:justify-between sm:p-2 sticky top-0 z-20 ${
+            className={`flex flex-col-reverse sm:flex-row sm:justify-between sm:p-2 sticky top-16 z-20 ${
               isSticky ? "bg-white" : "bg-[#fbfbfb]"
             }`}
           >

@@ -1,19 +1,23 @@
 import { useParams } from "react-router-dom";
-import CategoryCarousel from "@/components/carosel-components/CategoryCarousel";
+import MultiCarousel from "@/components/carosel-components/MultiCarousel";
+import { unslugCityName } from "@/lib/constants/cities-constants";
 
 const DiscoveryPage = () => {
   const { city } = useParams<{ city: string }>();
+  const unslugedCity = unslugCityName(city || "tlv-herzliya-area");
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-6">Explore {city}</h1>
-      <CategoryCarousel
-        categoryName="restaurants"
-        cityName={city || "TLV - Herzliya area"}
+      <h1 className="text-2xl font-bold mb-6">
+        Explore {unslugedCity || "TLV - Herzliya area"}
+      </h1>
+      <MultiCarousel
+        cityName={unslugedCity || "TLV - Herzliya area"}
+        type="restaurant"
       />
-      <CategoryCarousel
-        categoryName="stores"
-        cityName={city || "TLV - Herzliya area"}
+      <MultiCarousel
+        cityName={unslugedCity || "TLV - Herzliya area"}
+        type="store"
       />
     </div>
   );

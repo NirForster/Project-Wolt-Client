@@ -1,69 +1,86 @@
 import { useEffect, useState } from "react";
 import Carousel from "./GenericCarouselComponent";
 import {
-  fetchBusinessesByCity,
-  BusinessSummary,
-} from "../../services/api/businessApi";
+  fetchBusinessesByCategory,
+  BusinessWithSummary, // Use the new type
+} from "@/services/api/businessApi";
 import BusinessCard from "../BusinessCard";
+import { cityService } from "@/lib/constants/cities-constants";
 
 interface MultiCarouselProps {
-  cityName: string; // Allow cityName to be passed as a prop
+  cityName: string;
+  type: "restaurant" | "store";
 }
 
-const MultiCarousel: React.FC<MultiCarouselProps> = ({ cityName }) => {
-  const [businesses, setBusinesses] = useState<BusinessSummary[]>([]);
-  const CAROUSEL_COUNT = 3; // Number of carousels
-  const ITEMS_PER_CAROUSEL = 10; // Number of businesses per carousel
+const MultiCarousel: React.FC<MultiCarouselProps> = ({ cityName, type }) => {
+  const [businessesByCategory, setBusinessesByCategory] = useState<{
+    [category: string]: BusinessWithSummary[];
+  }>({});
 
   useEffect(() => {
     const loadBusinesses = async () => {
       try {
-        const data = await fetchBusinessesByCity(cityName, "restaurants");
-        setBusinesses(data);
+        const data = await fetchBusinessesByCategory(cityName, type);
+        setBusinessesByCategory(data);
+        console.log("Fetched data: ", data);
       } catch (error) {
-        console.error(`Failed to load businesses in ${cityName}:`, error);
+        console.error(
+          `Failed to load businesses grouped by category in ${cityName}:`,
+          error
+        );
       }
     };
 
     loadBusinesses();
-  }, [cityName]);
+  }, [cityName, type]);
 
-  // Split businesses into chunks for each carousel
-  const carousels = [];
-  for (let i = 0; i < CAROUSEL_COUNT; i++) {
-    carousels.push(
-      businesses.slice(i * ITEMS_PER_CAROUSEL, (i + 1) * ITEMS_PER_CAROUSEL)
-    );
-  }
+  const citySlug = cityService.find((city) => city.name === cityName)?.slug;
+
+  const flatBusinesses = Object.entries(businessesByCategory).flatMap(
+    ([category, businesses]) =>
+      businesses.map((business) => ({
+        ...business,
+        category, // Add category to each business
+      }))
+  );
+
+  console.log(flatBusinesses);
 
   return (
     <div>
-      {carousels.map((carouselItems, index) => (
-        <Carousel
-          key={index}
-          items={carouselItems}
-          title={`Carousel ${index + 1}`}
-          renderItem={(business: BusinessSummary) => (
-            <BusinessCard
-              city={cityName}
-              key={business.id}
-              id={business.id}
-              type={business.type}
-              name={business.name}
-              link={business.link}
-              image={business.image}
-              description={business.shortDescription}
-              estimatedDeliveryTime={business.estimatedDeliveryTime}
-              rating={business.rating}
-              dollarCount={business.dollarCount}
-              label={business.label}
-            />
-          )}
-          seeAllLink={`/discovery/restaurants/${cityName}/carousel/${
-            index + 1
-          }`}
-        />
-      ))}
+      {Object.entries(businessesByCategory).map(([category, businesses]) => {
+        if (businesses.length === 0) return null;
+
+        // Generate a clean category slug (replace spaces with hyphens)
+        const categorySlug = category.toLowerCase().replace(/\s+/g, "-");
+
+        return (
+          <Carousel
+            key={category}
+            items={businesses.slice(0, 1000)} // Limit to 10 businesses
+            title={category}
+            renderItem={(business: BusinessWithSummary) => (
+              <BusinessCard
+                city={cityName}
+                key={business._id}
+                id={business._id}
+                type={business.summary.type}
+                name={business.summary.name}
+                link={business.summary.link}
+                image={business.summary.image}
+                description={business.summary.shortDescription}
+                estimatedDeliveryTime={business.summary.estimatedDeliveryTime}
+                rating={business.summary.rating}
+                dollarCount={business.summary.dollarCount}
+                label={business.summary.label}
+              />
+            )}
+            seeAllLink={`/discovery/${type}/${
+              citySlug || "unknown-city"
+            }/category/${categorySlug}`}
+          />
+        );
+      })}
     </div>
   );
 };

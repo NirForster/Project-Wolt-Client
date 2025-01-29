@@ -19,6 +19,23 @@ export interface BusinessSummary {
   };
 }
 
+export interface BusinessWithSummary {
+  _id: string;
+  summary: BusinessSummary; // Add the summary field
+  additionalInfo: {
+    coverImage: string;
+    businessDescription?: string;
+    address: { name: string; zip: string };
+    openingTimes: { day: string; time: string }[];
+    deliveryTimes: { day: string; time: string }[];
+    deliveryFeeStructure: { text: string; spanText: string }[];
+    phoneNumber: string;
+    website: string;
+  };
+  categories: string[];
+  __v: number;
+}
+
 export interface BusinessAdditionalInfo {
   coverImage: string;
   businessDescription?: string;
@@ -33,6 +50,7 @@ export interface BusinessAdditionalInfo {
 export interface BusinessDetails {
   summary: BusinessSummary; // Summary information
   additionalInfo: BusinessAdditionalInfo; // Detailed information
+  categories: string[];
 }
 
 export interface MenuItem {
@@ -61,7 +79,6 @@ export interface Menu {
 }
 
 // API Calls
-
 /**
  * Fetch all businesses of a specific type
  * @param type - "store" or "restaurant"
@@ -143,6 +160,27 @@ export const fetchMenuByBusinessId = async (
     return response.data;
   } catch (error) {
     console.error(`Error fetching menu for business ID ${businessId}:`, error);
+    throw error;
+  }
+};
+
+// API Call to Fetch Businesses by Categories
+export const fetchBusinessesByCategory = async (
+  cityName: string,
+  type: "restaurant" | "store"
+): Promise<Record<string, BusinessWithSummary[]>> => {
+  try {
+    const response = await api.get(
+      `/business/cities/${cityName}/${type}/categories`
+    );
+    // console.log(
+    //   `Fetched businesses grouped by category in ${cityName}:`,
+    //   response.data
+    // );
+    return response.data;
+  } catch (error) {
+    console.log(cityName);
+    console.error(`Error fetching businesses grouped by category:`, error);
     throw error;
   }
 };

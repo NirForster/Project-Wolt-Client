@@ -34,5 +34,10 @@ export const cityService = cities.map((city) => ({
     .replace(/-+/g, "-"), // Replace multiple hyphens with a single hyphen
 }));
 
+export const unslugCityName = (slug: string): string | null => {
+  const city = cityService.find((city) => city.slug === slug);
+  return city ? city.name : null; // Return the name if found, otherwise null
+};
+
 // Get all cities
 export const getAllCities = () => cityService;
