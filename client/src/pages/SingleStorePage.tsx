@@ -61,6 +61,9 @@ export default function SingleStorePage() {
       try {
         const { data } = await api.get(`/shop/${shopID}`);
         setLoading(false);
+        data.menu.sections = data.menu.sections.filter((section: Section) => {
+          return section.items.length;
+        });
         setBusiness({
           menu: data.menu,
           additionalInfo: data.shop.additionalInfo,
@@ -80,6 +83,12 @@ export default function SingleStorePage() {
   }
 
   if (business?.additionalInfo && business?.summary && business?.menu) {
+    const currentSectionIndex = business?.menu.sections.findIndex((section) => {
+      return section.sectionTitle === currentSection.sectionTitle;
+    });
+    console.log(business.menu.sections);
+    console.log(currentSectionIndex);
+
     return (
       <>
         <BusinessHeader
@@ -93,6 +102,7 @@ export default function SingleStorePage() {
         <hr />
 
         <div className="bg-white sm:bg-[#fbfbfbf] sm:grid sm:grid-cols-[1fr_2fr] relative">
+          {/* search and sections titles */}
           <div className="sticky top-0 sm:static w-full bg-white flex gap-2 flex flex-col">
             <SearchInBusinessForm
               businessName={business.summary.name}
@@ -100,33 +110,33 @@ export default function SingleStorePage() {
               handleOnSearchChange={handleOnSearchChange}
               setFilter={setFilter}
             />
-            <div className="flex overflow-x-auto sm:flex-col sm:overflow-y-auto">
+            {/* sections titles */}
+            <div className="flex overflow-x-auto sm:flex-col sm:overflow-y-auto sm:gap-3 p-2">
               {business.menu.sections.map((section, index) => {
                 return (
-                  <button
-                    key={index}
-                    className={`flex flex-col items-center justify-center ${
-                      currentSection?.sectionTitle === section.sectionTitle
-                        ? "text-[#039de0] border-b-2 border-[#039de0]"
-                        : "hover:border-b-2 border-[#E4E4E5]"
-                    } p-2 whitespace-nowrap`}
-                    onClick={() => setCurrentSection(section)}
-                  >
-                    {section.sectionTitle}
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={section.items[0].image}
+                      className="rounded-full w-10 h-10 hidden sm:block"
+                    />
+                    <button
+                      key={index}
+                      className={`flex flex-col items-center justify-center ${
+                        currentSection?.sectionTitle === section.sectionTitle
+                          ? "text-[#039de0] border-b-2 border-[#039de0]"
+                          : "hover:border-b-2 border-[#E4E4E5]"
+                      } p-2 whitespace-nowrap`}
+                      onClick={() => setCurrentSection(section)}
+                    >
+                      {section.sectionTitle}
+                    </button>
+                  </div>
                 );
               })}
             </div>
           </div>
-          <div>
-            <p className="font-woltHeader text-[28px]">
-              {/* {currentSection.sectionTitle} */}
-              {filter
-                ? filteredMenu.length
-                  ? "filteredMenu"
-                  : "map guy"
-                : "currentSection.sectionTitle"}
-            </p>
+          {/* main */}
+          <div className="">
             {filter ? (
               filteredMenu.length ? (
                 "filter menu"
@@ -134,23 +144,100 @@ export default function SingleStorePage() {
                 <MapGuyErr filter={filter} setFilter={setFilter} />
               )
             ) : (
-              // currentSection.items.map((item) => {
-              //   console.log(item);
-
-              //   return <p>{item.name}</p>;
-              // })
-              <div className="">
-                {currentSection.items.map((item, index) => {
-                  console.log(item);
-
-                  return (
-                    <FoodItemCard
-                      item={item}
-                      key={index}
-                      isRestaurant={false}
-                    />
-                  );
-                })}
+              <div className="p-2 h-full flex flex-col justify-between">
+                <div>
+                  <p className="font-woltHeader text-[28px]">
+                    {/* {currentSection.sectionTitle} */}
+                    {filter ? (
+                      filteredMenu.length ? (
+                        "filteredMenu"
+                      ) : (
+                        "map guy"
+                      )
+                    ) : (
+                      <p>{currentSection.sectionTitle}</p>
+                    )}
+                  </p>
+                  {currentSection.items.map((item, index) => {
+                    // console.log(item);
+                    return (
+                      <button
+                        onClick={() => {
+                          setItemModal({
+                            item,
+                            sectionTitle: currentSection.sectionTitle,
+                          });
+                        }}
+                      >
+                        <FoodItemCard
+                          item={item}
+                          key={index}
+                          isRestaurant={false}
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="flex relative w-full justify-between">
+                  <div className={``}>
+                    <div
+                      className={`flex gap-2 ${
+                        currentSectionIndex === 0
+                          ? "hidden"
+                          : "left-0 cursor-pointer items-center"
+                      }`}
+                      onClick={() =>
+                        setCurrentSection(
+                          business.menu.sections[currentSectionIndex - 1]
+                        )
+                      }
+                    >
+                      <img
+                        src="/assets/photos/arrow-left.png"
+                        alt=""
+                        className="bg-[#D6EFFA] rounded-full p-2"
+                      />
+                      {currentSectionIndex - 1 >= 0 && (
+                        <p>
+                          {
+                            business.menu.sections[currentSectionIndex - 1]
+                              .sectionTitle
+                          }
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <div className={``}>
+                    <div
+                      className={`flex gap-2 ${
+                        currentSectionIndex ===
+                        business.menu.sections.length - 1
+                          ? "hidden"
+                          : "left-0 cursor-pointer items-center"
+                      }`}
+                      onClick={() =>
+                        setCurrentSection(
+                          business.menu.sections[currentSectionIndex + 1]
+                        )
+                      }
+                    >
+                      {currentSectionIndex + 1 <
+                        business.menu.sections.length && (
+                        <p>
+                          {
+                            business.menu.sections[currentSectionIndex + 1]
+                              .sectionTitle
+                          }
+                        </p>
+                      )}
+                      <img
+                        src="/assets/photos/arrow-right.png"
+                        alt=""
+                        className="bg-[#D6EFFA] rounded-full p-2"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
               // "current section"
             )}

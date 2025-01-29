@@ -30,7 +30,7 @@ export function ItemViewCard({
 
   const itemRef = useRef<{ item: Item; totalPrice: number }>({
     item,
-    totalPrice: parseFloat(item.price.slice(1)),
+    totalPrice: parseFloat(item.price.slice(1)) || 50,
   });
   const [, forceUpdate] = useState({});
   const [formResponse, setFormResponse] = useState<{
