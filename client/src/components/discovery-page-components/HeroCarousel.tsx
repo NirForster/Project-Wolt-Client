@@ -49,6 +49,22 @@ export function HeroCarousel() {
       subtitle: "Bakeries, Wine, Flowers, Deli & more.. 🛒",
       link: "/en/discovery/isr_g_flowers_shishi",
     },
+    {
+      type: "image",
+      contentUrl:
+        "https://imageproxy.wolt.com/wolt-frontpage-images/content_editor/banners/images/076d7fe6-c749-11ef-8f7d-4659948a4881_8d8517f6_c6f9_4f52_8276_76be9814f514.jpg",
+      title: "Super delivery!",
+      subtitle: "Fresh & fast grocery delivery",
+      link: "/en/discovery/wolt-market-all-26",
+    },
+    {
+      type: "image",
+      contentUrl:
+        "https://imageproxy.wolt.com/wolt-frontpage-images/content_editor/banners/images/f5cd85d8-b889-11ef-aa54-72ffe9156115_46844750_5d9c_448c_84eb_f8f1d95e33b3.jpg",
+      title: "Get 30₪ credits 💰",
+      subtitle: "Share your code here",
+      link: "/en/me/earn-credits",
+    },
   ];
 
   // Handle responsiveness
@@ -101,9 +117,8 @@ export function HeroCarousel() {
       {/* Carousel Container */}
       <div
         ref={carouselRef}
-        className="flex overflow-x-scroll no-scrollbar scroll-smooth gap-4"
+        className="flex gap-4 overflow-hidden no-scrollbar"
         style={{
-          scrollSnapType: "x mandatory",
           display: "grid",
           gridTemplateColumns: `repeat(${carouselItems.length}, minmax(${
             100 / itemsToShow
@@ -115,7 +130,6 @@ export function HeroCarousel() {
             key={index}
             href={item.link}
             className="relative block overflow-hidden rounded-lg shadow-lg w-full"
-            style={{ scrollSnapAlign: "start" }}
           >
             {item.type === "video" ? (
               <video
