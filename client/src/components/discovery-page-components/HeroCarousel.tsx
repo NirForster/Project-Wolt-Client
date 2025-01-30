@@ -149,11 +149,15 @@ export function HeroCarousel() {
             )}
             {/* Overlay content */}
             <div className="absolute inset-0 bg-gradient-to-t from-slate-800 via-transparent to-transparent"></div>
-            <div className="absolute bottom-4 left-4 text-white">
+            <div className="absolute bottom-4 left-4 text-white flex flex-col p-2">
               {/* Title */}
-              <h2 className="text-lg font-bold mt-2">{item.title}</h2>
+              <span className="text-[32px] font-bold font-woltHeader mt-2">
+                {item.title}{" "}
+              </span>
+              <span className="text-lg text-gray-300 pt-3">
+                {item.subtitle}
+              </span>
               {/* Subtitle */}
-              <p className="text-sm text-gray-300">{item.subtitle}</p>
             </div>
           </a>
         ))}
