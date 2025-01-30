@@ -82,7 +82,7 @@ export function HeroCarousel() {
               >
                 {item.type === "video" ? (
                   <video
-                    className="w-full min-h-[180px] max-h-[400px] object-cover"
+                    className="w-full min-h-[180px] max-h-[360px] object-cover"
                     src={item.contentUrl}
                     autoPlay
                     loop
@@ -90,7 +90,7 @@ export function HeroCarousel() {
                   />
                 ) : (
                   <img
-                    className="w-full max-h-[180px] object-cover"
+                    className="w-full min-h-[180px] max-h-[360px] object-cover"
                     src={item.contentUrl}
                     alt={item.title}
                     loading="lazy"
@@ -118,7 +118,7 @@ export function HeroCarousel() {
                 >
                   {item.type === "video" ? (
                     <video
-                      className="w-full min-h-[180px] max-h-[400px] object-cover"
+                      className="w-full min-h-[180px] max-h-[360px] object-cover"
                       src={item.contentUrl}
                       autoPlay
                       loop
@@ -126,7 +126,7 @@ export function HeroCarousel() {
                     />
                   ) : (
                     <img
-                      className="w-full max-h-[180px] object-cover"
+                      className="w-full min-h-[180px] max-h-[360px] object-cover"
                       src={item.contentUrl}
                       alt={item.title}
                       loading="lazy"
@@ -152,7 +152,7 @@ export function HeroCarousel() {
                 >
                   {item.type === "video" ? (
                     <video
-                      className="w-full min-h-[180px] max-h-[400px] object-cover"
+                      className="w-full h min-h-[180px] max-h-[360px] object-cover"
                       src={item.contentUrl}
                       autoPlay
                       loop
@@ -160,7 +160,7 @@ export function HeroCarousel() {
                     />
                   ) : (
                     <img
-                      className="w-full max-h-[180px] object-cover"
+                      className="w-full min-h-[180px] max-h-[360px] object-cover"
                       src={item.contentUrl}
                       alt={item.title}
                       loading="lazy"
