@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import MultiCarousel from "@/components/carosel-components/MultiCarousel";
 import { unslugCityName } from "@/lib/constants/cities-constants";
 import CategoriesCarosel from "@/components/discovery-page-components/CategoriesCarosel";
-import ProductLineGrid from "@/components/discovery-page-components/ProductLineGrid";
+import ProductLineGrid from "@/components/discovery-page-components/category-product-line/ProductLineGrid";
 import HeroCarousel from "@/components/discovery-page-components/HeroCarousel";
 import MarketingBanner from "@/components/discovery-page-components/MarketingBanner";
 import MealTimeCarousel from "@/components/discovery-page-components/MealTimeCarousel";
