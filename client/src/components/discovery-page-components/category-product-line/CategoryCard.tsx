@@ -13,13 +13,13 @@ type CategoryCardProps = {
 const CategoryCard: React.FC<CategoryCardProps> = ({ categories }) => {
   return (
     <nav className="p-4">
-      <ul className="flex space-x-4 overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-auto scrollbar-custom">
+      <ul className="flex space-x-4 overflow-x-auto xl:gap-[5px] xl:grid-cols-11 xl:space-x-0">
         {categories.map((category, index) => (
           <div className="flex-shrink-0 w-28" key={index}>
             <li className="bg-woltColors-bgSurfaceSecondary bg-gradient-to-t rounded-lg shadow-md">
               <a
                 href={category.href}
-                className="flex flex-col items-center text-center p-2 transition-transform transform hover:scale-105"
+                className="flex flex-col items-center text-center w-[118px] transition-transform transform hover:scale-105"
               >
                 <img
                   src={category.img}
