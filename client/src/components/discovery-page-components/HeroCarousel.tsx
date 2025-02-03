@@ -144,42 +144,6 @@ export function HeroCarousel() {
     }
   };
 
-  // Handle infinite scroll reset
-  useEffect(() => {
-    const handleScroll = () => {
-      if (carouselRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-        if (scrollLeft >= scrollWidth / 2) {
-          carouselRef.current.scrollLeft = 0; // Reset without transition
-        } else if (scrollLeft <= 0) {
-          carouselRef.current.scrollLeft = scrollWidth / 2 - clientWidth; // Jump to duplicated content
-        }
-      }
-    };
-    carouselRef.current?.addEventListener("scroll", handleScroll);
-    return () =>
-      carouselRef.current?.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Scroll Functions
-  // const scrollLeft = () => {
-  //   if (carouselRef.current) {
-  //     carouselRef.current.scrollBy({
-  //       left: -carouselRef.current.offsetWidth / itemsToShow,
-  //       behavior: "smooth",
-  //     });
-  //   }
-  // };
-
-  // const scrollRight = () => {
-  //   if (carouselRef.current) {
-  //     carouselRef.current.scrollBy({
-  //       left: carouselRef.current.offsetWidth / itemsToShow,
-  //       behavior: "smooth",
-  //     });
-  //   }
-  // };
-
   return (
     <div className="relative w-full max-w-full p-4">
       {/* Navigation Buttons */}
@@ -215,14 +179,19 @@ export function HeroCarousel() {
       {/* Carousel Container */}
       <div
         ref={carouselRef}
-        className="flex gap-4 overflow-hidden no-scrollbar whitespace-nowrap"
-        style={{ display: "flex", transition: "transform 0.5s ease-in-out" }}
+        className="flex gap-4 overflow-hidden no-scrollbar my-2"
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${originalItems.length}, minmax(${
+            100 / itemsToShow
+          }%, 1fr))`,
+        }}
       >
         {originalItems.map((item, index) => (
           <a
             key={index}
             href={item.link}
-            className="relative block overflow-hidden rounded-lg shadow-lg w-full min-w-[50%]"
+            className="relative block overflow-hidden rounded-lg shadow-lg w-full"
           >
             {item.type === "video" ? (
               <video

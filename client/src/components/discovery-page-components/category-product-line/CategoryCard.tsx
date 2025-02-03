@@ -10,8 +10,6 @@ type CategoryCardProps = {
   categories: Category[];
 };
 
-console.log(window.outerWidth);
-
 const CategoryCard: React.FC<CategoryCardProps> = ({ categories }) => {
   return (
     <nav className="p-4">
