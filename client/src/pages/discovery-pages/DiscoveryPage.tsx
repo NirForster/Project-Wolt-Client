@@ -8,7 +8,6 @@ import MarketingBanner from "@/components/discovery-page-components/MarketingBan
 import MealTimeCarousel from "@/components/discovery-page-components/MealTimeCarousel";
 import BrandsCarousel from "@/components/discovery-page-components/BrandsCarousel";
 import QuickLinks from "@/components/discovery-page-components/QuickLinks";
-import MarketingBanner_2 from "@/components/discovery-page-components/MarketingBanner_2";
 
 const DiscoveryPage = () => {
   const { city } = useParams<{ city: string }>();
@@ -16,16 +15,13 @@ const DiscoveryPage = () => {
 
   return (
     <div className="p-4">
-      {/* <h1 className="text-2xl font-bold mb-6">
-        Explore {unslugedCity || "TLV - Herzliya area"}
-      </h1> */}
       <ProductLineGrid />
       <HeroCarousel />
       <MultiCarousel
         cityName={unslugedCity || "TLV - Herzliya area"}
         type="restaurant"
         categoryProp="Lunch"
-        titleProp="Lunch near you"
+        titleProp="Lunch near you (demo)"
       />
       <MarketingBanner />
       <CategoriesCarosel
@@ -39,8 +35,7 @@ const DiscoveryPage = () => {
       <MultiCarousel
         cityName={unslugedCity || "TLV - Herzliya area"}
         type="restaurant"
-        categoryProp="Street Food"
-        titleProp="Popular right now (demo)"
+        titleProp="Popular right now"
       />
       <CategoriesCarosel
       // Our stores 🛍️
@@ -48,8 +43,7 @@ const DiscoveryPage = () => {
       />
       <MultiCarousel
         cityName={unslugedCity || "TLV - Herzliya area"}
-        type="restaurant"
-        categoryProp="Street Food"
+        type="business"
         titleProp="0 ₪ delivery fee (demo)"
       />
       <MultiCarousel
@@ -58,12 +52,12 @@ const DiscoveryPage = () => {
         categoryProp="Grocery"
         titleProp="Groceries list👇🏻"
       />
-      <MultiCarousel
+      {/* <MultiCarousel
         cityName={unslugedCity || "TLV - Herzliya area"}
         type="restaurant"
         categoryProp="Burger"
         titleProp="0 ₪ delivery fee with Wolt+ (demo)"
-      />
+      /> */}
       <MultiCarousel
         cityName={unslugedCity || "TLV - Herzliya area"}
         type="restaurant"
@@ -74,14 +68,12 @@ const DiscoveryPage = () => {
       <MultiCarousel
         cityName={unslugedCity || "TLV - Herzliya area"}
         type="restaurant"
-        categoryProp="Homemade"
         titleProp="It’s a DEAL 💰 (demo)"
       />
       <MultiCarousel
         cityName={unslugedCity || "TLV - Herzliya area"}
-        type="restaurant"
-        categoryProp="Sweets"
-        titleProp="Top-rated (demo)"
+        type="business"
+        titleProp="Top-rated"
       />
       <BrandsCarousel
       // Tasty brands 🍽️
@@ -91,7 +83,7 @@ const DiscoveryPage = () => {
         cityName={unslugedCity || "TLV - Herzliya area"}
         type="store"
         categoryProp="Grocery"
-        titleProp="Top grocery picks (demo)"
+        titleProp="Top grocery picks"
       />
       <MultiCarousel
         cityName={unslugedCity || "TLV - Herzliya area"}
@@ -114,8 +106,7 @@ const DiscoveryPage = () => {
       <MultiCarousel
         cityName={unslugedCity || "TLV - Herzliya area"}
         type="restaurant"
-        categoryProp="Sandwich"
-        titleProp="Wallet friendly (demo)"
+        titleProp="Wallet friendly"
       />
       <MultiCarousel
         cityName={unslugedCity || "TLV - Herzliya area"}
