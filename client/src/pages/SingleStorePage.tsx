@@ -14,8 +14,11 @@ import ItemViewCardCover from "@/components/business-page/single-item-modal/Item
 import BusinessHeader from "@/components/business-page/BusinessHeader";
 import MapGuyErr from "@/components/business-page/MapMan";
 import SearchInBusinessForm from "@/components/SearchInBusinessForm";
+import { useLocation } from "react-router-dom";
 
 export default function SingleStorePage() {
+  const location = useLocation();
+  alert(location.pathname);
   const shopID = useParams().id;
   const [business, setBusiness] = useState<{
     summary: BusinessSummery;
@@ -254,9 +257,9 @@ export default function SingleStorePage() {
             menuID={business.menu._id}
           />
         )}
-        {isLoginModalOpen && (
+        {/* {isLoginModalOpen && (
           <LoginModel onClose={() => setIsLoginModalOpen(false)} />
-        )}
+        )} */}
       </>
     );
   } else {

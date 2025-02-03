@@ -197,9 +197,9 @@ export default function BusinessHeader({
       </div>
 
       {/* Modals */}
-      {isLoginModalOpen && (
+      {/* {isLoginModalOpen && (
         <LoginModel onClose={() => setIsLoginModalOpen(false)} />
-      )}
+      )} */}
       {isMoreModalOpen && (
         <BusinessMoreInfoModal
           onClose={() => setIsMoreModalOpen(false)}
