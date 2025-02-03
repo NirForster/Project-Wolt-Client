@@ -5,7 +5,7 @@ import DiscoveryTabs from "../DiscoveryTabs";
 
 function MainLayout() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen">
       <AppBar />
       <DiscoveryTabs />
       <main className="">
