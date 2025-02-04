@@ -15,43 +15,24 @@ import { signup } from "../../../services/api/auth";
 interface SignUpFormProps {
   className?: string;
   onClose: () => void;
+  email: string;
 }
 
-export function SignUpForm({ className, onClose, ...props }: SignUpFormProps) {
+export function SignUpForm({
+  className,
+  onClose,
+  email,
+  ...props
+}: SignUpFormProps) {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [emailError, setEmailError] = useState<string | null>(null);
-  const [passwordError, setPasswordError] = useState<string | null>(null);
-
-  const validateEmail = (email: string) => {
-    if (!REGEX_EMAIL.test(email)) {
-      setEmailError(EMAIL_MESSAGE);
-      return false;
-    }
-    setEmailError(null);
-    return true;
-  };
-
-  const validatePassword = (password: string) => {
-    if (password.length < 5) {
-      setPasswordError("Password must be at least 5 characters long.");
-      return false;
-    }
-    setPasswordError(null);
-    return true;
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!validateEmail(email) || !validatePassword(password)) return;
-
     try {
-      await signup(fname, lname, email, password, phone);
-      // alert("Account created successfully!");
+      await signup(fname, lname, email, phone);
       onClose(); // Close modal after success
     } catch (error) {
       alert("Error creating account. Please try again.");
@@ -123,19 +104,10 @@ export function SignUpForm({ className, onClose, ...props }: SignUpFormProps) {
               <div>
                 <Input
                   id="email"
-                  type="email"
-                  placeholder="Email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onBlur={() => validateEmail(email)}
-                  required
-                  className={`h-[54px] mb-2 ${
-                    emailError ? "border-red-500" : ""
-                  }`}
+                  disabled
+                  className={`h-[54px] mb-2 `}
                 />
-                {emailError && (
-                  <p className="text-red-500 text-sm">{emailError}</p>
-                )}
               </div>
 
               {/* Phone Number */}
@@ -155,25 +127,6 @@ export function SignUpForm({ className, onClose, ...props }: SignUpFormProps) {
                   required
                   className="h-[54px] w-3/4"
                 />
-              </div>
-
-              {/* Password Input */}
-              <div>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  onBlur={() => validatePassword(password)}
-                  required
-                  className={`h-[54px] mb-2 ${
-                    passwordError ? "border-red-500" : ""
-                  }`}
-                />
-                {passwordError && (
-                  <p className="text-red-500 text-sm">{passwordError}</p>
-                )}
               </div>
 
               {/* Submit Button */}

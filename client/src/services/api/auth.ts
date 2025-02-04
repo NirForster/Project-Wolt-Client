@@ -1,12 +1,31 @@
 // src/services/auth.ts
 import api from "./api";
 
-// Login Function
-export const login = async (email: string, password: string) => {
+// Send email Function
+export const sendEmail = async (email: string, lastURL: string) => {
+  try {
+    const response = await api.post(
+      "/auth/sendemail",
+      { email, lastURL },
+      { withCredentials: true } // Ensure cookies are sent
+    );
+    // alert("Login successful!");
+    return response.data;
+  } catch (error: any) {
+    console.error(
+      "Login error:",
+      error.response?.data?.message || error.message
+    );
+    throw new Error(error.response?.data?.message || error.message);
+  }
+};
+
+// Send email Function
+export const login = async (token: string) => {
   try {
     const response = await api.post(
       "/auth/login",
-      { email, password },
+      { token },
       { withCredentials: true } // Ensure cookies are sent
     );
     // alert("Login successful!");
@@ -26,7 +45,7 @@ export const signup = async (
   fname: string,
   lname: string | undefined,
   email: string,
-  password: string,
+  // password: string,
   phone: string
 ) => {
   try {
@@ -36,12 +55,13 @@ export const signup = async (
         fname,
         lname, // Optional last name
         email,
-        password,
+        // password,
         phone,
       },
       { withCredentials: true }
     );
     // alert("Signup successful!");
+    localStorage.setItem("token", response.data.token); // Store the token if needed
     return response.data;
   } catch (error: any) {
     console.error(

@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
-import AppBar from "./appBar/AppBar";
+import AppBar from "./AppBar";
 import Footer from "./Footer";
 import DiscoveryTabs from "../DiscoveryTabs";
 
 function MainLayout() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen">
       <AppBar />
       <DiscoveryTabs />
       <main className="">

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useState, useContext } from "react";
-import { login } from "../../../services/api/auth";
+import { sendEmail } from "../../../services/api/auth";
 import {
   REGEX_EMAIL,
   EMAIL_MESSAGE,
@@ -58,7 +58,8 @@ export function LoginFormWithPassword({
     }
 
     try {
-      const userData = await login(email, password);
+      const userData = await sendEmail(email, lastURL);
+      // alert("Login successful!");
 
       providerLogin(userData.user); //update the user in context
       onClose(); // Close the form on successful login
@@ -75,10 +76,10 @@ export function LoginFormWithPassword({
         {/* Close Button in the Top Right */}
         <CardHeader className="flex justify-center align-middle px-[2rem] py-0">
           <div className="flex top-0 left-0 right-0 justify-center items-center px-[4.5rem] pb-2 h-[4.5rem]"></div>
-          <div
+          <button
             onClick={onClose}
             tabIndex={0}
-            className="flex items-center justify-center bg-background shadow-sm hover:bg-accent hover:text-accent-foreground absolute top-3 right-3 text-lg rounded-full font-bold bg-woltColors-bgSurface hover:bg-woltColors-bgSurfaceHovered w-[40px] h-[40px] p-0 m-0"
+            className="flex items-center justify-center bg-background shadow-sm hover:bg-accent hover:text-accent-foreground absolute top-3 right-3 text-lg rounded-full font-bold bg-woltColors-bgSurface hover:bg-woltColors-bgSurfaceHovered w-[40px] h-[40px] p-0 m-0 cursor-pointer"
           >
             <svg
               viewBox="0 0 24 24"
@@ -88,7 +89,7 @@ export function LoginFormWithPassword({
             >
               <path d="M2.44 19.44a1.5 1.5 0 002.121 2.121l7.262-7.26a.25.25 0 01.354 0l7.262 7.262a1.5 1.5 0 102.122-2.12l-7.26-7.266a.25.25 0 010-.354l7.262-7.262a1.5 1.5 0 00-2.124-2.12L12.177 9.7a.25.25 0 01-.354 0L4.561 2.44A1.5 1.5 0 002.44 4.56L9.7 11.823a.25.25 0 010 .354L2.44 19.44z"></path>
             </svg>
-          </div>
+          </button>
         </CardHeader>
         <CardContent className="p-4">
           <div className="flex flex-col">
@@ -201,7 +202,7 @@ export function LoginFormWithPassword({
                     required
                     className="h-[54px] mb-2"
                   />
-                  <Input
+                  {/* <Input
                     id="password"
                     type="password"
                     placeholder="Password"
@@ -209,7 +210,7 @@ export function LoginFormWithPassword({
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     className="h-[54px] mb-2"
-                  />
+                  /> */}
                   <Button
                     type="submit"
                     className="w-full bg-woltColors-brandBg hover:bg-woltColors-brandHovered text-[16px] h-[54px]"

@@ -48,7 +48,7 @@ export interface BusinessSummery {
   _id: string;
 }
 
-interface TimeObj {
+export interface TimeObj {
   day:
     | "Sunday"
     | "Monday"
