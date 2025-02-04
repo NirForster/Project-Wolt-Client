@@ -255,9 +255,9 @@ export default function RestaurantPage() {
             menuID={business.menu._id}
           />
         )}
-        {isLoginModalOpen && (
+        {/* {isLoginModalOpen && (
           <LoginModel onClose={() => setIsLoginModalOpen(false)} />
-        )}
+        )} */}
       </>
     );
   } else {

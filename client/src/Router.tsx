@@ -10,6 +10,7 @@ import MePayment from "./components/me-section/profilePages/MePayment";
 import MeEarnCredits from "./components/me-section/profilePages/MeEarnCredits";
 import MeRedeemCode from "./components/me-section/profilePages/MeRedeemCode";
 import MeProfileSettings from "./components/me-section/profilePages/meSettings/MeSettings";
+import LoginPage from "./pages/LoginPage";
 
 const LandingPage = lazy(() => import("./pages/LandingPage"));
 const DiscoveryPage = lazy(
@@ -124,6 +125,14 @@ function AppRoutes() {
           />
         </Route>
 
+        <Route
+          path="login"
+          element={
+            <SuspenseWrapper>
+              <LoginPage />
+            </SuspenseWrapper>
+          }
+        />
         {/* 404 Page */}
         <Route
           path="*"

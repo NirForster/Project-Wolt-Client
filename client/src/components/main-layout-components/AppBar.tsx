@@ -8,7 +8,7 @@ import { userContext } from "../../providers/userContext";
 import AppBarLocation from "../locations/AppBarLocation";
 import LocationsModel from "../locations/LocationsModel";
 import AvatarMenu from "../avatarMenu/AvatarMenu";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import Lottie from "lottie-react";
 import woltLogoLottie from "@/assets/lottie-files/wolt_logo_animation_themeable.json";
 
@@ -19,8 +19,12 @@ interface AppBarProps {
 }
 
 const AppBar = ({ handleSearchChange }: AppBarProps) => {
+  const [searchParams] = useSearchParams();
+  const email = searchParams.get("email");
   const [isSearchActive, setIsSearchActive] = useState(false);
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(
+    email ? true : false
+  );
   const [isLocationsModel, setIsLocationsModel] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
@@ -30,9 +34,6 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
 
   // Check if the current path is the landing page
   const isLandingPage = location.pathname === "/";
-  if (isLandingPage) {
-    navigate("/en/discovery/tlv-herzliya-area");
-  }
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -107,7 +108,7 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
               {/* Show only if the user is not logged in */}
               <Button
                 className="bg-BlueLightBackground font-semibold text-[16px] text-woltColors-brandBg hover:bg-BlueBackgroundOnHover"
-                onClick={() => setIsSignUpModalOpen(true)}
+                onClick={() => setIsLoginModalOpen(true)}
               >
                 Sign up
               </Button>
@@ -129,7 +130,10 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
             <LoginModel onClose={() => setIsLoginModalOpen(false)} />
           )}
           {isSignUpModalOpen && (
-            <SignUpModel onClose={() => setIsSignUpModalOpen(false)} />
+            <SignUpModel
+              onClose={() => setIsSignUpModalOpen(false)}
+              email={email}
+            />
           )}
           {isLocationsModel && (
             <LocationsModel onClose={() => setIsLocationsModel(false)} />
