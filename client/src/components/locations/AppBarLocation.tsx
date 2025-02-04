@@ -4,23 +4,23 @@ import { SlHome, SlLocationPin } from "react-icons/sl";
 import { userContext } from "../../providers/userContext";
 
 const AppBarLocation = () => {
-  const { user } = useContext(userContext); // Access user context
+  const { user } = useContext(userContext);
   const [currentLoc, setCurrentLoc] = useState(user?.locations?.[0]);
 
-  // Update in the app bar ths user address and icon
-  const loggedInUserLocation = user?.locations?.[0];
-  // if (user?.locations.length) {
-  //   for (let i = 0; i < user.locations.length; i++) {
-  //     if (user.locations[i].lastLocation) return i;
-  //     return 0;
-  //   }
-  // }
+  //  Check what is the last location of the user
+  if (user?.locations.length) {
+    for (let i = 0; i < user.locations.length; i++) {
+      if (user.locations[i].lastLocation) setCurrentLoc(user.locations[i]);
+      return;
+    }
+  }
 
+  // Update the icon
   const loggedInUserLocationIcon = () => {
-    if (loggedInUserLocation?.type === "Home") {
+    if (currentLoc?.type === "Home") {
       return <SlHome size={16} />;
     }
-    if (loggedInUserLocation?.type === "Work") {
+    if (currentLoc?.type === "Work") {
       return <BsBuildingsFill size={16} />;
     }
     return <SlLocationPin size={16} />; // Default icon
@@ -43,9 +43,6 @@ const AppBarLocation = () => {
         {currentLoc
           ? `${currentLoc?.type} (${currentLoc?.address})`
           : "There is no location saved"}
-        {/* {loggedInUserLocation
-          ? `${loggedInUserLocation?.type} (${loggedInUserLocation?.address})`
-          : "There is no location saved"} */}
       </p>
     </div>
   );

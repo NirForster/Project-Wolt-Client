@@ -10,7 +10,6 @@ import MePayment from "./components/me-section/profilePages/MePayment";
 import MeEarnCredits from "./components/me-section/profilePages/MeEarnCredits";
 import MeRedeemCode from "./components/me-section/profilePages/MeRedeemCode";
 import MeProfileSettings from "./components/me-section/profilePages/meSettings/MeSettings";
-import MeOrderHistory from "./components/me-section/profilePages/MeReturnOrder";
 
 const LandingPage = lazy(() => import("./pages/LandingPage"));
 const DiscoveryPage = lazy(
@@ -88,7 +87,7 @@ function AppRoutes() {
             { path: "personal-info", components: <MePersonalInfo /> },
             { path: "payment", components: <MePayment /> },
             { path: "addresses", components: <MeAddress /> },
-            { path: "order-history", components: <MeOrderHistory /> },
+            { path: "order-history", components: <MeAddress /> },
             { path: "earn-credits", components: <MeEarnCredits /> },
             { path: "redeem-code", components: <MeRedeemCode /> },
             { path: "settings", components: <MeProfileSettings /> },

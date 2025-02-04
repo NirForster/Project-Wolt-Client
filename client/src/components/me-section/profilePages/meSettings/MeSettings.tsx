@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import EditUserEmailModel from "./EditUserEmailModel";
 import EditUserNameModel from "./EditUserNameModel";
 import { userContext } from "@/providers/userContext";
@@ -38,6 +38,8 @@ const MeProfileSettings: React.FC<ProfileSettingsProps> = () => {
         break;
     }
   };
+
+  useEffect(() => {}, [user]);
 
   return isEditUserModelOpen ? (
     whichEditUserModel

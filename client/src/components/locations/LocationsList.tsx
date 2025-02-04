@@ -9,16 +9,22 @@ const LocationsList = ({ onClose }: { onClose: () => void }) => {
 
   // Update in the app bar ths user address and icon
   const loggedInUserLocationList = user?.locations;
-  console.log("before mounts up", loggedInUserLocationList);
 
-  useEffect(() => {
-    console.log("after mounts up", loggedInUserLocationList);
-  }, [loggedInUserLocationList]);
+  // useEffect(() => {}, [loggedInUserLocationList]);
+
+  //  Check what is the last location of the user
+  let indexOfLastLocation = 0;
+  if (user?.locations) {
+    for (let i = 0; i < user.locations.length; i++) {
+      if (user.locations[i].lastLocation) indexOfLastLocation = i;
+      return;
+    }
+  }
 
   // State for the current selected address
   const [currentAddress, setCurrentAddress] = useState<string | null>(
     loggedInUserLocationList && loggedInUserLocationList.length > 0
-      ? loggedInUserLocationList[0].address
+      ? loggedInUserLocationList[indexOfLastLocation].address
       : null
   );
 
