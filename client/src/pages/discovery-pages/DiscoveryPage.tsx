@@ -1,13 +1,18 @@
 import { useParams } from "react-router-dom";
 import MultiCarousel from "@/components/carosel-components/MultiCarousel";
 import { unslugCityName } from "@/lib/constants/cities-constants";
-import CategoriesCarosel from "@/components/discovery-page-components/CategoriesCarosel";
+import CategoriesCarosel from "@/components/discovery-page-components/business-category-components/CategoriesCarosel";
 import ProductLineGrid from "@/components/discovery-page-components/category-product-line/ProductLineGrid";
 import HeroCarousel from "@/components/discovery-page-components/HeroCarousel";
 import MarketingBanner from "@/components/discovery-page-components/MarketingBanner";
 import MealTimeCarousel from "@/components/discovery-page-components/MealTimeCarousel";
 import BrandsCarousel from "@/components/discovery-page-components/BrandsCarousel";
 import QuickLinks from "@/components/discovery-page-components/QuickLinks";
+import {
+  restaurantCategories,
+  storeCategories,
+  foodStoreCategories,
+} from "@/lib/constants/categories-constants";
 
 const DiscoveryPage = () => {
   const { city } = useParams<{ city: string }>();
@@ -25,22 +30,19 @@ const DiscoveryPage = () => {
       />
       <MarketingBanner />
       <CategoriesCarosel
-      // I feel like eating..
-      // Restaurant Categories
+        categories={restaurantCategories}
+        title="I feel like eating.."
       />
       <CategoriesCarosel
-      // Grocery list 🛒
-      // Store Categories
+        categories={foodStoreCategories}
+        title="Grocery list 🛒"
       />
       <MultiCarousel
         cityName={unslugedCity || "TLV - Herzliya area"}
         type="restaurant"
         titleProp="Popular right now"
       />
-      <CategoriesCarosel
-      // Our stores 🛍️
-      // Store Categories
-      />
+      <CategoriesCarosel categories={storeCategories} title="Our stores 🛍️" />
       <MultiCarousel
         cityName={unslugedCity || "TLV - Herzliya area"}
         type="business"

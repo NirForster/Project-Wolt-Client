@@ -1,0 +1,50 @@
+.category-card {
+  width: var(--item-width);
+  min-width: var(--item-min-width);
+  scroll-snap-align: start;
+}
+
+/* Define dynamic item widths */
+@media screen and (min-width: 0px) {
+  .category-card {
+    --item-width: calc(
+      (100% / 2.8) - var(--slideMargin) + var(--slideMargin) / 2.8
+    );
+    --item-min-width: calc(
+      (100% / 2.8) - var(--slideMargin) + var(--slideMargin) / 2.8
+    );
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .category-card {
+    --item-width: calc(
+      (100% / 4) - var(--slideMargin) + var(--slideMargin) / 4
+    );
+    --item-min-width: calc(
+      (100% / 4) - var(--slideMargin) + var(--slideMargin) / 4
+    );
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .category-card {
+    --item-width: calc(
+      (100% / 5) - var(--slideMargin) + var(--slideMargin) / 5
+    );
+    --item-min-width: calc(
+      (100% / 5) - var(--slideMargin) + var(--slideMargin) / 5
+    );
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .category-card {
+    --item-width: calc(
+      (100% / 6) - var(--slideMargin) + var(--slideMargin) / 6
+    );
+    --item-min-width: calc(
+      (100% / 6) - var(--slideMargin) + var(--slideMargin) / 6
+    );
+  }
+}
