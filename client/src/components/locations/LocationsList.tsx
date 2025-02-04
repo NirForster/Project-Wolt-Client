@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaHome, FaMapMarkerAlt, FaBuilding } from "react-icons/fa";
 import { userContext } from "../../providers/userContext";
 import AddNewLocationModal from "./add-location-model/AddLocationModal";
@@ -10,10 +10,21 @@ const LocationsList = ({ onClose }: { onClose: () => void }) => {
   // Update in the app bar ths user address and icon
   const loggedInUserLocationList = user?.locations;
 
+  // useEffect(() => {}, [loggedInUserLocationList]);
+
+  //  Check what is the last location of the user
+  let indexOfLastLocation = 0;
+  if (user?.locations) {
+    for (let i = 0; i < user.locations.length; i++) {
+      if (user.locations[i].lastLocation) indexOfLastLocation = i;
+      return;
+    }
+  }
+
   // State for the current selected address
   const [currentAddress, setCurrentAddress] = useState<string | null>(
     loggedInUserLocationList && loggedInUserLocationList.length > 0
-      ? loggedInUserLocationList[0].address
+      ? loggedInUserLocationList[indexOfLastLocation].address
       : null
   );
 
