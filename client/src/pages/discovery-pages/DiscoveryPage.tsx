@@ -10,8 +10,8 @@ import BrandsCarousel from "@/components/discovery-page-components/BrandsCarouse
 import QuickLinks from "@/components/discovery-page-components/QuickLinks";
 import {
   restaurantCategories,
-  storeCategories,
-  foodStoreCategories,
+  retailStoreCategories,
+  GroceryStoreCategories,
 } from "@/lib/constants/categories-constants";
 
 const DiscoveryPage = () => {
@@ -34,7 +34,7 @@ const DiscoveryPage = () => {
         title="I feel like eating.."
       />
       <CategoriesCarosel
-        categories={foodStoreCategories}
+        categories={GroceryStoreCategories}
         title="Grocery list 🛒"
       />
       <MultiCarousel
@@ -42,7 +42,10 @@ const DiscoveryPage = () => {
         type="restaurant"
         titleProp="Popular right now"
       />
-      <CategoriesCarosel categories={storeCategories} title="Our stores 🛍️" />
+      <CategoriesCarosel
+        categories={retailStoreCategories}
+        title="Our stores 🛍️"
+      />
       <MultiCarousel
         cityName={unslugedCity || "TLV - Herzliya area"}
         type="business"

@@ -4,6 +4,7 @@ import {
   BusinessSummary,
 } from "../../services/api/businessApi";
 import BusinessCard from "../BusinessCard";
+import { unslugCityName } from "@/lib/constants/cities-constants";
 
 interface RestaurantsGridViewProps {
   cityName: string;
@@ -28,9 +29,11 @@ const RestaurantsGridView: React.FC<RestaurantsGridViewProps> = ({
     loadRestaurants();
   }, [cityName]);
 
+  const unslugedCity = unslugCityName(cityName || "tlv-herzliya-area");
+
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Restaurants in {cityName}</h2>
+      <h2 className="text-2xl font-bold mb-4">Restaurants in {unslugedCity}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {restaurants.map((restaurant) => (
           <BusinessCard
