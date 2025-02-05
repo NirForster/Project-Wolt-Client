@@ -59,7 +59,7 @@ export function LoginFormWithPassword({
       return; // Prevent form submission if email is invalid
     }
     setIsLoading(true);
-    alert(window.location.origin);
+    // alert(window.location.origin);
     try {
       const userData = await sendEmail(email, lastURL, window.location.origin);
       // alert("Login successful!");
