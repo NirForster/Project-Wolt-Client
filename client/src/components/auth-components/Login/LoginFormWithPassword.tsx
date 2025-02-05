@@ -16,6 +16,7 @@ import {
 } from "../../../lib/constants/auth-constants";
 import { userContext } from "@/providers/userContext";
 import { useNavigate } from "react-router-dom";
+import Loader from "@/components/Loader/Loader";
 
 interface LoginFormProps {
   className?: string;
@@ -30,8 +31,8 @@ export function LoginFormWithPassword({
   ...props
 }: LoginFormProps) {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [_emailError, setEmailError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   if (!lastURL) {
     lastURL = "/";
@@ -56,9 +57,10 @@ export function LoginFormWithPassword({
     if (!validateEmail(email)) {
       return;
     }
-
+    setIsLoading(true);
+    // alert(window.location.origin);
     try {
-      const userData = await sendEmail(email, lastURL);
+      const userData = await sendEmail(email, lastURL, window.location.origin);
       // alert("Login successful!");
 
       providerLogin(userData.user); //update the user in context
@@ -211,12 +213,16 @@ export function LoginFormWithPassword({
                     required
                     className="h-[54px] mb-2"
                   /> */}
-                  <Button
-                    type="submit"
-                    className="w-full bg-woltColors-brandBg hover:bg-woltColors-brandHovered text-[16px] h-[54px]"
-                  >
-                    Next
-                  </Button>
+                  {isLoading ? (
+                    <Loader />
+                  ) : (
+                    <Button
+                      type="submit"
+                      className="w-full bg-woltColors-brandBg hover:bg-woltColors-brandHovered text-[16px] h-[54px]"
+                    >
+                      Next
+                    </Button>
+                  )}
                 </div>
               </div>
               <span className="text-xs p-1 font-thin text-woltColors-textSubdued">

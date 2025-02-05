@@ -2,11 +2,15 @@
 import api from "./api";
 
 // Send email Function
-export const sendEmail = async (email: string, lastURL: string) => {
+export const sendEmail = async (
+  email: string,
+  lastEndpoints: string,
+  baseURL: string
+) => {
   try {
     const response = await api.post(
       "/auth/sendemail",
-      { email, lastURL },
+      { email, lastEndpoints, baseURL },
       { withCredentials: true } // Ensure cookies are sent
     );
     // alert("Login successful!");
@@ -21,11 +25,11 @@ export const sendEmail = async (email: string, lastURL: string) => {
 };
 
 // Send email Function
-export const login = async (token: string) => {
+export const login = async (email: string | null) => {
   try {
     const response = await api.post(
       "/auth/login",
-      { token },
+      { email },
       { withCredentials: true } // Ensure cookies are sent
     );
     // alert("Login successful!");
