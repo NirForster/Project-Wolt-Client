@@ -10,14 +10,14 @@ const LocationsList = ({ onClose }: { onClose: () => void }) => {
   // Update in the app bar ths user address and icon
   const loggedInUserLocationList = user?.locations;
 
-  // useEffect(() => {}, [loggedInUserLocationList]);
+  useEffect(() => {}, [loggedInUserLocationList]);
 
   //  Check what is the last location of the user
   let indexOfLastLocation = 0;
   if (user?.locations) {
     for (let i = 0; i < user.locations.length; i++) {
       if (user.locations[i].lastLocation) indexOfLastLocation = i;
-      return;
+      // return;
     }
   }
 

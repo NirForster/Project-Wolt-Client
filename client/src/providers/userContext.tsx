@@ -21,11 +21,15 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const loadUser = async () => {
-      const currentUser = await fetchCurrentUser();
-      setUser(currentUser);
+      try {
+        const currentUser = await fetchCurrentUser();
+        setUser(currentUser);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
     };
     loadUser();
-  }, [user]);
+  }, []);
 
   const providerLogin = (user: User) => setUser(user);
 
