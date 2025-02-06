@@ -22,12 +22,14 @@ interface LoginFormProps {
   className?: string;
   onClose: () => void;
   lastURL?: string;
+  handleSetEmail: (email: string) => void;
 }
 
 export function LoginFormWithPassword({
   className,
   onClose,
   lastURL,
+  handleSetEmail,
   ...props
 }: LoginFormProps) {
   const [email, setEmail] = useState("");
@@ -62,9 +64,7 @@ export function LoginFormWithPassword({
     try {
       const userData = await sendEmail(email, lastURL, window.location.origin);
       // alert("Login successful!");
-
-      providerLogin(userData.user); //update the user in context
-      onClose(); // Close the form on successful login
+      handleSetEmail(email);
       navigate(lastURL); // Redirect to Discovery page after successful login
     } catch (error) {
       alert("Login failed. Please check your credentials.");
@@ -213,16 +213,13 @@ export function LoginFormWithPassword({
                     required
                     className="h-[54px] mb-2"
                   /> */}
-                  {isLoading ? (
-                    <Loader />
-                  ) : (
-                    <Button
-                      type="submit"
-                      className="w-full bg-woltColors-brandBg hover:bg-woltColors-brandHovered text-[16px] h-[54px]"
-                    >
-                      Next
-                    </Button>
-                  )}
+
+                  <Button
+                    type="submit"
+                    className="w-full bg-woltColors-brandBg hover:bg-woltColors-brandHovered text-[16px] h-[54px]"
+                  >
+                    {isLoading ? <Loader bgColor="#224865" /> : <p>Next</p>}
+                  </Button>
                 </div>
               </div>
               <span className="text-xs p-1 font-thin text-woltColors-textSubdued">
