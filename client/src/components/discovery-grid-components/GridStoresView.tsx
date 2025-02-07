@@ -58,3 +58,5 @@ const GridStoresView: React.FC<GridStoresViewProps> = ({ cityName }) => {
 };
 
 export default GridStoresView;
+
+// commit of the day
