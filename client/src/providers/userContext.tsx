@@ -7,6 +7,7 @@ interface UserContextType {
   providerLogin: (user: User) => void;
   providerLogout: () => void;
   updateUser: (updatedFields: Partial<User>) => void;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
 export const userContext = createContext<UserContextType>({
@@ -14,6 +15,7 @@ export const userContext = createContext<UserContextType>({
   providerLogin: () => {},
   providerLogout: () => {},
   updateUser: () => {},
+  setUser: () => {},
 });
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -47,7 +49,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <userContext.Provider
-      value={{ user, providerLogin, providerLogout, updateUser }}
+      value={{ user, providerLogin, providerLogout, updateUser, setUser }}
     >
       {children}
     </userContext.Provider>
