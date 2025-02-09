@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import styles from "./Carousel.module.css";
+import styles from "./GenericCarousel.module.css";
 
 interface CarouselProps<T> {
   items: T[];
