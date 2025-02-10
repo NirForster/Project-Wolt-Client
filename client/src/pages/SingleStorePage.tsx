@@ -18,7 +18,7 @@ import { useLocation } from "react-router-dom";
 
 export default function SingleStorePage() {
   const location = useLocation();
-  alert(location.pathname);
+  // alert(location.pathname);
   const shopID = useParams().id;
   const [business, setBusiness] = useState<{
     summary: BusinessSummery;

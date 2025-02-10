@@ -18,11 +18,10 @@ const CartModel = () => {
   }
   const [itemsInCart, setItemsInCart] = useState(user.cart.length);
 
-  // useEffect(() => {
-  //   console.log("My name is baba: what yours?");
-  //   console.log(user.cart.length);
-  //   setItemsInCart(user.cart.length);
-  // }, [user.cart]);
+  useEffect(() => {
+    console.log(user.cart.length);
+    setItemsInCart(user.cart.length);
+  }, [user.cart]);
 
   return (
     <div>
