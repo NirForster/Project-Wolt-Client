@@ -3,11 +3,13 @@ import { useState } from "react";
 interface UpdateItemQuantityProps {
   totalPrice: number;
   setFormResponse: any;
+  onClose: () => void;
 }
 
 export default function UpdateItemQuantity({
   totalPrice,
   setFormResponse,
+  onClose,
 }: UpdateItemQuantityProps) {
   const [quantity, setQuantity] = useState(1);
   totalPrice *= quantity;
@@ -54,6 +56,7 @@ export default function UpdateItemQuantity({
         <button
           type="submit"
           className="bg-woltColors-brandBg hover:bg-[#1FA9E4] rounded-lg flex justify-around items-center text-white text-[16px] font-bold"
+          onClick={onClose}
         >
           <span>Add to order</span>
           <span>{totalPrice}₪</span>

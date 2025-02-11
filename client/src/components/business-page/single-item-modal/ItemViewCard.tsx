@@ -175,6 +175,7 @@ export function ItemViewCard({
             <UpdateItemQuantity
               totalPrice={itemRef.current.totalPrice}
               setFormResponse={setFormResponse}
+              onClose={onClose}
             />
           </div>
         </form>
