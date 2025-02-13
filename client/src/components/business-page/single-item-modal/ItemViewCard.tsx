@@ -124,7 +124,7 @@ export function ItemViewCard({
           extras,
         });
         if (response.data.status === "Success") {
-          onClose;
+          onClose();
         } else {
           alert(response.data.message);
         }
@@ -190,7 +190,6 @@ export function ItemViewCard({
             <UpdateItemQuantity
               totalPrice={itemRef.current.totalPrice}
               setFormResponse={setFormResponse}
-              onClose={onClose}
             />
           </div>
         </form>
