@@ -83,7 +83,7 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({ tabs }) => {
               className={`py-4 px-4 text-lg border-t ${
                 activeTab === tab.label
                   ? "font-bold text-black"
-                  : "font-normal  text-gray-700s"
+                  : "font-normal  text-gray-600"
               }`}
             >
               {tab.label}

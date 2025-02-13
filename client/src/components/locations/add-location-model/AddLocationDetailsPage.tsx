@@ -7,10 +7,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AddressTypeSelector from "./AddressTypeSelector";
-import { Details } from "@/services/types/types";
+import { Details, UserLocation } from "@/services/types/types";
 import addLocationToUser from "@/services/api/users/addLocation";
+import { userContext } from "@/providers/userContext";
 
 const AddLocationDetailsPage = ({
   street,
@@ -31,7 +32,14 @@ const AddLocationDetailsPage = ({
   const [locationLabel, setLocationLabel] = useState<"Home" | "Work" | "Other">(
     "Home"
   );
+
   const isSaveDisabled = numberOnDoor.trim() === "";
+
+  const context = useContext(userContext);
+
+  if (!context) {
+    throw new Error("userContext must be used inside UserProvider");
+  }
 
   const handleSave = async () => {
     const allDetails = {
@@ -42,7 +50,22 @@ const AddLocationDetailsPage = ({
     };
     // setDetails(allDetails);
     const hara = await addLocationToUser(allDetails.locationLabel, street);
+
     console.log(hara);
+
+    if (context.user?.locations) {
+      context.updateUser({
+        locations: [
+          ...context.user.locations,
+          {
+            type: allDetails.locationLabel,
+            address: street,
+            lastLocation: true,
+          },
+        ],
+      });
+    }
+
     onClose();
   };
 

@@ -4,30 +4,40 @@ import { SlHome, SlLocationPin } from "react-icons/sl";
 import { userContext } from "../../providers/userContext";
 
 const AppBarLocation = () => {
-  const { user } = useContext(userContext); // Access user context
-  const [currentLoc, setCurrentLoc] = useState(user?.locations?.[0]);
+  const { user } = useContext(userContext);
+  const [currentLoc, setCurrentLoc] = useState(
+    user?.locations[user.locations.length - 1]
+  );
+  // const [currentLoc, setCurrentLoc] = useState(
+  //   user?.locations?.length ? user.locations[user.locations.length - 1] : null
+  // );
 
-  // Update in the app bar ths user address and icon
-  const loggedInUserLocation = user?.locations?.[0];
-  // if (user?.locations.length) {
-  //   for (let i = 0; i < user.locations.length; i++) {
-  //     if (user.locations[i].lastLocation) return i;
-  //     return 0;
-  //   }
-  // }
-
+  // Update the icon
   const loggedInUserLocationIcon = () => {
-    if (loggedInUserLocation?.type === "Home") {
+    if (currentLoc?.type === "Home") {
       return <SlHome size={16} />;
     }
-    if (loggedInUserLocation?.type === "Work") {
+    if (currentLoc?.type === "Work") {
       return <BsBuildingsFill size={16} />;
     }
     return <SlLocationPin size={16} />; // Default icon
   };
 
+  // useEffect(() => {
+  //   console.log(user?.locations);
+  //   setCurrentLoc(user?.locations[user.locations.length - 1]);
+  //   console.log(user?.locations);
+  // }, [user]);
+
   useEffect(() => {
-    setCurrentLoc(user?.locations[user.locations.length - 1]);
+    // console.log("User object:", user);
+    if (user?.locations && user.locations.length > 0) {
+      setCurrentLoc(user.locations[user.locations.length - 1]);
+      // console.log(
+      //   "Updated location:",
+      //   user.locations[user.locations.length - 1]
+      // );
+    }
   }, [user?.locations]);
 
   return (
@@ -43,9 +53,6 @@ const AppBarLocation = () => {
         {currentLoc
           ? `${currentLoc?.type} (${currentLoc?.address})`
           : "There is no location saved"}
-        {/* {loggedInUserLocation
-          ? `${loggedInUserLocation?.type} (${loggedInUserLocation?.address})`
-          : "There is no location saved"} */}
       </p>
     </div>
   );

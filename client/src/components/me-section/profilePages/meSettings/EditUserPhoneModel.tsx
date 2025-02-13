@@ -47,11 +47,11 @@ const EditUserPhoneModel = ({ onClose }: { onClose: () => void }) => {
           <div>
             <p className="font-woltHeader text-2xl">Phone</p>
             <Input
-              type="text"
               value={newPhoneValue}
-              onChange={(e) => setNewPhoneValue(e.target.value)}
+              onChange={(e) => setNewPhoneValue(parseInt(e.target.value))}
               className="h-[40px] mt-4"
             />
+
             <div className="flex gap-4 mt-4">
               <div
                 onClick={onClose}

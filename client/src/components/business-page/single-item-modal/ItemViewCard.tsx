@@ -56,6 +56,21 @@ export function ItemViewCard({
     }
   }
 
+  // const context = useContext(userContext);
+
+  // if (!context) {
+  //   throw new Error("userContext must be used inside UserProvider");
+  // }
+
+  // if (context.user?.locations) {
+  //   context.updateUser({
+  //     cart: [
+  //       ...context.user.cart,
+
+  //     ],
+  //   });
+  // }
+
   function changeAddedPrice(update: number) {
     if (item._id === itemRef.current.item._id) {
       itemRef.current.totalPrice += update;
@@ -175,6 +190,7 @@ export function ItemViewCard({
             <UpdateItemQuantity
               totalPrice={itemRef.current.totalPrice}
               setFormResponse={setFormResponse}
+              onClose={onClose}
             />
           </div>
         </form>

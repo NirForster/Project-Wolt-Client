@@ -10,9 +10,10 @@ export interface User {
   fullname: string;
 }
 
-interface UserLocation {
+export interface UserLocation {
   type: string;
   address: string;
+  lastLocation: boolean;
 }
 
 export interface IOrder {

@@ -5,7 +5,7 @@ import getUserCart from "@/services/api/users/getUserCart";
 
 const CartTabs = () => {
   const [userCart, setUserCart] = useState<any>(null); // State for the cart
-  const [error, setError] = useState<string | null>(null); // Error handling state
+  const [error, setError] = useState<string | null>(null);
 
   // Fetch the user's cart on component load
   useEffect(() => {
@@ -32,7 +32,6 @@ const CartTabs = () => {
       </div>
     );
   }
-  // console.log(item);
 
   return (
     <div>
@@ -60,10 +59,7 @@ const CartTabs = () => {
             </button> */}
 
             {/* Render saved orders dynamically */}
-            {userCart.cart.map((item) => {
-              // Log to inspect the structure of item
-              console.log(item);
-
+            {userCart.cart.map((item: any) => {
               return (
                 <SavedOrder
                   key={item.id}

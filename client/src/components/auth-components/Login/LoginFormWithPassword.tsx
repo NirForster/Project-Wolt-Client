@@ -15,32 +15,34 @@ import {
   EMAIL_MESSAGE,
 } from "../../../lib/constants/auth-constants";
 import { userContext } from "@/providers/userContext";
-import { User } from "@/services/types/types";
 import { useNavigate } from "react-router-dom";
+import Loader from "@/components/Loader/Loader";
 
 interface LoginFormProps {
   className?: string;
   onClose: () => void;
   lastURL?: string;
+  handleSetEmail: (email: string) => void;
 }
 
 export function LoginFormWithPassword({
   className,
   onClose,
   lastURL,
+  handleSetEmail,
   ...props
 }: LoginFormProps) {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [_emailError, setEmailError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   if (!lastURL) {
     lastURL = "/";
   }
 
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
-  const { providerLogin } = useContext(userContext); // ✅ Access the providerLogin method
+  const { providerLogin } = useContext(userContext);
 
   const validateEmail = (email: string) => {
     if (!REGEX_EMAIL.test(email)) {
@@ -52,20 +54,17 @@ export function LoginFormWithPassword({
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
 
     if (!validateEmail(email)) {
-      return; // Prevent form submission if email is invalid
+      return;
     }
-
+    setIsLoading(true);
+    // alert(window.location.origin);
     try {
-      const userData = await sendEmail(email, lastURL);
+      const userData = await sendEmail(email, lastURL, window.location.origin);
       // alert("Login successful!");
-
-      //update the user in context
-      providerLogin(userData.user);
-
-      onClose(); // Close the form on successful login
+      handleSetEmail(email);
       navigate(lastURL); // Redirect to Discovery page after successful login
     } catch (error) {
       alert("Login failed. Please check your credentials.");
@@ -214,11 +213,12 @@ export function LoginFormWithPassword({
                     required
                     className="h-[54px] mb-2"
                   /> */}
+
                   <Button
                     type="submit"
                     className="w-full bg-woltColors-brandBg hover:bg-woltColors-brandHovered text-[16px] h-[54px]"
                   >
-                    Next
+                    {isLoading ? <Loader bgColor="#224865" /> : <p>Next</p>}
                   </Button>
                 </div>
               </div>

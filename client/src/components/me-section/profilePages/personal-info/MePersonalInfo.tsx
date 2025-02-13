@@ -13,7 +13,8 @@ const MePersonalInfo = () => {
       <UserDetails
         name={user?.fullname || "error"}
         email={user?.email || "error"}
-        phone={user?.phone || "error"}
+        phone={user?.phone || 0}
+        photo={user?.photo || "error"}
       />
       <InfoCards />
       <FavoritesSection />
