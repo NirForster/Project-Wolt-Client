@@ -18,6 +18,7 @@ import SingleStorePage from "./SingleStorePage";
 import SearchInBusinessForm from "@/components/SearchInBusinessForm";
 import { userContext } from "../providers/userContext";
 import Lottie from "lottie-react";
+import { login } from "@/services/api/auth";
 
 export default function RestaurantPage() {
   const { user } = useContext(userContext);
@@ -93,6 +94,12 @@ export default function RestaurantPage() {
     setFilter(ev.target.value);
   }
 
+  // async function loginToMyUser() {
+  //   await login("lirazbarnir15@gmail.com");
+  // }
+
+  // loginToMyUser();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -130,9 +137,10 @@ export default function RestaurantPage() {
     return "Loading...";
   }
 
-  if (true) {
-    return <SingleStorePage />;
-  }
+  // if (true) {
+  //   return <SingleStorePage />;
+  // }
+
   if (business?.additionalInfo && business?.summary && business?.menu) {
     return (
       <>

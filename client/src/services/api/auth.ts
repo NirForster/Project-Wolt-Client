@@ -24,7 +24,7 @@ export const sendEmail = async (
   }
 };
 
-// Send email Function
+// Login function
 export const login = async (email: string | null) => {
   try {
     const response = await api.post(
