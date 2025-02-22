@@ -127,16 +127,16 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
             <>
               {/* Show only if the user is not logged in */}
               <Button
-                className="bg-BlueLightBackground font-semibold text-[16px] text-woltColors-brandBg hover:bg-BlueBackgroundOnHover"
-                onClick={() => setIsLoginModalOpen(true)}
-              >
-                Sign up
-              </Button>
-              <Button
-                className="bg-woltColors-brandBg font-semibold text-[16px] hover:bg-woltColors-brandHovered text-woltColors-white"
+                className="bg-transparent shadow-none font-semibold text-sm text-woltColors-textDefault hover:bg-transparent"
                 onClick={() => setIsLoginModalOpen(true)}
               >
                 Log in
+              </Button>
+              <Button
+                className="bg-BlueLightBackground shadow-none  font-semibold text-[16px] text-woltColors-brandBg hover:bg-BlueBackgroundOnHover"
+                onClick={() => setIsLoginModalOpen(true)}
+              >
+                Sign up
               </Button>
             </>
           ) : (
