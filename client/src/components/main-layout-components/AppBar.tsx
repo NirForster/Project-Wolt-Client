@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import CartModel from "../cart/CartModel";
 import { Button } from "../ui/button";
@@ -27,6 +27,7 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
   );
   const [isLocationsModel, setIsLocationsModel] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   const { user } = useContext(userContext);
   const navigate = useNavigate();
@@ -35,12 +36,25 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
   // Check if the current path is the landing page
   const isLandingPage = location.pathname === "/";
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setHasScrolled(true);
+      } else {
+        setHasScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
         console.log("User's Location:", latitude, longitude);
-        // Send this data to the backend
+        // save this data to user context (and local storage?)
       },
       (error) => {
         console.error("Error fetching location:", error);
@@ -52,7 +66,13 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
   }
 
   return (
-    <div className="flex h-[70px] bg-white w-full px-5 py-3 border-b border-gray-200 shadow-md sticky top-0 z-30">
+    <div
+      className={`flex h-[70px] bg-white w-full px-5 py-3  sticky top-0 z-30 ${
+        hasScrolled
+          ? "border-b border-gray-200 shadow-lg"
+          : "border-b border-gray-200 shadow-none"
+      }`}
+    >
       <div className="flex-1">
         <div className="flex items-center h-full justify-start ">
           {/* Wolt Logo */}
@@ -85,16 +105,16 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
       {/* Search Bar - Hide on Landing Page */}
       {!isLandingPage && (
         <div className={` ${isSearchActive ? "flex-grow" : "flex-1"} `}>
-          <div className="flex items-center px-4 py-2 bg-gray-100 rounded-full">
+          <div className="flex items-center px-4 py-2 bg-[#2021251f] rounded-full">
+            <FaSearch size={16} className="text-gray-600" />
             <input
               type="text"
               onFocus={() => setIsSearchActive(true)}
               onBlur={() => setIsSearchActive(false)}
-              placeholder="Search"
-              className="w-full text-sm bg-transparent outline-none"
+              placeholder="Search in Wolt..."
+              className="w-full pl-2 text-sm bg-transparent outline-none"
               onChange={handleSearchChange}
             />
-            <FaSearch size={16} className="text-gray-600" />
           </div>
         </div>
       )}
@@ -107,16 +127,16 @@ const AppBar = ({ handleSearchChange }: AppBarProps) => {
             <>
               {/* Show only if the user is not logged in */}
               <Button
-                className="bg-BlueLightBackground font-semibold text-[16px] text-woltColors-brandBg hover:bg-BlueBackgroundOnHover"
-                onClick={() => setIsLoginModalOpen(true)}
-              >
-                Sign up
-              </Button>
-              <Button
-                className="bg-woltColors-brandBg font-semibold text-[16px] hover:bg-woltColors-brandHovered text-woltColors-white"
+                className="bg-transparent shadow-none font-semibold text-sm text-woltColors-textDefault hover:bg-transparent"
                 onClick={() => setIsLoginModalOpen(true)}
               >
                 Log in
+              </Button>
+              <Button
+                className="bg-BlueLightBackground shadow-none  font-semibold text-[16px] text-woltColors-brandBg hover:bg-BlueBackgroundOnHover"
+                onClick={() => setIsLoginModalOpen(true)}
+              >
+                Sign up
               </Button>
             </>
           ) : (

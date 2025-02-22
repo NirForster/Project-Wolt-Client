@@ -4,7 +4,7 @@ import { unslugCityName } from "@/lib/constants/cities-constants";
 import CategoriesCarosel from "@/components/discovery-page-components/business-category-components/CategoriesCarosel";
 import ProductLineGrid from "@/components/discovery-page-components/category-product-line/ProductLineGrid";
 import HeroCarousel from "@/components/discovery-page-components/HeroCarousel";
-import MarketingBanner from "@/components/discovery-page-components/MarketingBanner";
+import MarketingBanner from "@/components/discovery-page-components/wolt+-marketing-banner/MarketingBanner";
 import MealTimeCarousel from "@/components/discovery-page-components/MealTimeCarousel";
 import BrandsCarousel from "@/components/discovery-page-components/BrandsCarousel";
 import QuickLinks from "@/components/discovery-page-components/QuickLinks";
