@@ -17,5 +17,3 @@ function MainLayout() {
 }
 
 export default MainLayout;
-
-// test
