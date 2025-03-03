@@ -1,7 +1,4 @@
-import {
-  BusinessAdditionalInfo,
-  BusinessSummery,
-} from "@/services/types/BusinessType";
+import { BusinessAdditionalInfo, BusinessSummery } from "@/types";
 import Xbtn from "../Xbtn";
 
 interface BusinessMoreInfoModalProps {

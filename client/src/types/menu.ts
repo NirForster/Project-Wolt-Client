@@ -1,3 +1,4 @@
+// Menu types from MenuType.ts
 export interface Menu {
   business: string;
   businessName: string;
@@ -33,5 +34,21 @@ export interface Item {
       optionLabel: string;
       optionPrice: string;
     }[];
+  }[];
+}
+
+// Additional menu types from businessApi.ts
+export interface MenuItem {
+  id: string;
+  name: string;
+  description?: string;
+  price: number;
+  image?: string;
+  isPopular: boolean;
+  formData?: {
+    title: string;
+    description?: string;
+    type: "radio" | "checkbox";
+    options: { optionLabel: string; optionPrice: string }[];
   }[];
 }

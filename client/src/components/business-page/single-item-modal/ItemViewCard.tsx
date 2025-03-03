@@ -3,7 +3,7 @@ import UpdateItemQuantity from "../../UpdateItemQuantity";
 import { useContext, useRef, useState } from "react";
 import { userContext } from "@/providers/userContext";
 import api from "@/services/api/api";
-import { Item } from "@/services/types/MenuType";
+import { Item } from "@/types";
 import FormRadioGroup from "../item-card-form/FormRadioGroup";
 import FormCheckbox from "../item-card-form/FormCheckbox";
 

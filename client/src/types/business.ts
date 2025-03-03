@@ -60,3 +60,34 @@ export interface TimeObj {
   time: string;
   _id: string;
 }
+
+export interface BusinessSummary {
+  id: string;
+  type: "restaurant" | "store";
+  location: { city: string; address: string };
+  name: string;
+  link: string;
+  image: string;
+  shortDescription: string;
+  estimatedDeliveryTime: { min: number; max: number };
+  rating: number;
+  dollarCount: "$" | "$$" | "$$$" | "$$$$";
+  label: {
+    deliveryFee?: string;
+    storeType?: string;
+  };
+}
+
+export interface BusinessWithSummary {
+  _id: string;
+  summary: BusinessSummary;
+  additionalInfo: BusinessAdditionalInfo;
+  categories: string[];
+  __v: number;
+}
+
+export interface BusinessDetails {
+  summary: BusinessSummary; // Summary information
+  additionalInfo: BusinessAdditionalInfo; // Detailed information
+  categories: string[];
+}

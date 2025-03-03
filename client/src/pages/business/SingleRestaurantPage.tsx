@@ -4,19 +4,21 @@ import api from "@/services/api/api";
 
 import { useEffect, useRef, useContext, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import Business, {
+import {
   BusinessAdditionalInfo,
   BusinessSummery,
-} from "@/services/types/BusinessType";
-import { Item, Menu, Section } from "@/services/types/MenuType";
+  Item,
+  Menu,
+  Section,
+} from "@/types";
 import useSectionOnScreen from "@/hooks/useSectionOnScreen";
-import LoginModel from "@/components/auth-components/Login/LoginModel";
 import ItemViewCardCover from "@/components/business-page/single-item-modal/ItemViewCardCover";
 import BusinessHeader from "@/components/business-page/BusinessHeader";
 import MapGuyErr from "@/components/business-page/MapMan";
-import SingleStorePage from "./SingleStorePage";
 import SearchInBusinessForm from "@/components/SearchInBusinessForm";
-import { userContext } from "../providers/userContext";
+import { userContext } from "@/providers/userContext";
+import LoginModel from "@/components/auth-components/Login/LoginModel";
+import SingleStorePage from "./SingleStorePage";
 import Lottie from "lottie-react";
 import { login } from "@/services/api/auth";
 

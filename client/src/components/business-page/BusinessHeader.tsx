@@ -2,10 +2,7 @@ import { userContext } from "@/providers/userContext";
 import api from "@/services/api/api";
 import { useContext, useEffect, useState } from "react";
 import LoginModel from "../auth-components/Login/LoginModel";
-import {
-  BusinessAdditionalInfo,
-  BusinessSummery,
-} from "@/services/types/BusinessType";
+import { BusinessAdditionalInfo, BusinessSummery } from "@/types/business";
 import BusinessMoreInfoModal from "./BusinessMoreInfoModal";
 import smiley_web_happy from "@/assets/lottie-files/smiley_web_happy.json";
 import smiley_web_speechless from "@/assets/lottie-files/smiley_web_speechless.json";

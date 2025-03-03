@@ -1,9 +1,19 @@
 \***\*Production Conventions\*\***
 
-all folders will be kebab-case .
-all pages will be PascalCase and end with "Page" .
-all components will be PascalCase .
-all routes will be kebab-case .
+# Naming Conventions
+
+Files:
+React Components: PascalCase (e.g., BusinessCard.tsx)
+Utilities, hooks, services: camelCase (e.g., useWindowSize.ts)
+Constants: UPPER_SNAKE_CASE or camelCase depending on usage
+
+Folders:
+Feature or domain-specific: camelCase (e.g., businessPage/)
+General categories: kebab-case (e.g., ui-components/)
+
+Components:
+Group related components in subfolders
+Index files for cleaner imports
 
 # business:
 
@@ -28,3 +38,28 @@ location logic - having location on each business and filtering by location.
 appBar - mobile design.
 displaying businesses by categeory/label/tag/theme.
 displaying animation carousels
+
+src/
+├── assets/ # Static assets (images, fonts, lottie animations)
+├── components/ # Shared/reusable UI components
+│ ├── common/ # Very basic UI components (buttons, cards, etc.)
+│ ├── layout/ # Layout components (header, footer, etc.)
+│ └── features/ # More complex components grouped by feature
+├── hooks/ # Custom React hooks
+├── pages/ # Page components - one for each route
+│ ├── discovery/ # Discovery related pages
+│ ├── business/ # Restaurant and store pages
+│ ├── me/ # User profile pages
+│ └── auth/ # Authentication pages
+├── services/ # API and other services
+│ ├── api/ # API related code
+│ └── auth/ # Authentication related code
+├── types/ # TypeScript type definitions
+├── utils/ # Utility functions
+├── constants/ # Application constants
+├── providers/ # Context providers
+├── styles/ # Global styles
+├── App.tsx # Main App component
+├── Router.tsx # Application routes
+├── main.tsx # Application entry point
+└── index.css # Global CSS

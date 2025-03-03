@@ -4,29 +4,26 @@ import MainLayout from "./components/main-layout-components/MainLayout";
 import ScrollToTop from "./utils/ScrollToTop";
 import MeInfoLayout from "./components/MeInfoLayot";
 import MeAddress from "./components/me-section/profilePages/MeAddress";
-import UserDetails from "./components/me-section/profilePages/personal-info/UserDetails";
+// import UserDetails from "./components/me-section/profilePages/personal-info/UserDetails";
 import MePersonalInfo from "./components/me-section/profilePages/personal-info/MePersonalInfo";
 import MePayment from "./components/me-section/profilePages/MePayment";
 import MeEarnCredits from "./components/me-section/profilePages/MeEarnCredits";
 import MeRedeemCode from "./components/me-section/profilePages/MeRedeemCode";
 import MeProfileSettings from "./components/me-section/profilePages/meSettings/MeSettings";
-import LoginPage from "./pages/LoginPage";
+import LoginPage from "./pages/auth/LoginPage";
 
 const LandingPage = lazy(() => import("./pages/LandingPage"));
-const DiscoveryPage = lazy(
-  () => import("./pages/discovery-pages/DiscoveryPage")
-);
+const DiscoveryPage = lazy(() => import("./pages/discovery/DiscoveryPage"));
 const DiscoveryRestaurants = lazy(
-  () => import("./pages/discovery-pages/DiscoveryRestaurants")
+  () => import("./pages/discovery/DiscoveryRestaurants")
 );
 const DiscoveryStorePage = lazy(
-  () => import("./pages/discovery-pages/DiscoveryStorePage")
+  () => import("./pages/discovery/DiscoveryStorePage")
 );
-// const CategoryBrowse = lazy(
-//   () => import("./pages/browsing-pages/CategoryBrowse")
-// );
-const SingleRestaurantPage = lazy(() => import("./pages/SingleRestaurantPage"));
-const SingleStorePage = lazy(() => import("./pages/SingleStorePage"));
+const SingleRestaurantPage = lazy(
+  () => import("./pages/business/SingleRestaurantPage")
+);
+const SingleStorePage = lazy(() => import("./pages/business/SingleStorePage"));
 const Error404Page = lazy(() => import("./pages/404Page"));
 const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
   <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
