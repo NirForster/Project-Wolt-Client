@@ -1,4 +1,4 @@
-export default interface Business {
+export interface Business {
   summery: BusinessSummary;
   _id: string;
   __v: number;
