@@ -1,4 +1,4 @@
-import { IOrder } from "./order";
+import { Order } from "./order";
 
 export interface User {
   email: string;
@@ -8,7 +8,7 @@ export interface User {
   photo: string;
   locations: UserLocation[];
   favoritesShops: string[];
-  cart: IOrder[];
+  cart: Order[];
   fullname: string;
 }
 

@@ -1,4 +1,4 @@
-export interface IOrder {
+export interface Order {
   user: string;
   shop: string;
   createdAt: Date;
