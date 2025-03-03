@@ -6,7 +6,7 @@ import { useEffect, useRef, useContext, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   BusinessAdditionalInfo,
-  BusinessSummery,
+  BusinessSummary,
   Item,
   Menu,
   Section,
@@ -27,7 +27,7 @@ export default function RestaurantPage() {
   const location = useLocation();
   const shopID = useParams().id;
   const [business, setBusiness] = useState<{
-    summary: BusinessSummery;
+    summary: BusinessSummary;
     additionalInfo: BusinessAdditionalInfo;
     menu: Menu;
   } | null>(null);

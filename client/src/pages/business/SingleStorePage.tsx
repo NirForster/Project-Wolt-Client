@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   BusinessAdditionalInfo,
-  BusinessSummery,
+  BusinessSummary,
   Item,
   Menu,
   Section,
@@ -22,7 +22,7 @@ export default function SingleStorePage() {
   const location = useLocation();
   const shopID = useParams().id;
   const [business, setBusiness] = useState<{
-    summary: BusinessSummery;
+    summary: BusinessSummary;
     additionalInfo: BusinessAdditionalInfo;
     menu: Menu;
   } | null>(null);

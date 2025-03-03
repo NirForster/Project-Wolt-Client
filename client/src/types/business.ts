@@ -1,5 +1,5 @@
 export default interface Business {
-  summery: BusinessSummery;
+  summery: BusinessSummary;
   _id: string;
   __v: number;
   id: string;
@@ -25,7 +25,7 @@ export interface BusinessAdditionalInfo {
   website: string;
 }
 
-export interface BusinessSummery {
+export interface BusinessSummary {
   dollarCount: string;
   estimatedDeliveryTime: {
     min: string;
