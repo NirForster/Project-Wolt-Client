@@ -1,4 +1,4 @@
-export default interface Business {
+export interface Business {
   summery: BusinessSummary;
   _id: string;
   __v: number;
@@ -35,7 +35,7 @@ export interface TimeObj {
     | "Friday"
     | "Saturday";
   time: string;
-  _id: string;
+  _id?: string; // Make _id optional for frontend usage
 }
 
 export interface BusinessSummary {
