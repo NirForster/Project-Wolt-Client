@@ -6,6 +6,7 @@ import api from "@/services/api/api";
 import { Item } from "@/services/types/MenuType";
 import FormRadioGroup from "../item-card-form/FormRadioGroup";
 import FormCheckbox from "../item-card-form/FormCheckbox";
+import getUserCart from "@/services/api/users/getUserCart";
 
 interface ItemViewCardProps {
   item: Item;
@@ -26,7 +27,7 @@ export function ItemViewCard({
     return <></>;
   }
 
-  const { user } = useContext(userContext);
+  const { user, updateUser } = useContext(userContext);
 
   const itemRef = useRef<{ item: Item; totalPrice: number }>({
     item,
@@ -124,7 +125,16 @@ export function ItemViewCard({
           extras,
         });
         if (response.data.status === "Success") {
+          // fetching the current cart of the user
+          const { cart } = await getUserCart(); // Await the resolved promise
+          console.log(cart);
+          console.log(user);
+          const isAlreadyIn = user.cart.some((orderID) => orderID === cart.id);
+          if (!isAlreadyIn) {
+            updateUser({ cart: [...user.cart, cart.id] });
+          }
           onClose();
+          console.log("bababababababab");
         } else {
           alert(response.data.message);
         }
