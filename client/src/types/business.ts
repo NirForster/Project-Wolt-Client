@@ -35,7 +35,7 @@ export interface TimeObj {
     | "Friday"
     | "Saturday";
   time: string;
-  _id: string;
+  _id?: string; // Make _id optional for frontend usage
 }
 
 export interface BusinessSummary {
