@@ -13,7 +13,7 @@ export interface User {
 }
 
 export interface UserLocation {
-  type: string;
+  type: "Home" | "Work" | "Other";
   address: string;
   lastLocation: boolean;
 }
