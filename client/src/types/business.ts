@@ -25,29 +25,6 @@ export interface BusinessAdditionalInfo {
   website: string;
 }
 
-export interface BusinessSummary {
-  dollarCount: string;
-  estimatedDeliveryTime: {
-    min: string;
-    max: string;
-  };
-  image: string;
-  label: {
-    deliveryFee: string;
-    storeType: any;
-  };
-  link: string;
-  location: {
-    address: string;
-    city: string;
-  };
-  name: string;
-  rating: number;
-  shortDescription: string;
-  type: "restaurant" | "store";
-  _id: string;
-}
-
 export interface TimeObj {
   day:
     | "Sunday"
@@ -62,9 +39,14 @@ export interface TimeObj {
 }
 
 export interface BusinessSummary {
-  id: string;
+  id: string; // Frontend ID
+  _id?: string; // Backend ID (optional in frontend)
   type: "restaurant" | "store";
-  location: { city: string; address: string };
+  location: {
+    city: string;
+    address: string;
+    coordinates?: { lat: number; lon: number }; // Optional for frontend
+  };
   name: string;
   link: string;
   image: string;
