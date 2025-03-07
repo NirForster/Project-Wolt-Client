@@ -3,7 +3,7 @@ import { WoltLogo } from "./Wolt+Svg";
 
 const MarketingBanner = () => {
   return (
-    <div className="relative w-full py-4 h-32 my-8">
+    <div className="relative w-full py-4 h-32 my-16">
       {/* Container to handle the overflowing image */}
       <div className="relative max-w-full h-32 mx-auto">
         {/* Blue background banner */}
