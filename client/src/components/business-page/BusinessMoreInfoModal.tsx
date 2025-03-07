@@ -1,12 +1,9 @@
-import {
-  BusinessAdditionalInfo,
-  BusinessSummery,
-} from "@/services/types/BusinessType";
+import { BusinessAdditionalInfo, BusinessSummary } from "@/types";
 import Xbtn from "../Xbtn";
 
 interface BusinessMoreInfoModalProps {
   business: {
-    summary: BusinessSummery;
+    summary: BusinessSummary;
     additionalInfo: BusinessAdditionalInfo;
   };
   onClose: () => void;

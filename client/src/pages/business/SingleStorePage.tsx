@@ -6,9 +6,11 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   BusinessAdditionalInfo,
-  BusinessSummery,
-} from "@/services/types/BusinessType";
-import { Item, Menu, Section } from "@/services/types/MenuType";
+  BusinessSummary,
+  Item,
+  Menu,
+  Section,
+} from "@/types";
 import LoginModel from "@/components/auth-components/Login/LoginModel";
 import ItemViewCardCover from "@/components/business-page/single-item-modal/ItemViewCardCover";
 import BusinessHeader from "@/components/business-page/BusinessHeader";
@@ -20,7 +22,7 @@ export default function SingleStorePage() {
   const location = useLocation();
   const shopID = useParams().id;
   const [business, setBusiness] = useState<{
-    summary: BusinessSummery;
+    summary: BusinessSummary;
     additionalInfo: BusinessAdditionalInfo;
     menu: Menu;
   } | null>(null);

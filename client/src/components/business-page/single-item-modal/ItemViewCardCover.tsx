@@ -1,4 +1,4 @@
-import { Item } from "@/services/types/MenuType";
+import { Item } from "@/types/menu";
 import { ItemViewCard } from "./ItemViewCard";
 import Xbtn from "@/components/Xbtn";
 

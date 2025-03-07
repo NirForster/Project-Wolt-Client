@@ -9,7 +9,7 @@ import {
 
 import { useContext, useState } from "react";
 import AddressTypeSelector from "./AddressTypeSelector";
-import { Details, UserLocation } from "@/services/types/types";
+import { Details } from "@/types";
 import addLocationToUser from "@/services/api/users/addLocation";
 import { userContext } from "@/providers/userContext";
 
@@ -18,8 +18,8 @@ const AddLocationDetailsPage = ({
   kind,
   onBack,
   onClose,
-  setDetails,
-}: {
+}: // setDetails,
+{
   street: string;
   kind: string;
   onBack: (kind: string) => void;

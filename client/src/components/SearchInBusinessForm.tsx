@@ -1,5 +1,3 @@
-import Business from "@/services/types/BusinessType";
-
 interface SearchInBusinessFormProps {
   filter: string;
   setFilter: React.Dispatch<React.SetStateAction<string>>;
