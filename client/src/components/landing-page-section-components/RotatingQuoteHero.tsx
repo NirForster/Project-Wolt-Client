@@ -146,50 +146,6 @@ const RotatingQuoteHero = () => {
               Log in for saved addresses
             </button>
           </div>
-          <div className="flex flex-wrap gap-4 mt-4 mb-12 sm:hidden">
-            <button
-              className="inline-flex items-center text-[#202125] text-base font-medium leading-[1.5rem] font-sans tracking-normal whitespace-nowrap text-start rounded-sm cursor-pointer bg-transparent border-none p-0 shadow-none antialiased select-inherit "
-              data-font-family="default"
-              data-prevent-text-wrap=""
-              data-size="medium"
-              data-variant="neutral"
-              type="button"
-              // fdprocessedid="mg89k"
-            >
-              <span
-                className="cbc_TextButton_iconContainer_7cfd4"
-                data-position="start"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  role="presentation"
-                  width="16"
-                  height="16"
-                  className=""
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M15.333 7.333h-1.082a.333.333 0 0 1-.328-.28 6.011 6.011 0 0 0-4.976-4.976.333.333 0 0 1-.28-.328V.667a.667.667 0 0 0-1.334 0v1.082c0 .163-.119.302-.28.328a6.011 6.011 0 0 0-4.976 4.976.333.333 0 0 1-.328.28H.667a.667.667 0 0 0 0 1.334h1.082c.163 0 .302.119.328.28a6.011 6.011 0 0 0 4.976 4.976c.161.025.28.165.28.328v1.082a.667.667 0 1 0 1.334 0v-1.082c0-.163.119-.303.28-.328a6.012 6.012 0 0 0 4.976-4.976.333.333 0 0 1 .328-.28h1.082a.667.667 0 1 0 0-1.334ZM8 12.667a4.667 4.667 0 1 1 0-9.334 4.667 4.667 0 0 1 0 9.334Zm0-2a2.667 2.667 0 1 0 0-5.334 2.667 2.667 0 0 0 0 5.334Z"
-                  ></path>
-                </svg>
-              </span>
-              Share location
-            </button>
-            <button
-              className="s8f81r7 cbc_TextButton_rootCss_7cfd4"
-              data-font-family="default"
-              data-prevent-text-wrap=""
-              data-size="medium"
-              data-variant="neutral"
-              type="button"
-              // fdprocessedid="ndb7c"
-            >
-              Log in for saved addresses
-            </button>
-          </div>
         </div>
       </div>
     </div>

@@ -19,7 +19,6 @@ const cities = [
   "Rishon Lezion & Hashfela",
   "Rosh Pinna - Zefat area",
   "TLV - Herzliya area",
-  "Yokneam - Tivon area",
 ];
 
 // Generate slug for each city
