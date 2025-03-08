@@ -8,9 +8,11 @@ function MainLayout() {
     <div className="min-h-screen">
       <AppBar />
       <DiscoveryTabs />
-      <main className="">
-        <Outlet />
-      </main>
+      <div className="flex items-center justify-center">
+        <main className="max-w-[1550px]">
+          <Outlet />
+        </main>
+      </div>
       <Footer />
     </div>
   );
