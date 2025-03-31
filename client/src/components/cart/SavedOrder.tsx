@@ -47,6 +47,9 @@ const SavedOrder: React.FC<SavedOrderProps> = ({
       );
     } else {
       alert("An error occurred. Probably you are not logged in.");
+      navigate(
+        `/en/isr/${encodeURIComponent(city || "")}/restaurant/${restaurantID}`
+      );
     }
     // if (user) {
     //   const order = user.cart.find(

@@ -219,7 +219,12 @@ export default function PayToOrder({}: PayToOrderProps) {
 
       {isOpen && (
         <div className="w-full h-full z-50 absolute top-0 ">
-          <AddCreditCard onClose={() => setIsOpen(false)} />
+          <AddCreditCard
+            onClose={(cardName: string) => {
+              setIsOpen(false);
+              setPaymentName(cardName);
+            }}
+          />
         </div>
       )}
     </div>
