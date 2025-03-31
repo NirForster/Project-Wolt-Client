@@ -84,6 +84,7 @@ export function ItemViewCard({
 
   async function handleFormSubmit(ev: React.FormEvent<HTMLFormElement>) {
     ev.preventDefault();
+
     try {
       if (user) {
         const formData = new FormData(ev.currentTarget);
@@ -124,17 +125,24 @@ export function ItemViewCard({
           sectionTitle,
           extras,
         });
+        console.log("response is");
+        console.log(response);
+
         if (response.data.status === "Success") {
           // fetching the current cart of the user
           const { cart } = await getUserCart(); // Await the resolved promise
           console.log(cart);
-          console.log(user);
-          const isAlreadyIn = user.cart.some((orderID) => orderID === cart.id);
-          if (!isAlreadyIn) {
-            updateUser({ cart: [...user.cart, cart.id] });
-          }
+
+          await updateUser({ cart: cart });
+          // console.log(cart);
+          // console.log(user);
+          // const isAlreadyIn = user.cart.some((orderID) => orderID === cart.id);
+          // updateUser({ cart: [...user.cart, cart.id] });
+          // if (!isAlreadyIn) {
+          // }
+          console.log(user.cart);
+
           onClose();
-          console.log("bababababababab");
         } else {
           alert(response.data.message);
         }

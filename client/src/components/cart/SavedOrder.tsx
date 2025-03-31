@@ -1,5 +1,10 @@
+import { userContext } from "@/providers/userContext";
 import sendOrder from "@/services/api/users/sendOrder";
+import { Business, Order } from "@/types";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { SheetClose } from "../ui/sheet";
 
 interface SavedOrderProps {
   restaurantID: string;
@@ -8,6 +13,7 @@ interface SavedOrderProps {
   totalPrice: string;
   coverImage: string;
   items: string[];
+  onClose: () => void;
 }
 
 const SavedOrder: React.FC<SavedOrderProps> = ({
@@ -17,12 +23,39 @@ const SavedOrder: React.FC<SavedOrderProps> = ({
   totalPrice,
   coverImage,
   items,
+  onClose,
 }) => {
   const navigate = useNavigate();
+  const { user, updateUser } = useContext(userContext);
+  const { city } = useParams();
 
   const handleSendOrder = () => {
-    sendOrder();
-    navigate(`/en/discovery/tlv-herzliya-area`);
+    if (user) {
+      console.log("hello baba");
+      console.log(user.cart);
+      const orderIdx = user.cart.findIndex((order: Order) => {
+        return (
+          (order.shop as Business)._id.toString() === restaurantID.toString()
+        );
+      });
+      // const orderIdx = 0;
+      onClose();
+      navigate(
+        `/en/isr/${encodeURIComponent(
+          city || ""
+        )}/restaurant/${restaurantID}/checkout/${orderIdx}`
+      );
+    } else {
+      alert("An error occurred. Probably you are not logged in.");
+    }
+    // if (user) {
+    //   const order = user.cart.find(
+    //     (order: Order) => order.shop === restaurantID
+    //   )?._id;
+    //   console.log(order);
+    // }
+
+    // navigate(`/en/discovery/tlv-herzliya-area`);
   };
   return (
     <div className="line-height w-full max-w-md mb-2 p-4 bg-white border border-gray-300 rounded-lg shadow-md">
@@ -70,6 +103,7 @@ const SavedOrder: React.FC<SavedOrderProps> = ({
       {/* Buttons Section */}
       <div className="flex justify-between gap-3">
         <button
+          type="button"
           onClick={() => handleSendOrder()}
           className="flex-1 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
         >

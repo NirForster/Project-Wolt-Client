@@ -1,10 +1,14 @@
 import api from "@/services/api/api";
 
-const sendOrder = async () => {
+const sendOrder = async (orderID: string) => {
   try {
-    const response = await api.get(`/orders/send`, {
-      withCredentials: true,
-    });
+    const response = await api.put(
+      `/orders/send`,
+      { orderID },
+      {
+        withCredentials: true,
+      }
+    );
     return response.data;
   } catch (error) {
     console.error(`Failed to fetch post with ID `, error);

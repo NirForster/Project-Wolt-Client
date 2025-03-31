@@ -28,6 +28,7 @@ const Error404Page = lazy(() => import("./pages/404Page"));
 const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
   <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
 );
+const PayToOrder = lazy(() => import("./pages/PayToOrder"));
 
 function AppRoutes() {
   return (
@@ -112,6 +113,11 @@ function AppRoutes() {
               </SuspenseWrapper>
             }
           />
+          <Route
+            path="restaurant/:id/checkout/:orderIdx"
+            element={<PayToOrder />}
+          />
+
           <Route
             path="venue/:id"
             element={

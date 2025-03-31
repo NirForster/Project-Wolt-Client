@@ -1,8 +1,10 @@
+import { Business } from "./business";
+
 // order.ts
 export interface Order {
   _id?: string;
   user: string;
-  shop: string;
+  shop: string | Business;
   createdAt: Date;
   deliveringTime?: number;
   items: OrderItem[] | string[]; // Allow both expanded items and IDs

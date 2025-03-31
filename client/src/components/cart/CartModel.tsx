@@ -1,5 +1,6 @@
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -9,7 +10,7 @@ import {
 import CartTabs from "./CartTabs";
 import { FaShoppingCart } from "react-icons/fa";
 import { userContext } from "../../providers/userContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 
 const CartModel = () => {
   const { user } = useContext(userContext);
@@ -17,6 +18,11 @@ const CartModel = () => {
     return "an error, no user detected";
   }
   const [itemsInCart, setItemsInCart] = useState(user.cart.length);
+  const [sheetOpen, setSheetOpen] = useState(false);
+
+  const onSheetClose = () => {
+    setSheetOpen(false);
+  };
 
   useEffect(() => {
     console.log(user.cart.length);
@@ -25,7 +31,7 @@ const CartModel = () => {
 
   return (
     <div>
-      <Sheet>
+      <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetTrigger>
           <div className="relative">
             <button className="p-3 bg-gray-100 rounded-full hover:bg-gray-200">
@@ -44,7 +50,7 @@ const CartModel = () => {
               Your orders
             </SheetTitle>
             <SheetDescription className="overflow-y-auto max-h-screen">
-              <CartTabs />
+              <CartTabs onClose={onSheetClose} />
             </SheetDescription>
           </SheetHeader>
         </SheetContent>

@@ -3,7 +3,11 @@ import SavedOrder from "./SavedOrder";
 import { useEffect, useState } from "react";
 import getUserCart from "@/services/api/users/getUserCart";
 
-const CartTabs = () => {
+interface CartTabsProps {
+  onClose: () => void;
+}
+
+const CartTabs = ({ onClose }: CartTabsProps) => {
   const [userCart, setUserCart] = useState<any>(null); // State for the cart
   const [error, setError] = useState<string | null>(null);
 
@@ -69,6 +73,7 @@ const CartTabs = () => {
                   totalPrice={item.totalPrice ? `₪${item.totalPrice}` : "₪0.00"} // Ensure it's a string or number
                   coverImage={item.shop.summary.image}
                   items={item.items}
+                  onClose={onClose}
                 />
               );
             })}
