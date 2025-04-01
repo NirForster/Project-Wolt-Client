@@ -2,7 +2,7 @@ import AddCreditCard from "@/components/AddCreditCard";
 import { userContext } from "@/providers/userContext";
 import getUserCart from "@/services/api/users/getUserCart";
 import sendOrder from "@/services/api/users/sendOrder";
-import { Order } from "@/types";
+import { Order, OrderItem } from "@/types";
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -32,9 +32,9 @@ export default function PayToOrder({}: PayToOrderProps) {
       { message: "דמי תפעול", price: 3.35 },
       { message: "משלוח", price: 10.0 }
     );
-  }
-  if (deliveryTip > 0) {
-    prices.push({ message: "טיפ לשליח", price: deliveryTip });
+    if (deliveryTip > 0) {
+      prices.push({ message: "טיפ לשליח", price: deliveryTip });
+    }
   }
   const totalOrderPrice = prices.reduce((acc, price) => acc + price.price, 0);
   prices.push({ message: "סה״כ", price: totalOrderPrice });
@@ -105,6 +105,39 @@ export default function PayToOrder({}: PayToOrderProps) {
           >
             Pick up
           </button>
+        </div>
+
+        {/* Order items div */}
+        <div className="flex flex-col gap-4 text-right">
+          <span className="font-bold">Order items</span>
+          {currentOrder.items.map((currentItem) => {
+            const castedCurrentItem = currentItem as OrderItem;
+            return (
+              <div className="flex justify-between flex-row-reverse">
+                <img
+                  src={castedCurrentItem.item.image}
+                  className="w-24 h-14 rounded"
+                  alt={`${castedCurrentItem.item.name}'s photo`}
+                />
+                <div className="flex flex-col">
+                  <span className="font-bold">
+                    {castedCurrentItem.item.name}
+                  </span>
+                  {castedCurrentItem.extras.map((currentExtra) => {
+                    return (
+                      <span className="text-gray-500">1 * {currentExtra}</span>
+                    );
+                  })}
+
+                  <span className="text-[#039de0]">
+                    {castedCurrentItem.totalPrice} ₪
+                  </span>
+                </div>
+
+                <div></div>
+              </div>
+            );
+          })}
         </div>
 
         {/* payment div */}
