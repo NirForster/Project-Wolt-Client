@@ -29,21 +29,47 @@ const SavedOrder: React.FC<SavedOrderProps> = ({
   const { user, updateUser } = useContext(userContext);
   const { city } = useParams();
 
-  const handleSendOrder = () => {
+  const handleAddMoreItems = () => {
     if (user) {
-      console.log("hello baba");
-      console.log(user.cart);
       const orderIdx = user.cart.findIndex((order: Order) => {
         return (
           (order.shop as Business)._id.toString() === restaurantID.toString()
         );
       });
-      // const orderIdx = 0;
+      const currentOrder = user.cart[orderIdx];
+      const currentShop = currentOrder.shop as Business;
+      const currentRestaurantID = currentShop._id;
+      const currentCity = currentShop.summary.location.city;
       onClose();
       navigate(
         `/en/isr/${encodeURIComponent(
-          city || ""
-        )}/restaurant/${restaurantID}/checkout/${orderIdx}`
+          currentCity
+        )}/restaurant/${currentRestaurantID}`
+      );
+    } else {
+      alert("An error occurred. You are probably you are not logged in.");
+      navigate(
+        `/en/isr/${encodeURIComponent(city || "")}/restaurant/${restaurantID}`
+      );
+    }
+  };
+
+  const handleSendOrder = () => {
+    if (user) {
+      const orderIdx = user.cart.findIndex((order: Order) => {
+        return (
+          (order.shop as Business)._id.toString() === restaurantID.toString()
+        );
+      });
+      const currentOrder = user.cart[orderIdx];
+      const currentShop = currentOrder.shop as Business;
+      const currentRestaurantID = currentShop._id;
+      const currentCity = currentShop.summary.location.city;
+      onClose();
+      navigate(
+        `/en/isr/${encodeURIComponent(
+          currentCity
+        )}/restaurant/${currentRestaurantID}/checkout/${orderIdx}`
       );
     } else {
       alert("An error occurred. Probably you are not logged in.");
@@ -51,15 +77,8 @@ const SavedOrder: React.FC<SavedOrderProps> = ({
         `/en/isr/${encodeURIComponent(city || "")}/restaurant/${restaurantID}`
       );
     }
-    // if (user) {
-    //   const order = user.cart.find(
-    //     (order: Order) => order.shop === restaurantID
-    //   )?._id;
-    //   console.log(order);
-    // }
-
-    // navigate(`/en/discovery/tlv-herzliya-area`);
   };
+
   return (
     <div className="line-height w-full max-w-md mb-2 p-4 bg-white border border-gray-300 rounded-lg shadow-md">
       {/* Header Section */}
@@ -114,11 +133,7 @@ const SavedOrder: React.FC<SavedOrderProps> = ({
         </button>
         <button
           // onClick={() => navigate(`/restaurant/${restaurantID}`)}
-          onClick={() =>
-            navigate(
-              `/en/isr/tlv-herzliya-area/restaurant/678d776c7790e17f96248fec`
-            )
-          }
+          onClick={() => handleAddMoreItems()}
           className="flex-1 px-4 py-2 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-100"
         >
           להוסיף עוד פריטים

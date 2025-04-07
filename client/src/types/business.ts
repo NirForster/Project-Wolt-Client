@@ -1,5 +1,5 @@
 export interface Business {
-  summery: BusinessSummary;
+  summary: BusinessSummary;
   _id: string;
   __v: number;
   id: string;
